@@ -1,0 +1,7 @@
+The Convicts: Annabel Zhang, Alif Abdullah, Sophie Liu, Qina Liu (add your duckies)
+SoftDev
+P04: Forged By Land
+2022-05-24
+
+annabelZ -- 2022-05-24 21:34
+Initialized project files (requirements.txt, app.conf, and app.wsgi still needed)
