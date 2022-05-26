@@ -7,7 +7,8 @@
 * Qina Liu
 
 ## Project Description
-[insert project description]
+Forged by Land is an empire building game focusing around destroying the capitals of all enemy empires. Every turn, your capital building will generate gold, which you can use to create troops at your capital. You can then send these troops to other tiles on the map and establish sub capitals, which can generate more gold and are places where you can create more troops. Troops can venture into the territory of other enemies and claim that territory as their own, offering more space to build more capitals and generate more troops. May the best empire builder win!
+
 
 ## Launch Codes
 - Install virtual environment <br>
