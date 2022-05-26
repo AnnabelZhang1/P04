@@ -4,7 +4,18 @@
 # 2022-05-24
 
 from flask import Flask, request, render_template, redirect, session, jsonify
+import sqlite3
 app = Flask(__name__)
+
+db = sqlite3.connect('USERSd.db')
+cursor = db.cursor()
+
+# TODO: Make SQL statement to create table
+create_table_sql ="""
+	CREATE TABLE IF NOT EXISTS (
+	username TEXT
+	)
+"""
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
