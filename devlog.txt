@@ -3,6 +3,10 @@ SoftDev
 P04: Forged By Land
 2022-05-24
 
+* Design Doc Changes: *
+2022-05-26 18:05
+- Added lobby room deletion specifications under SQL Database
+
 annabelZ -- 2022-05-24 21:34
 Initialized project files (requirements.txt, app.conf, and app.wsgi still needed)
 
