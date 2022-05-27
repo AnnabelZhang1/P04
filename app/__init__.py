@@ -22,10 +22,24 @@ def welcome():
 	return redirect("/home")
 
 @app.route("/home", methods=['GET', 'POST'])
-def login():
+def home():
 	return render_template("home.html")
+
+@app.route("/game", methods=['GET', 'POST'])
+def game():
+    return render_template("game.html")
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    return render_template("login.html")
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    return render_template("register.html")
+
 
 if __name__ == "__main__":
     app.debug = True
     app.run()
     app.run(debug=True)
+
