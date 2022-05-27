@@ -17,12 +17,12 @@ class Grid {
         this.height = y;
         this.grid = [];
         // Two for loops nested within each other so I can push the length of the grid "x" times, then push that length grid "y" to make the height.
-        for(let i = 0; i < this.height; i++){
-            for(let j = 0; j < this.length; j++) {
-                let add = [];
+        for(let i = 0; i <= this.height; i++){
+            for(let j = 0; j <= this.length; j++) {
+                var add = [];
                 add.push(0);
             }
-            grid.push(add);
+            this.grid.push(add);
         }
     }
 }
