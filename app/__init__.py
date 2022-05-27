@@ -11,11 +11,20 @@ db = sqlite3.connect('USERSd.db')
 cursor = db.cursor()
 
 # TODO: Make SQL statement to create table
-create_table_sql ="""
-	CREATE TABLE IF NOT EXISTS (
-	username TEXT
+create_users_table_sql ="""
+	CREATE TABLE IF NOT EXISTS users(
+	rowid INTEGER PRIMARY KEY,
+	user_name TEXT NOT NULL,
+	hash_string TEXT NOT NULL,
+	wins INTEGER NOT NULL
 	)
 """
+
+cursor.execute(create_users_table_sql)
+
+db.commit()
+db.close()
+
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
@@ -39,7 +48,4 @@ def register():
 
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
     app.run(debug=True)
-
