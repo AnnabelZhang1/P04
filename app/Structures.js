@@ -4,7 +4,6 @@
 // 2022-05-24
 
 class Fort {
-
   constructor() {
     this.troopCap = 4;
     this.troopNum = 0;
@@ -16,4 +15,19 @@ class Fort {
     this.troopNum = 0;
     this.owner = color;
   }
+}
+
+class Grid {
+    constructor() {
+        this.length = 6;
+        this.height = 6;
+        this.grid = [];
+        for(let i = 0; i < this.height; i++){
+            for(let j = 0; j < this.length; j++) {
+                let add = [];
+                add.push(0);
+            }
+            grid.push(add);
+        }
+    }
 }
