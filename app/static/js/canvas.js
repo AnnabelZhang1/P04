@@ -15,27 +15,6 @@ ctx.stroke();
 const a = 2 * Math.PI / 6; //angle. The 6 makes it a hexagon!
 const r = 50; //radius (change as needed)
 
-// function drawGrid(length, height, color) {
-//   // For some reason, when the length is divisable by two, the y value becomes half of what it should be.
-//   // Thus, the if-else function.
-//   if (length % 2 == 0) {
-//     for (let y = r, i = 0; i < height; y += 2 * r * Math.sin(a), i++) {
-//       //columns
-//       for (let x = r, p = 0, m = 0; m < length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), m++) {
-//         //rows
-//         drawHexagon(x, y, color);
-//       }
-//     }
-//   }
-//   else { //same as before, but y += r * Math.sin(a) instead of y += 2 * r * Math.sin(a).
-//     for (let y = r, i = 0; i < height; y += r * Math.sin(a), i++) {
-//       for (let x = r, p = 0, m = 0; m < length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), m++) {
-//         drawHexagon(x, y, color);
-//       }
-//     }
-//   }
-// }
-
 function drawGrid(z) {
   // For some reason, when the length is divisable by two, the y value becomes half of what it should be.
   // Thus, the if-else function.
