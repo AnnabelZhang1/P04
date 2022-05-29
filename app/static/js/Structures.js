@@ -24,5 +24,6 @@ class Grid {
           }
           this.grid.push(add);
         }
+        drawGrid(this.length, this.height);
     }
 }

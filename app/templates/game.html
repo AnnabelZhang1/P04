@@ -5,7 +5,7 @@ P04: Forged By Land
 
 <!DOCTYPE html>
 <html>
-  
+
 {% extends "base.html" %}
 
 {% block title %} Game {% endblock %}
@@ -15,7 +15,10 @@ P04: Forged By Land
 
 {% block body %}
 <p> this is game</p>
-<script src="../static/js/Structures.js"></script>
+<canvas id="canvas" width="960" height="540"/>
+<script src="../static/js/structures.js"></script>
+<script src="../static/js/canvas.js"></script>
 {% endblock %}
+
 
 </html>
