@@ -12,7 +12,7 @@ class Fort {
 }
 
 class Grid {
-    constructor(x, y) {
+    constructor(x, y, color) {
         this.length = x;
         this.height = y;
         this.grid = [];
@@ -24,6 +24,6 @@ class Grid {
           }
           this.grid.push(add);
         }
-        drawGrid(this.length, this.height);
+        drawGrid(this.length, this.height, color);
     }
 }
