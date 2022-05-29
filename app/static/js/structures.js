@@ -12,7 +12,7 @@ class Fort {
 }
 
 class Grid {
-    constructor(x, y, color) {
+    constructor(x, y) {
         this.length = x;
         this.height = y;
         this.grid = [];
@@ -20,10 +20,9 @@ class Grid {
         for(let i = 0; i < this.height; i++){
           let add = [];
           for(let j = 0; j < this.length; j++) {
-            add.push(0);
+            add.push(Math.floor(Math.random() * 5));
           }
           this.grid.push(add);
         }
-        drawGrid(this.length, this.height, color);
     }
 }
