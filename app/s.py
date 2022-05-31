@@ -2,6 +2,8 @@ import asyncio
 import json
 import websockets
 
+import itertools
+
 USERS = []
 
 # returns how many users are logged in
@@ -14,7 +16,7 @@ def value_event(message):
 
 async def send_data(websocket):
     try:
-        # Register user
+        # Register user if enter tab
         USERS.append(websocket)
         print("New user entered!")
         # Tell all the clients about the new user.
@@ -25,7 +27,7 @@ async def send_data(websocket):
             websockets.broadcast(USERS, value_event(message))
 
     finally:
-        # Unregister user
+        # Unregister user if exit tab
         USERS.remove(websocket)
         print("Some user exited.")
         websockets.broadcast(USERS, users_event())

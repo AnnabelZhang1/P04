@@ -68,4 +68,17 @@ console.log("new troops:" + tester.troops);
 tester.troops = 4;
 console.log("troops:" + tester.troops);
 
+<<<<<<< HEAD
+// window.addEventListener("DOMContentLoaded", () => {
+//   // Initialize the UI.
+//   const board = document.getElementById('canvas');
+//   createBoard(board);
+//   // Open the WebSocket connection and register event handlers.
+//   const websocket = new WebSocket("ws://localhost:6789/");
+//   initGame(websocket);
+//   receiveMoves(board, websocket);
+//   sendMoves(board, websocket);
+// });
+=======
 
+>>>>>>> 695c8eaf03b1855674e780c294faac5fbdb23476
