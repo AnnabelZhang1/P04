@@ -15,7 +15,7 @@ ctx.stroke();
 const a = 2 * Math.PI / 6; //angle. The 6 makes it a hexagon!
 const r = 50; //radius (change as needed)
 
-function drawGrid(z) {
+function drawGrid(z) { //z is grid object
   // For some reason, when the length is divisable by two, the y value becomes half of what it should be.
   // Thus, the if-else function.
   var color = "#d066a4";
@@ -24,21 +24,24 @@ function drawGrid(z) {
       //columns
       for (let x = r, p = 0, m = 0; m < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), m++) {
         //rows
-        if(z.grid[i][m] == 0) {
+        /*
+        if(z.grid[i][m].color == 0) {
           color = "white";
         }
-        else if (z.grid[i][m] == 1) {
+        else if (z.grid[i][m].color == 1) {
           color = "red";
         }
-        else if (z.grid[i][m] == 2) {
+        else if (z.grid[i][m].color == 2) {
           color = "yellow";
         }
-        else if (z.grid[i][m] == 3) {
+        else if (z.grid[i][m].color == 3) {
           color = "blue";
         }
-        else if (z.grid[i][m] == 4) {
+        else if (z.grid[i][m].color == 4) {
           color = "green";
         }
+        */
+       color = z.grid[i][m].color;
         drawHexagon(x, y, color);
       }
     }
@@ -48,21 +51,24 @@ function drawGrid(z) {
       for (let x = r, p = 0, m = 0; m < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), m++) {
         console.log("length: " + z.length);
         console.log("coordinates: " + i + ", " + m + ". Results: " + z.grid[i][m]);
-        if(z.grid[i][m] == 0) {
+        /*
+        if(z.grid[i][m].color == 0) {
           color = "white";
         }
-        else if (z.grid[i][m] == 1) {
+        else if (z.grid[i][m].color == 1) {
           color = "red";
         }
-        else if (z.grid[i][m] == 2) {
+        else if (z.grid[i][m].color == 2) {
           color = "yellow";
         }
-        else if (z.grid[i][m] == 3) {
+        else if (z.grid[i][m].color == 3) {
           color = "blue";
         }
-        else if (z.grid[i][m] == 4) {
+        else if (z.grid[i][m].color == 4) {
           color = "green";
         }
+        */
+        color = z.grid[i][m].color;
         drawHexagon(x, y, color);
       }
     }
@@ -79,3 +85,16 @@ function drawHexagon(x, y, color) {  //draws hexagons
   ctx.stroke();
   ctx.fill();
 }
+
+// initiates canvas in brwoser
+let map = new Grid(10, 3);
+drawGrid(map);
+
+// testing troops
+let tester = map.grid[0][0]
+console.log("troops:" + tester.troops);
+tester.modifyTroops(3);
+console.log("new troops:" + tester.troops);
+tester.troops = 4;
+console.log("troops:" + tester.troops);
+

@@ -3,3 +3,9 @@ SoftDev
 P04: Forged By Land
 2022-05-24 */
 
+body {
+    text-align: center;
+}
+p {
+    margin-top: 10px;
+}
