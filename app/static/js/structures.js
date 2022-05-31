@@ -4,11 +4,34 @@
 // 2022-05-24
 
 class Fort {
-  constructor(troopCap, color) {
+  constructor(troopCap, color, level) {
     this.troopCap = troopCap;
     this.troopNum = 0;
     this.owner = color;
+    this.level = 1;
   }
+
+  getTroopNum() {
+    return this.troopNum;
+  }
+
+  raiseTroop() {
+    this.troopNum += 1;
+  }
+
+  lowerTroop() {
+    this.troopNum -= 1;
+  }
+
+  getTroopCap() {
+    return this.troopCap;
+  }
+
+  // when a building gets taken over, its color shifts
+  swapOwner(color) {
+    this.owner = color;
+  }
+
 }
 
 class Grid {
@@ -24,14 +47,14 @@ class Grid {
           }
           this.grid.push(add);
         }
-        
+
     }
 }
 
 class Hexagon {
   constructor(){
     /*
-    having color as a string/hexcode is better than as a number b/c we have to convert from int eventually 
+    having color as a string/hexcode is better than as a number b/c we have to convert from int eventually
     starting col as int to randomize colors so all colors seen on canvas
     each hexagon should start off white normally tho
     */

@@ -17,7 +17,7 @@ create_users_table_sql ="""
 	user_name TEXT NOT NULL,
 	hash_string TEXT NOT NULL,
 	wins INTEGER NOT NULL
-	)
+	);
 """
 
 cursor.execute(create_users_table_sql)
@@ -25,6 +25,51 @@ cursor.execute(create_users_table_sql)
 db.commit()
 db.close()
 
+#insertNewUser has not been tested yet
+def insertNewUser(user, hash, wins) {
+	db = sqlite3.connect('USERSd.db')
+	cursor = db.cursor()
+
+	cursor.execute("""
+	INSERT INTO users (user_name, hash_string, wins) VALUES
+	("""+ user +""","""+ hash +""",""" + wins + """);
+	""")
+
+	db.commit()
+	db.close()
+}
+
+#getWins has not been tested yet
+def getWins(user) {
+	db = sqlite3.connect('USERSd.db')
+	cursor = db.cursor()
+
+	cursor.execute("""
+	SELECT * FROM users WHERE user_name = """ + user + """
+	""")
+
+	row = cursor.fetchone()
+
+	db.commit()
+	db.close()
+
+	return row['wins']
+}
+
+#addWin has not been tested yet
+def addWin(user) {
+	db = sqlite3.connect('USERSd.db')
+	cursor = db.cursor()
+
+	cursor.execute("""
+	UPDATE users
+	SET wins = """ + (getWins(user)+1) + """
+
+	""")
+
+	db.commit()
+	db.close()
+}
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
