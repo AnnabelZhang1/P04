@@ -41,3 +41,7 @@ qinaL -- 2022-05-31 20:38
 
 qinaL -- 2022-05-31 22:07
 - added a blue background to canvas behind hexagonal grid
+
+alifA - 2022-05-30 22:16
+added starting code to the emperor.js file. created basic troop functionality. expanded Fort functionality.
+added methods to insert and update rows in the users sqlite database in __init__.py
