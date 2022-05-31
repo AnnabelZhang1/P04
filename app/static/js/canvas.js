@@ -69,4 +69,3 @@ tester.troops = 4;
 console.log("troops:" + tester.troops);
 
 
-
