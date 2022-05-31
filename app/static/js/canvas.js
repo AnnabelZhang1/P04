@@ -14,7 +14,7 @@ ctx.rect(0, 0, canvas.width, canvas.height);
 ctx.stroke();
 
 // background of canvas behind hexagons
-// ctx.fillStyle = "#F0F8FF"; 
+// ctx.fillStyle = "#F0F8FF";
 ctx.fillStyle = "#c4d9ec";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -28,53 +28,17 @@ function drawGrid(z) { //z is grid object
   if (z.length % 2 == 0) {
     for (let y = r, i = 0; i < z.height; y += 2 * r * Math.sin(a), i++) {
       //columns
-      for (let x = r, p = 0, m = 0; m < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), m++) {
+      for (let x = r, p = 0, j = 0; j < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), j++) {
         //rows
-        /*
-        if(z.grid[i][m].color == 0) {
-          color = "white";
-        }
-        else if (z.grid[i][m].color == 1) {
-          color = "red";
-        }
-        else if (z.grid[i][m].color == 2) {
-          color = "yellow";
-        }
-        else if (z.grid[i][m].color == 3) {
-          color = "blue";
-        }
-        else if (z.grid[i][m].color == 4) {
-          color = "green";
-        }
-        */
-       color = z.grid[i][m].color;
+       color = z.grid[i][j].color;
         drawHexagon(x, y, color);
       }
     }
   }
   else { //same as before, but y += r * Math.sin(a) instead of y += 2 * r * Math.sin(a).
     for (let y = r, i = 0; i < z.height; y += r * Math.sin(a), i++) {
-      for (let x = r, p = 0, m = 0; m < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), m++) {
-        console.log("length: " + z.length);
-        console.log("coordinates: " + i + ", " + m + ". Results: " + z.grid[i][m]);
-        /*
-        if(z.grid[i][m].color == 0) {
-          color = "white";
-        }
-        else if (z.grid[i][m].color == 1) {
-          color = "red";
-        }
-        else if (z.grid[i][m].color == 2) {
-          color = "yellow";
-        }
-        else if (z.grid[i][m].color == 3) {
-          color = "blue";
-        }
-        else if (z.grid[i][m].color == 4) {
-          color = "green";
-        }
-        */
-        color = z.grid[i][m].color;
+      for (let x = r, p = 0, j = 0; j < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), j++) {
+        color = z.grid[i][j].color;
         drawHexagon(x, y, color);
       }
     }
@@ -103,5 +67,3 @@ tester.modifyTroops(3);
 console.log("new troops:" + tester.troops);
 tester.troops = 4;
 console.log("troops:" + tester.troops);
-
-
