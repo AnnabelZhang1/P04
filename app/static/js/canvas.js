@@ -56,6 +56,11 @@ function drawHexagon(x, y, color) {  //draws hexagons
   ctx.fill();
 }
 
+function hexCheck(event) {
+  console.log(event.offsetX);
+  console.log(event.offsetY);
+}
+
 // initiates canvas in brwoser
 let map = new Grid(10, 3);
 drawGrid(map);
@@ -67,6 +72,7 @@ tester.modifyTroops(3);
 console.log("new troops:" + tester.troops);
 tester.troops = 4;
 console.log("troops:" + tester.troops);
+<<<<<<< Updated upstream
 
 <<<<<<< HEAD
 // window.addEventListener("DOMContentLoaded", () => {
@@ -82,3 +88,5 @@ console.log("troops:" + tester.troops);
 =======
 
 >>>>>>> 695c8eaf03b1855674e780c294faac5fbdb23476
+=======
+>>>>>>> Stashed changes
