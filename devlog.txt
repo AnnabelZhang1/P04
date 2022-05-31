@@ -45,3 +45,15 @@ qinaL -- 2022-05-31 22:07
 alifA - 2022-05-30 22:16
 added starting code to the emperor.js file. created basic troop functionality. expanded Fort functionality.
 added methods to insert and update rows in the users sqlite database in __init__.py
+
+qinaL -- 2022-05-31 18:46
+- added turn.js to hande turn cycle
+- instantiated 4 players, put into players array
+- game page shows turn phase (planning/action) w/ Next Button to lead to switch phase
+- issue: if refresh page, you lose current status of game (i.e. game restarts from beginning); put game data in db?
+
+qinaL -- 2022-05-31 19:15
+- turn.js handles switching from each players turn to the next players
+- next button no longer switches phase, it goes to next player, and when all players have gone is when turn phase changes
+- emperors have a name property ("red") and a color property (red hexcode), easier to show who's turn on screen this way
+
