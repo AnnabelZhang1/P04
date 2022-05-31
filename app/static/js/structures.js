@@ -3,37 +3,6 @@
 // P04: Forged By Land
 // 2022-05-24
 
-class Fort {
-  constructor(troopCap, color, level) {
-    this.troopCap = troopCap;
-    this.troopNum = 0;
-    this.owner = color;
-    this.level = 1;
-  }
-
-  getTroopNum() {
-    return this.troopNum;
-  }
-
-  raiseTroop() {
-    this.troopNum += 1;
-  }
-
-  lowerTroop() {
-    this.troopNum -= 1;
-  }
-
-  getTroopCap() {
-    return this.troopCap;
-  }
-
-  // when a building gets taken over, its color shifts
-  swapOwner(color) {
-    this.owner = color;
-  }
-
-}
-
 class Grid {
     constructor(x, y) {
         this.length = x;
@@ -43,16 +12,15 @@ class Grid {
         for(let i = 0; i < this.height; i++){
           let add = [];
           for(let j = 0; j < this.length; j++) {
-            add.push(new Hexagon());
+            add.push(new Hexagon(i, j));
           }
           this.grid.push(add);
         }
-
     }
 }
 
 class Hexagon {
-  constructor(){
+  constructor(x, y){
     /*
     having color as a string/hexcode is better than as a number b/c we have to convert from int eventually
     starting col as int to randomize colors so all colors seen on canvas
@@ -66,6 +34,8 @@ class Hexagon {
     this.buildings = "";
     // holds how many troops are on tile
     this.troops = 0;
+    this.xcoordinates = x;
+    this.ycoordinate = y; 
   }
   // modifying functins technically not needed
   modifyBuildings(newBuildings){
@@ -74,4 +44,33 @@ class Hexagon {
   modifyTroops(newNum){
     this.troops = newNum;
   }
+}
+
+class Emperor {
+  constructor(gold) {
+    this.gold = gold;
+  }
+}
+
+class Troop {
+  constructor(health, attack, cost) {
+    this.hp = health;
+    this.atk = attack;
+
+    // this value will be reduced from the emperor(player character)'s gold funds.
+    this.cost = cost;
+  }
+
+  takeDmg(dmg) {
+    this.hp -= dmg;
+  }
+
+  heal(hp) {
+    this.hp += hp;
+  }
+
+  dealDmg(troop)  {
+    troop.takeDmg(this.atk);
+  }
+
 }
