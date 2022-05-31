@@ -26,7 +26,7 @@ db.commit()
 db.close()
 
 #insertNewUser has not been tested yet
-def insertNewUser(user, hash, wins) {
+def insertNewUser(user, hash, wins):
 	db = sqlite3.connect('USERSd.db')
 	cursor = db.cursor()
 
@@ -37,10 +37,9 @@ def insertNewUser(user, hash, wins) {
 
 	db.commit()
 	db.close()
-}
 
 #getWins has not been tested yet
-def getWins(user) {
+def getWins(user):
 	db = sqlite3.connect('USERSd.db')
 	cursor = db.cursor()
 
@@ -54,10 +53,9 @@ def getWins(user) {
 	db.close()
 
 	return row['wins']
-}
 
 #addWin has not been tested yet
-def addWin(user) {
+def addWin(user):
 	db = sqlite3.connect('USERSd.db')
 	cursor = db.cursor()
 
@@ -69,7 +67,7 @@ def addWin(user) {
 
 	db.commit()
 	db.close()
-}
+
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
