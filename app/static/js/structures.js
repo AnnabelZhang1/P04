@@ -47,7 +47,8 @@ class Hexagon {
 }
 
 class Emperor {
-  constructor(color, gold, troops) {
+  constructor(name, color, gold, troops) {
+    this.name = name;
     this.color = color;
     this.gold = gold;
     this.troops = troops;
