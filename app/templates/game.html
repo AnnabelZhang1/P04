@@ -16,10 +16,14 @@ P04: Forged By Land
 {% block body %}
 <p> this is game</p>
 <canvas id="canvas" width="960" height="540" onclick="hexCheck(event)"></canvas>
+
+<h3>Phase:</h3> <h3 id="turnPhase">Planning</h3>
+<button id="nextTurn" type="button" class="btn btn-info">Next</button>
+
 <script src="../static/js/structures.js"></script>
 <script src="../static/js/canvas.js"></script>
 <script src="../static/js/turn.js"></script>
-{% endblock %}
 
+{% endblock %}
 
 </html>

@@ -72,9 +72,7 @@ tester.modifyTroops(3);
 console.log("new troops:" + tester.troops);
 tester.troops = 4;
 console.log("troops:" + tester.troops);
-<<<<<<< Updated upstream
-
-<<<<<<< HEAD
+ 
 // window.addEventListener("DOMContentLoaded", () => {
 //   // Initialize the UI.
 //   const board = document.getElementById('canvas');
@@ -85,8 +83,3 @@ console.log("troops:" + tester.troops);
 //   receiveMoves(board, websocket);
 //   sendMoves(board, websocket);
 // });
-=======
-
->>>>>>> 695c8eaf03b1855674e780c294faac5fbdb23476
-=======
->>>>>>> Stashed changes
