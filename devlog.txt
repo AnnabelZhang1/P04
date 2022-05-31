@@ -33,3 +33,8 @@ connected hexagon grid to Grid.
 
 sophieL - 2022-05-29 12:25
 hexagons now color according to inputted value!
+
+qinaL -- 2022-05-31 20:38
+- added hexagon object so tiles can hold info color, troops, buildings
+- colors stored as hexcode string instead of int; colors are better(kinda) shades
+- linked css file
