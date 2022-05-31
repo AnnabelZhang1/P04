@@ -38,3 +38,6 @@ qinaL -- 2022-05-31 20:38
 - added hexagon object so tiles can hold info color, troops, buildings
 - colors stored as hexcode string instead of int; colors are better(kinda) shades
 - linked css file
+
+qinaL -- 2022-05-31 22:07
+- added a blue background to canvas behind hexagonal grid

@@ -9,8 +9,14 @@ const ctx = canvas.getContext('2d');
 // The canvas bounding box wasn't showing on my computer for some reason, so I just drew it in manually.
 // DELETE LATER
 ctx.beginPath();
+// ctx.strokeStyle = "gray";
 ctx.rect(0, 0, canvas.width, canvas.height);
 ctx.stroke();
+
+// background of canvas behind hexagons
+// ctx.fillStyle = "#F0F8FF"; 
+ctx.fillStyle = "#c4d9ec";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 const a = 2 * Math.PI / 6; //angle. The 6 makes it a hexagon!
 const r = 50; //radius (change as needed)
@@ -97,4 +103,5 @@ tester.modifyTroops(3);
 console.log("new troops:" + tester.troops);
 tester.troops = 4;
 console.log("troops:" + tester.troops);
+
 
