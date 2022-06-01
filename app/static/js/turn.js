@@ -7,6 +7,9 @@ let green = new Emperor("Green", "#00A36C", 7, 2, 0 );
 
 let players = [red, yellow, blue, green];
 
+let turnCounter = 0;
+let currentPlayer = players[turnCounter];
+
 
 // handles the switch from planning plase to action phase of turn cycle
 let turnIsPlanning = true; // switches btwn planning and action
@@ -23,7 +26,6 @@ let changeTurnCycle = function(){
 }
 
 // handles the switch from player to player
-let turnCounter = 0;
 let turnPlayer = document.getElementById("turnPlayer");
 let nextTurn = function(){
     turnCounter++;
@@ -33,6 +35,7 @@ let nextTurn = function(){
         turnCounter = 0;
     }
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
+    getResources();
     updatevalues();
 }
 
@@ -61,8 +64,15 @@ goldMineButton.addEventListener('click', buyGoldMine)
 
 //update all values on screen for current player
 let updatevalues = function(){
-    let currentPlayer = players[turnCounter];
     goldShow.innerHTML = "Gold: " + currentPlayer.gold;
     goldMineShow.innerHTML = "Gold Mines: "+currentPlayer.goldMine;
 }
 
+let getResources = function(){
+    // 5 gold from each gold mine comes in at start of planning turn 
+    if (turnIsPlanning){
+        let goldMine = currentPlayer.goldMine;
+        addGold = goldMine * 5;
+        currentPlayer.gold += addGold;
+    }
+}
