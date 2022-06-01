@@ -31,6 +31,9 @@ sophieL - 2022-05-28 9:13
 made hexagon grid
 connected hexagon grid to Grid.
 
+annabelZ - 2022-05-31 9:50
+Started adding multiplayer
+
 sophieL - 2022-05-29 12:25
 hexagons now color according to inputted value!
 
@@ -56,4 +59,3 @@ qinaL -- 2022-05-31 19:15
 - turn.js handles switching from each players turn to the next players
 - next button no longer switches phase, it goes to next player, and when all players have gone is when turn phase changes
 - emperors have a name property ("red") and a color property (red hexcode), easier to show who's turn on screen this way
-
