@@ -59,3 +59,6 @@ qinaL -- 2022-05-31 19:15
 - turn.js handles switching from each players turn to the next players
 - next button no longer switches phase, it goes to next player, and when all players have gone is when turn phase changes
 - emperors have a name property ("red") and a color property (red hexcode), easier to show who's turn on screen this way
+
+qinaL -- 2022-06-01 8:56
+- game pages shows how much gold the current player has 

@@ -33,7 +33,12 @@ let nextTurn = function(){
         turnCounter = 0;
     }
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
+    // updates resources of new player
+    goldShow.innerHTML="Gold: " + players[turnCounter].gold;
 }
 
 let nextTurnButton = document.getElementById("nextTurn");
 nextTurnButton.addEventListener('click', nextTurn);
+
+// shows resouces of player's turn 
+let goldShow = document.getElementById("gold");
