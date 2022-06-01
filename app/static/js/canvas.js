@@ -6,13 +6,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// The canvas bounding box wasn't showing on my computer for some reason, so I just drew it in manually.
-// DELETE LATER
-ctx.beginPath();
-// ctx.strokeStyle = "gray";
-ctx.rect(0, 0, canvas.width, canvas.height);
-ctx.stroke();
-
 // background of canvas behind hexagons
 // ctx.fillStyle = "#F0F8FF";
 ctx.fillStyle = "#c4d9ec";
