@@ -1,0 +1,25 @@
+<!-- The Convicts: Annabel Zhang, Alif Abdullah, Sophie Liu, Qina Liu (Mang, The Eagle In The Sand, Quacky, Nyx)
+SoftDev
+P04: Forged By Land
+2022-05-24 -->
+
+<!DOCTYPE html>
+<html>
+
+{% extends "base.html" %}
+
+{% block title %} Lobby Room {% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+<!-- {% users %} -->
+<p> /4 players joined</p>
+    <form action="/game">
+      <!-- change from fake button to real button once it hits 4 -->
+      <button type="submit">Start Game</button>
+  </form>
+{% endblock %}
+
+</html>
