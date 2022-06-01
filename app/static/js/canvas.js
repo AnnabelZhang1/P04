@@ -18,7 +18,7 @@ ctx.stroke();
 ctx.fillStyle = "#c4d9ec";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const a = 2 * Math.PI / 6; //angle. The 6 makes it a hexagon!
+const a = Math.PI / 3; //angle. The 6 makes it a hexagon!
 const r = 50; //radius (change as needed)
 
 function drawGrid(z) { //z is grid object
@@ -46,14 +46,14 @@ function drawGrid(z) { //z is grid object
 }
 
 function drawHexagon(x, y, color) {  //draws hexagons
-  ctx.fillStyle = color + "";
-  ctx.beginPath();
-  for (let i = 0; i < 6; i++) {
-    ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
-  }
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
+    ctx.fillStyle = color + "";
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+        ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+    }
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
 }
 
 function hexCheck(event) {
@@ -72,7 +72,7 @@ tester.modifyTroops(3);
 console.log("new troops:" + tester.troops);
 tester.troops = 4;
 console.log("troops:" + tester.troops);
- 
+
 // window.addEventListener("DOMContentLoaded", () => {
 //   // Initialize the UI.
 //   const board = document.getElementById('canvas');
