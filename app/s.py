@@ -5,6 +5,7 @@ import websockets
 import itertools
 
 USERS = []
+JOINED = {}
 
 # returns how many users are logged in
 def users_event():
@@ -33,11 +34,41 @@ async def send_data(websocket):
         websockets.broadcast(USERS, users_event())
 
 
+async def start(websocket):
+    """
+    Handle a connection from the first player: start a new game.
+    """
+    # Initialize a Connect Four game, the set of WebSocket connections
+    # receiving moves from this game, and secret access tokens.
+    game = Grid()
+    # or
+    game = Hexagon()
+    connected = {websocket}
+    # replace with random string gen
+    join_key = secrets.token_urlsafe(12)
+    JOIN[join_key] = game, connected
+
+    try:
+        # Send the secret access tokens to the browser of the first player,
+        # where they'll be used for building "join" and "watch" links.
+        event = {
+            "type": "init",
+            "join": join_key,
+        }
+
+        await websocket.send(json.dumps(event))
+        # Receive and process moves from the first player.
+        await play(websocket, game, PLAYER1, connected)
+
+    finally:
+        # game finished
+        del JOIN[join_key]
+
+
 async def main():
     # server at localhost 6789
     async with websockets.serve(send_data, "localhost", 6789):
         await asyncio.Future() # run forever
-
 
 if __name__ == "__main__":
     asyncio.run(main())
