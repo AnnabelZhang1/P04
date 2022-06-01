@@ -1,9 +1,9 @@
 
 // each player start off w/ 7 gold, 2 troops
-let red = new Emperor("Red", "#E30B5C", 7, 2 );
-let yellow = new Emperor("Yellow", "#FDDA0D", 7, 2 );
-let blue = new Emperor("Blue", "#4169E1", 7, 2 );
-let green = new Emperor("Green", "#00A36C", 7, 2 );
+let red = new Emperor("Red", "#E30B5C", 7, 2, 0 );
+let yellow = new Emperor("Yellow", "#FDDA0D", 7, 2, 0 );
+let blue = new Emperor("Blue", "#4169E1", 7, 2, 0 );
+let green = new Emperor("Green", "#00A36C", 7, 2, 0 );
 
 let players = [red, yellow, blue, green];
 
@@ -33,12 +33,36 @@ let nextTurn = function(){
         turnCounter = 0;
     }
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
-    // updates resources of new player
-    goldShow.innerHTML="Gold: " + players[turnCounter].gold;
+    updatevalues();
 }
 
 let nextTurnButton = document.getElementById("nextTurn");
 nextTurnButton.addEventListener('click', nextTurn);
 
 // shows resouces of player's turn 
-let goldShow = document.getElementById("gold");
+let goldShow = document.getElementById("gold"); 
+
+// user wants to buy a gold mine
+let goldMineShow = document.getElementById("goldMineShow");
+let goldMineButton = document.getElementById("goldMineBuy");
+let buyGoldMine = function(){
+    // gold mines cost five gold 
+    let currentPlayer = players[turnCounter];
+    //currentGold = currentPlayer.gold;
+    if (currentPlayer.gold >= 5){
+        currentPlayer.gold -= 5;
+        currentPlayer.goldMine++;
+        // update new vales on screen
+        updatevalues();
+    }
+
+}
+goldMineButton.addEventListener('click', buyGoldMine)
+
+//update all values on screen for current player
+let updatevalues = function(){
+    let currentPlayer = players[turnCounter];
+    goldShow.innerHTML = "Gold: " + currentPlayer.gold;
+    goldMineShow.innerHTML = "Gold Mines: "+currentPlayer.goldMine;
+}
+
