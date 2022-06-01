@@ -77,6 +77,10 @@ def welcome():
 def home():
 	return render_template("home.html")
 
+@app.route("/lobby", methods=['GET', 'POST'])
+def lobby():
+    return render_template("lobby.html")
+
 @app.route("/game", methods=['GET', 'POST'])
 def game():
     return render_template("game.html")
