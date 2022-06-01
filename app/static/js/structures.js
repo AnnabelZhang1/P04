@@ -57,6 +57,8 @@ class Hexagon {
     the one and only Hexagon that returns true is the Hexagon that has been clicked.
     return the xcoordinates and ycoordinates of that Hexagon.
   */
+
+  //isClicked not tested!
   isClicked(x,y) {
     if(this.X < x && x < this.X+50 && this.Y < y && y < this.Y+50*Math.sqrt(3)) {
       return true;
