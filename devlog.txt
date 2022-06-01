@@ -61,8 +61,11 @@ qinaL -- 2022-05-31 19:15
 - emperors have a name property ("red") and a color property (red hexcode), easier to show who's turn on screen this way
 
 qinaL -- 2022-06-01 8:56
-- game pages shows how much gold the current player has 
+- game pages shows how much gold the current player has
 
 qinaL -- 2022-06-01 9:21
 - shows how much goldmines player has (emperor has goldmine property now)
 - game has buy gold mine button; will increase goldmines, decrease gold by 5
+
+annabelZ -- 2022-06-01 9:25
+Continued adding to s.py
