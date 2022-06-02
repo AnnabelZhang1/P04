@@ -24,23 +24,21 @@ function drawGrid(z) { //z is grid object
       //columns
       for (let x = r, p = 0, j = 0; j < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), j++) {
         //rows
-       color = z.grid[i][j].color;
-        drawHexagon(x, y, color);
+        drawHexagon(x, y, z.grid[i][j]);
       }
     }
   }
   else { //same as before, but y += r * Math.sin(a) instead of y += 2 * r * Math.sin(a).
     for (let y = r, i = 0; i < z.height; y += r * Math.sin(a), i++) {
       for (let x = r, p = 0, j = 0; j < z.length; x += r * (1 + Math.cos(a)), y += ((-1) ** p++) * r * Math.sin(a), j++) {
-        color = z.grid[i][j].color;
-        drawHexagon(x, y, color);
+        drawHexagon(x, y, z.grid[i][j]);
       }
     }
   }
 }
 
-function drawHexagon(x, y, color) {  //draws hexagons
-    ctx.fillStyle = color + "";
+function drawHexagon(x, y, hex) {  //draws hexagons
+    ctx.fillStyle = hex.color + "";
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
         ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
@@ -48,11 +46,15 @@ function drawHexagon(x, y, color) {  //draws hexagons
     ctx.closePath();
     ctx.stroke();
     ctx.fill();
+    ctx.fillStyle = "orange";
+    ctx.textAlign = "center";
+    ctx.font = "25px Arial";
+    ctx.fillText(hex.troops + "", x, y + 10);
 }
 
 
 // initiates canvas in brwoser
-let map = new Grid(10, 3);
+let map = new Grid(11, 6);
 drawGrid(map);
 
 /* calls isClicked (defined in structures.js) on every hexagon
