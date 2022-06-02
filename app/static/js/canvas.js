@@ -38,6 +38,7 @@ function drawGrid(z) { //z is grid object
 }
 
 function drawHexagon(x, y, hex) {  //draws hexagons
+    ctx.strokeStyle = "black";
     ctx.fillStyle = hex.color + "";
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
@@ -52,6 +53,7 @@ function drawHexagon(x, y, hex) {  //draws hexagons
     ctx.fillText(hex.troops + "", x, y + 10);
 }
 
+
 function drawHexNoFill(x,y,radius) {
   ctx.lineWidth = 5;
   ctx.fillStyle = 'orange';
@@ -61,6 +63,16 @@ function drawHexNoFill(x,y,radius) {
   }
   ctx.closePath();
   ctx.stroke();
+
+function clearHexagon(x, y, hex) {  //draws hexagons
+    ctx.strokeStyle = "#c4d9ec"
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+        ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+    }
+    ctx.closePath();
+    ctx.stroke();
+
 }
 
 
