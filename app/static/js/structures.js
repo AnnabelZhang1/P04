@@ -46,6 +46,8 @@ class Hexagon {
   }
   modifyTroops(newNum){
     this.troops = newNum;
+    clearHexagon(this.centerX,this.centerY, this);
+    drawHexagon(this.centerX, this.centerY, this);
   }
 
   // x and y are event.offsetX and event.offsetY respectively
