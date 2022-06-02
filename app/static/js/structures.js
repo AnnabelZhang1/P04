@@ -30,8 +30,8 @@ class Hexagon {
                 // white, red, yellow, blue, green
     let cols = ["white", "#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
     this.color = cols[col];
-    // holds what buildings are on the tile
-    this.buildings = "";
+    // what building is on tile (only 1 can be on building at once); buildings for now strings
+    this.building = "";
     // holds how many troops are on tile
     this.troops = 0;
     this.xcoordinates = x;

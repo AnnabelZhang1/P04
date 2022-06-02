@@ -47,13 +47,15 @@ let goldShow = document.getElementById("gold");
 let goldMineShow = document.getElementById("goldMineShow");
 let goldMineButton = document.getElementById("goldMineBuy");
 let buyGoldMine = function(){
+    // might be made redddundant later but for now still needed 
     // can only buy during planning
     if (!turnIsPlanning){
         alert("Can Only Buy During Planning");
         return;
     }
-    // gold mines cost five gold 
+    // gold mines cost 7 gold 
     let cost = 7;
+    // add to player
     let currentPlayer = players[turnCounter];
     //currentGold = currentPlayer.gold;
     if (currentPlayer.gold < cost){
@@ -66,9 +68,9 @@ let buyGoldMine = function(){
         // update new vales on screen
         updatevalues();
     }
-
+    // add to hex tile
+    map.grid[curHex[0]][curHex[1]].building = "goldMine";
 }
-goldMineButton.addEventListener('click', buyGoldMine)
 
 //update all values on screen for current player
 let updatevalues = function(){
