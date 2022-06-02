@@ -72,7 +72,7 @@ function hexCheck(event) {
     }
   }
   if(!hexClicked) {curHex[0] = -1; curHex[1] = -1;}
-  // console.log(curHex);
+  console.log(curHex);
 }
 
 // testing troops
