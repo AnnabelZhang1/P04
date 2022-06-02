@@ -35,6 +35,8 @@ let nextTurn = function(){
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
     getResources();
     updatevalues();
+
+    deleteOptions();
 }
 
 let nextTurnButton = document.getElementById("nextTurn");

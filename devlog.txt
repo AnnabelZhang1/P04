@@ -78,5 +78,5 @@ annabelZ -- 2022-06-01 23:30
 Added castle and gold mine sprites; working on finding how to get apache to work with websockets
 
 qinaL -- 2022-06-02 19:27
-- goldMineButton does not show up on start anymore, shows when user clicks a tile
+- goldMineButton does not show up on start anymore, shows when user clicks a til; deleteOptions() and showOptions() added for this
 - if a user clicks tile then goldMineButton, will add goldMine to player and the tile
