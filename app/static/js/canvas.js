@@ -52,6 +52,17 @@ function drawHexagon(x, y, hex) {  //draws hexagons
     ctx.fillText(hex.troops + "", x, y + 10);
 }
 
+function drawHexNoFill(x,y,radius) {
+  ctx.lineWidth = 5;
+  ctx.fillStyle = 'orange';
+  ctx.beginPath();
+  for (let i = 0; i < 6; i++) {
+    ctx.lineTo(x + radius * Math.cos(a * i), y + radius * Math.sin(a * i));
+  }
+  ctx.closePath();
+  ctx.stroke();
+}
+
 
 // initiates canvas in brwoser
 let map = new Grid(11, 6);
@@ -60,7 +71,7 @@ drawGrid(map);
 /* calls isClicked (defined in structures.js) on every hexagon
 in the grid. modifies the elements of the curHex array.
  */
-function hexCheck(event) {
+function hexClick(event) {
   mX = event.offsetX;
   mY = event.offsetY;
   let hexClicked = false;
@@ -73,8 +84,15 @@ function hexCheck(event) {
       }
     }
   }
-  if(!hexClicked) {curHex[0] = -1; curHex[1] = -1;}
-  console.log(curHex);
+  if(!hexClicked) {
+    curHex[0] = -1; curHex[1] = -1;
+    console.log(curHex);
+  }
+  else {
+    console.log(curHex[1]);
+    drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
+  }
+
 }
 
 // testing troops
