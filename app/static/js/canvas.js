@@ -55,6 +55,9 @@ function drawHexagon(x, y, color) {  //draws hexagons
 let map = new Grid(10, 3);
 drawGrid(map);
 
+/* calls isClicked (defined in structures.js) on every hexagon
+in the grid. modifies the elements of the curHex array.
+ */
 function hexCheck(event) {
   mX = event.offsetX;
   mY = event.offsetY;
@@ -69,7 +72,7 @@ function hexCheck(event) {
     }
   }
   if(!hexClicked) {curHex[0] = -1; curHex[1] = -1;}
-  console.log(curHex);
+  // console.log(curHex);
 }
 
 // testing troops
