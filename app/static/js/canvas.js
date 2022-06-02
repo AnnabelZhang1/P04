@@ -63,6 +63,7 @@ function drawHexNoFill(x,y,radius) {
   }
   ctx.closePath();
   ctx.stroke();
+}
 
 function clearHexagon(x, y, hex) {  //draws hexagons
     ctx.strokeStyle = "#c4d9ec"
