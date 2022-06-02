@@ -36,12 +36,9 @@ class Hexagon {
     this.troops = 0;
     this.xcoordinates = x;
     this.ycoordinate = y;
-    let centerX = (y*75+50);
-    let centerY = (x*50*Math.sqrt(3)+50);
-    if (y % 2 == 1) {centerY += 25*Math.sqrt(3);}
-
-    this.X = Math.round(centerX - 25);
-    this.Y = Math.round(centerY - 25*Math.sqrt(3));
+    this.centerX = (y*75+50);
+    this.centerY = (x*50*Math.sqrt(3)+50);
+    if (y % 2 == 1) {this.centerY += 25*Math.sqrt(3);}
   }
   // modifying functins technically not needed
   modifyBuildings(newBuildings){
@@ -52,17 +49,11 @@ class Hexagon {
   }
 
   // x and y are event.offsetX and event.offsetY respectively
-  /*
-    change hexCheck in canvas.js to run isClicked on every Hexagon in Grid.
-    the one and only Hexagon that returns true is the Hexagon that has been clicked.
-    return the xcoordinates and ycoordinates of that Hexagon.
-  */
-
-  //isClicked not tested!
   isClicked(x,y) {
-    if(this.X < x && x < this.X+50 && this.Y < y && y < this.Y+50*Math.sqrt(3)) {
+    if (50 >= (Math.sqrt(Math.pow(this.centerX-x,2) + Math.pow(this.centerY-y,2) ))) {
       return true;
     }
+    return false;
   }
 
 }

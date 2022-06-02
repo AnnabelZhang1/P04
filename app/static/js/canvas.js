@@ -5,6 +5,7 @@
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+let curHex = [-1,-1];
 
 // background of canvas behind hexagons
 // ctx.fillStyle = "#F0F8FF";
@@ -49,14 +50,27 @@ function drawHexagon(x, y, color) {  //draws hexagons
     ctx.fill();
 }
 
-function hexCheck(event) {
-  console.log(event.offsetX);
-  console.log(event.offsetY);
-}
 
 // initiates canvas in brwoser
 let map = new Grid(10, 3);
 drawGrid(map);
+
+function hexCheck(event) {
+  mX = event.offsetX;
+  mY = event.offsetY;
+  let hexClicked = false;
+  for (let i = 0; i < map.height; i++) {
+    for (let j = 0; j < map.length; j++) {
+      if (map.grid[i][j].isClicked(mX,mY)) {
+        curHex[0] = i;
+        curHex[1] = j;
+        hexClicked = true;
+      }
+    }
+  }
+  if(!hexClicked) {curHex[0] = -1; curHex[1] = -1;}
+  console.log(curHex);
+}
 
 // testing troops
 let tester = map.grid[0][0]
