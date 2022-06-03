@@ -10,3 +10,18 @@ body {
 p {
     margin-top: 10px;
 }
+
+canvas {
+    position: fixed;
+    top:50%;
+    transform:translate(-50%,-50%)
+}
+
+#interactions {
+    z-index: 2;
+}
+
+#canvas {
+    position: absolute;
+    z-index: 1;
+}
