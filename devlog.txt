@@ -103,4 +103,4 @@ implemented code to check if a hexagon was clicked
 implemented code to draw a border around the clicked hexagon
 
 qinaL -- 2022-06-03 12:53
-- capital initization 
+- capital initization

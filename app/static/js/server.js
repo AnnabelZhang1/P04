@@ -17,7 +17,7 @@ var send_mouse = function(e){
   var mouseX = e.offsetX;
   var mouseY = e.offsetY;
   console.log("sent to server "+mouseX+","+mouseY);
-  websocket.send(JSON.stringify({xcor":mouseX, "ycor":mouseY}))
+  //websocket.send(JSON.stringify({xcor":mouseX, "ycor":mouseY}))
 }
 
 // function playMove(board, player, column, row) {
