@@ -104,3 +104,6 @@ implemented code to draw a border around the clicked hexagon
 
 qinaL -- 2022-06-03 12:53
 - capital initization
+
+qinaL -- 2022-06-03 13:52
+- capitals start off w/ 2 troops, and every planning turn, 2 new troops spawn at capital (except for first cycle)

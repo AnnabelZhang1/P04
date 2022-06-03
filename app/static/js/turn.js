@@ -6,8 +6,13 @@ let blue = new Emperor("Blue", "#4169E1", 7, 2, 0 );
 let green = new Emperor("Green", "#00A36C", 7, 2, 0 );
 
 let players = [red, yellow, blue, green];
+players[0].capital = map.grid[capitalRows[0]][capitalCols[0]];
+players[1].capital = map.grid[capitalRows[1]][capitalCols[1]];
+players[2].capital = map.grid[capitalRows[2]][capitalCols[2]];
+players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 
 let turnCounter = 0;
+let turnIsStart = true; // is the first cycle of planning, so don't add new troops to capital
 
 // handles the switch from planning plase to action phase of turn cycle
 let turnIsPlanning = true; // switches btwn planning and action
@@ -34,10 +39,16 @@ let nextTurn = function(){
     if (turnCounter > 3){
         changeTurnCycle();
         turnCounter = 0;
+        turnIsStart = false;
     }
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
-    getResources();
-    updatevalues();
+    if (turnIsPlanning){
+        /// avoid capitals getting troops at first cycle
+        if (!turnIsStart){
+            getResources();
+        }
+        updatevalues();
+    }
 }
 
 let nextTurnButton = document.getElementById("nextTurn");
@@ -90,15 +101,19 @@ let updatevalues = function(){
 let getResources = function(){
     let currentPlayer = players[turnCounter];
     // 5 gold from each gold mine comes in at start of planning turn 
-    if (turnIsPlanning){
-        let goldMine = currentPlayer.goldMine;
-        // has mine, add + send notif
-        if (goldMine != 0){
-            addGold = goldMine * 5;
-            currentPlayer.gold += addGold;
-            addNotif("*recevied " + addGold + " from mines");
-        }
+    
+    let goldMine = currentPlayer.goldMine;
+    // has mine, add + send notif
+    if (goldMine != 0){
+        addGold = goldMine * 5;
+        currentPlayer.gold += addGold;
+        addNotif("*recevied " + addGold + " from mines");
     }
+    // 2 troops spawn at capital 
+    let prevTroop = currentPlayer.capital.troops;
+    //console.log(currentPlayer.capital.troops);
+    currentPlayer.capital.modifyTroops(prevTroop + 2);
+    addNotif("*2 troops spawn at capital");
 }
 
 let addNotif = function(notification){

@@ -111,18 +111,22 @@ console.log(map.grid)
 map.grid[capitalRows[0]][capitalCols[0]].color = "#E30B5C";
 map.grid[capitalRows[0]][capitalCols[0]].building = "Capital";
 map.grid[capitalRows[0]][capitalCols[0]].troops = 2;
+// players[0].capital = map.grid[capitalRows[0]][capitalCols[0]];
 // yellow
 map.grid[capitalRows[1]][capitalCols[1]].color = "#FDDA0D";
 map.grid[capitalRows[1]][capitalCols[1]].building = "Capital";
 map.grid[capitalRows[1]][capitalCols[1]].troops = 2;
+// players[1].capital = map.grid[capitalRows[1]][capitalCols[1]];
 // blue
 map.grid[capitalRows[2]][capitalCols[2]].color = "#4169E1";
 map.grid[capitalRows[2]][capitalCols[2]].building = "Capital";
 map.grid[capitalRows[2]][capitalCols[2]].troops = 2;
+//players[2].capital = map.grid[capitalRows[2]][capitalCols[2]];
 // green
 map.grid[capitalRows[3]][capitalCols[3]].color = "#00A36C";
 map.grid[capitalRows[3]][capitalCols[3]].building = "Capital";
 map.grid[capitalRows[3]][capitalCols[3]].troops = 2;
+//players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 
 drawGrid(map);
 
