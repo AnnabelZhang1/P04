@@ -83,4 +83,4 @@ qinaL -- 2022-06-02 19:27
 
 qinaL -- 2022-06-02 20:07
 - made background of game page match background of canvas
-- made game text info a column next to canvas
+- made game text info a column next to canvas; bootstrap containers are cool
