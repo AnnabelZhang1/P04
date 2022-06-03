@@ -79,6 +79,12 @@ function clearHexagon(x, y, hex) {  //draws hexagons
 
 // initiates canvas in brwoser
 let map = new Grid(11, 6);
+// topright red
+map.grid[int(Math.random()*5)][int(Math.random()*3)].color = "#E30B5C";
+// top left
+map.grid[int(Math.random()*5)+5][int(Math.random()*3)].color = "#FDDA0D";
+map.grid[int(Math.random()*5)][int(Math.random()*3)+3].color = "#4169E1";
+map.grid[int(Math.random()*5)+5][int(Math.random()*3)+3].color = "#00A36C";
 drawGrid(map);
 
 /* calls isClicked (defined in structures.js) on every hexagon
@@ -130,3 +136,4 @@ console.log("troops:" + tester.troops);
 //   receiveMoves(board, websocket);
 //   sendMoves(board, websocket);
 // });
+
