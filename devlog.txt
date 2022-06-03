@@ -107,3 +107,8 @@ qinaL -- 2022-06-03 12:53
 
 qinaL -- 2022-06-03 13:52
 - capitals start off w/ 2 troops, and every planning turn, 2 new troops spawn at capital (except for first cycle)
+
+qinaL -- 2022-06-03 16:29
+- build fort button added to options, button works, fort property added to emperor, fort building add to tile
+- when buying mine + fort, options are updated on screen to show new buy + matching options
+- tile coordinates shown in options when tile is clicked

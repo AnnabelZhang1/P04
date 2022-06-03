@@ -85,16 +85,21 @@ let buyGoldMine = function(){
     else{
         currentPlayer.gold -= cost;
         currentPlayer.goldMine++;
+        // add to hex tile
+        map.grid[curHex[0]][curHex[1]].building = "goldMine";
         // update new vales on screen
         updatevalues();
+        deleteOptions();
+        showOptions();
     }
-    // add to hex tile
-    map.grid[curHex[0]][curHex[1]].building = "goldMine";
 }
+
 let deleteGoldMine = function(){
     map.grid[curHex[0]][curHex[1]].building = "";
     players[turnCounter].goldMine -= 1;
     updatevalues();
+    deleteOptions();
+    showOptions();
 }
 
 //update all values on screen for current player
@@ -144,6 +149,7 @@ let eraseNotifs = function(){
 
 
 let showOptions = function(hex){
+    // tile
     let build = document.getElementById("buildOptions");
     let tile = document.createElement("p");
     tile.innerHTML = "Tile: (" + curHex[0] + ", " + curHex[1] + ")";
@@ -151,6 +157,7 @@ let showOptions = function(hex){
     if (!turnIsPlanning){
         return;
     }
+
     // shows what building is on tile when tile is clicked
     let building = map.grid[curHex[0]][curHex[1]].building;
     let showBuild = document.createElement("p");
@@ -161,9 +168,9 @@ let showOptions = function(hex){
         showBuild.innerHTML = "Building: " + building;
     }
     build.appendChild(showBuild);
+
     // if it's player's tile, shows building options
-    // color is used instead of name b/c hex doesnt have name porperty
-    if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){
+    if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){ // color is used instead of name b/c hex doesnt have name porperty
         if (building == "goldMine"){
             let deleteMineButton = document.createElement("button");
             deleteMineButton.innerHTML = "Delete Gold Mine";
@@ -180,19 +187,34 @@ let showOptions = function(hex){
             goldMineCreated.setAttribute("id", "goldMineBuy");
             goldMineCreated.setAttribute("class", "btn btn-warning");
             build.appendChild(goldMineCreated);
-            //console.log(goldMineButton);
             goldMineCreated.addEventListener('click', buyGoldMine); //buyGoldMine is in turn.js
+
+            build.appendChild(document.createElement("br"));
+
+            // fortbuy button 
+            let fortCreated = document.createElement("button");
+            fortCreated.innerHTML = "Build Fort";
+            fortCreated.setAttribute("id", "fortBuy");
+            fortCreated.setAttribute("class", "btn btn-secondary");
+            build.appendChild(fortCreated);
+            fortCreated.addEventListener('click', buyFort);
         }
-      }
-  }
+    }
+}
   
-  let deleteOptions = function(){
+let deleteOptions = function(){
     let build = document.getElementById("buildOptions");
     let children = build.childNodes;
     // console.log(children);
     while (build.hasChildNodes()){
-      build.removeChild(build.firstChild);
+        build.removeChild(build.firstChild);
     }
+}
   
-  }
-  
+let buyFort = function(){
+    map.grid[curHex[0]][curHex[1]].building = "Fort";
+    players[turnCounter].forts.push(map.grid[curHex[0]][curHex[1]]);   
+    console.log(players[turnCounter]);
+    deleteOptions();
+    showOptions();
+}

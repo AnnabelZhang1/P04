@@ -68,6 +68,7 @@ class Emperor {
     this.troops = troops;
     this.goldMine = goldMine;
     this.capital = ''; // refers to hexagon tile; done after declaring players
+    this.forts = []; //array of hexs w/ fort
   }
 }
 

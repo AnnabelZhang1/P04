@@ -135,6 +135,9 @@ map.grid[capitalRows[3]][capitalCols[3]].building = "Capital";
 map.grid[capitalRows[3]][capitalCols[3]].troops = 2;
 //players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 */
+
+map.grid[3][6].color = "#E30B5C"; // for testing buildings 
+
 drawGrid(map);
 
 
