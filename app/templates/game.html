@@ -11,20 +11,39 @@ P04: Forged By Land
 {% block title %} Game {% endblock %}
 
 {% block css %}
+<style>
+    body{
+        background-color: #c4d9ec;
+    }
+    h1{
+        margin: 15px;
+    }
+</style>
 {% endblock %}
 
 {% block body %}
-<p> this is game</p>
-<canvas id="canvas" width="960" height="540" onclick="hexClick(event)"></canvas>
+<h1> Forged By Land</h1>
+<br>
+<div class = "container-fluid">
+    <div class = "row">
+        <div class = "col-8">
+            <canvas id="canvas" width="855" height="580" onclick="hexClick(event)"></canvas>
+        </div>
+        <div class = "col-4">
+            <div id="side">
+                <h3 id="turnPhase">Phase: Planning</h3>
+                <h3 id ="turnPlayer">Red's Turn</h3>
+                <button id="nextTurn" type="button" class="btn btn-info">Next</button>
+                <br><br>
+                <p id="gold"> Gold: 7</p>
+                <p id="goldMineShow">Gold Mines: 0</p>
 
-<h3 id="turnPhase">Phase: Planning</h3>
-<h3 id ="turnPlayer">Red's Turn</h3>
-<button id="nextTurn" type="button" class="btn btn-info">Next</button>
-<br><br>
-<p id="gold"> Gold: 7</p>
-<p id="goldMineShow">Gold Mines: 0</p>
-<div id = "buildOptions">
-    <!--<button id="goldMineBuy" type="button" class="btn btn-warning">Buy Gold Mine</button> -->
+                <div id = "buildOptions">
+                    <!--<button id="goldMineBuy" type="button" class="btn btn-warning">Buy Gold Mine</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="../static/js/structures.js"></script>

@@ -108,7 +108,7 @@ function hexClick(event) {
 
   // if building options are shown, they will be deleted 
   deleteOptions();
-  showOptions(); 
+  showOptions(curHex); 
 
 }
 
@@ -116,7 +116,8 @@ let showOptions = function(){
   // adds button to page
   let goldMineCreated = document.createElement("button");
   goldMineCreated.innerHTML = "Build Gold Mine";
-  goldMineCreated.id = "goldMineBuy";
+  //goldMineCreated.id = "goldMineBuy";
+  //goldMineCreated.type = "button";
   goldMineCreated.class = "btn btn-warning";
   let build = document.getElementById("buildOptions");
   build.appendChild(goldMineCreated);

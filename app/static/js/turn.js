@@ -47,7 +47,7 @@ let goldShow = document.getElementById("gold");
 
 // user wants to buy a gold mine
 let goldMineShow = document.getElementById("goldMineShow");
-let goldMineButton = document.getElementById("goldMineBuy");
+//let goldMineButton = document.getElementById("goldMineBuy");
 let buyGoldMine = function(){
     // might be made redddundant later but for now still needed 
     // can only buy during planning
