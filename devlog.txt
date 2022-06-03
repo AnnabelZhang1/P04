@@ -96,3 +96,8 @@ qinaL -- 2022-06-03 9:12
 - will only show building options during planning + if the tile is yours
 - building gold mine options only appears if no building on owned tile
 - delete gold mine options appears if owned tile already has gold mine built; button has functionality
+
+alifA - 2022-06-03 12:34
+fixed random spawn of hexagon colors
+implemented code to check if a hexagon was clicked
+implemented code to draw a border around the clicked hexagon

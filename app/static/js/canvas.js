@@ -79,12 +79,16 @@ function clearHexagon(x, y, hex) {  //draws hexagons
 
 // initiates canvas in brwoser
 let map = new Grid(11, 6);
+
 // topright red
-map.grid[int(Math.random()*5)][int(Math.random()*3)].color = "#E30B5C";
-// top left
-map.grid[int(Math.random()*5)+5][int(Math.random()*3)].color = "#FDDA0D";
-map.grid[int(Math.random()*5)][int(Math.random()*3)+3].color = "#4169E1";
-map.grid[int(Math.random()*5)+5][int(Math.random()*3)+3].color = "#00A36C";
+map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)].color = "#E30B5C";
+// top left yellow
+map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)].color = "#FDDA0D";
+// bottom right blue
+map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)].color = "#4169E1";
+// bottom left green
+map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)].color = "#00A36C";
+
 drawGrid(map);
 
 /* calls isClicked (defined in structures.js) on every hexagon
@@ -112,9 +116,9 @@ function hexClick(event) {
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
   }
 
-  // if building options are shown, they will be deleted 
+  // if building options are shown, they will be deleted
   deleteOptions();
-  showOptions(curHex); 
+  showOptions(curHex);
 
 }
 
@@ -136,4 +140,3 @@ console.log("troops:" + tester.troops);
 //   receiveMoves(board, websocket);
 //   sendMoves(board, websocket);
 // });
-
