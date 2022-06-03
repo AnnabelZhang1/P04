@@ -88,3 +88,6 @@ qinaL -- 2022-06-02 20:07
 qinaL -- 2022-06-02 21:17
 - frontend: made fonts look better, font is serif, fixed gold button look
 - notifications added, will notify player if they got gold from mines at start of turn
+
+qinaL -- 2022-06-02 21:27
+- fixed the overflowing of columns in smaller screen size so text never blocks canvas
