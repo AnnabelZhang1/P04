@@ -116,9 +116,8 @@ let showOptions = function(){
   // adds button to page
   let goldMineCreated = document.createElement("button");
   goldMineCreated.innerHTML = "Build Gold Mine";
-  //goldMineCreated.id = "goldMineBuy";
-  //goldMineCreated.type = "button";
-  goldMineCreated.class = "btn btn-warning";
+  goldMineCreated.setAttribute("id", "goldMineBuy");
+  goldMineCreated.setAttribute("class", "btn btn-warning");
   let build = document.getElementById("buildOptions");
   build.appendChild(goldMineCreated);
   //console.log(goldMineButton);

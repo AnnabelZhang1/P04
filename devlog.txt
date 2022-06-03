@@ -84,3 +84,7 @@ qinaL -- 2022-06-02 19:27
 qinaL -- 2022-06-02 20:07
 - made background of game page match background of canvas
 - made game text info a column next to canvas; bootstrap containers are cool
+
+qinaL -- 2022-06-02 21:17
+- frontend: made fonts look better, font is serif, fixed gold button look
+- notifications added, will notify player if they got gold from mines at start of turn

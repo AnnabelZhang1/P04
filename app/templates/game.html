@@ -17,6 +17,17 @@ P04: Forged By Land
     }
     h1{
         margin: 15px;
+        font-family: "Times New Roman", Times, serif;
+        font-weight: bold;
+    }
+    h3{
+        font-weight: 550;
+    }
+    p{
+        font-size: 20px;
+    }
+    p.noti{
+        color: #FA8072;
     }
 </style>
 {% endblock %}
@@ -33,14 +44,21 @@ P04: Forged By Land
             <div id="side">
                 <h3 id="turnPhase">Phase: Planning</h3>
                 <h3 id ="turnPlayer">Red's Turn</h3>
-                <button id="nextTurn" type="button" class="btn btn-info">Next</button>
-                <br><br>
+            </div>
+            <button id="nextTurn" type="button" class="btn btn-info">Next</button>
+            <br><br>
+
+            <div id ="notifs">
+
+            </div>
+
+            <div id="resources">
                 <p id="gold"> Gold: 7</p>
                 <p id="goldMineShow">Gold Mines: 0</p>
+            </div>
 
-                <div id = "buildOptions">
-                    <!--<button id="goldMineBuy" type="button" class="btn btn-warning">Buy Gold Mine</button> -->
-                </div>
+            <div id = "buildOptions">
+                <!--<button id="goldMineBuy" type="button" class="btn btn-warning">Buy Gold Mine</button> -->
             </div>
         </div>
     </div>

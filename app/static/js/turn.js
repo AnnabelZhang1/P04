@@ -26,6 +26,9 @@ let changeTurnCycle = function(){
 // handles the switch from player to player
 let turnPlayer = document.getElementById("turnPlayer");
 let nextTurn = function(){
+    eraseNotifs();
+    deleteOptions();
+
     turnCounter++;
     // every player has gone
     if (turnCounter > 3){
@@ -35,8 +38,6 @@ let nextTurn = function(){
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
     getResources();
     updatevalues();
-
-    deleteOptions();
 }
 
 let nextTurnButton = document.getElementById("nextTurn");
@@ -47,7 +48,7 @@ let goldShow = document.getElementById("gold");
 
 // user wants to buy a gold mine
 let goldMineShow = document.getElementById("goldMineShow");
-//let goldMineButton = document.getElementById("goldMineBuy");
+let goldMineButton = document.getElementById("goldMineBuy");
 let buyGoldMine = function(){
     // might be made redddundant later but for now still needed 
     // can only buy during planning
@@ -86,7 +87,31 @@ let getResources = function(){
     // 5 gold from each gold mine comes in at start of planning turn 
     if (turnIsPlanning){
         let goldMine = currentPlayer.goldMine;
-        addGold = goldMine * 5;
-        currentPlayer.gold += addGold;
+        // has mine, add + send notif
+        if (goldMine != 0){
+            addGold = goldMine * 5;
+            currentPlayer.gold += addGold;
+            addNotif("*recevied " + addGold + " from mines");
+        }
+    }
+}
+
+let addNotif = function(notification){
+    let notifs = document.getElementById("notifs");
+    let statement = document.createElement("p");
+    statement.setAttribute("class", "noti");
+    //let text = document.createTextNode(notification);
+    //statement.appendChild(text);
+    statement.innerHTML = notification;
+    notifs.appendChild(statement);
+    //console.log(notifs);
+    //console.log(statement);
+    //console.log(notification);
+}
+
+let eraseNotifs = function(){
+    let notifs = document.getElementById("notifs");
+    while (notifs.hasChildNodes()){
+        notifs.removeChild(notifs.firstChild);
     }
 }
