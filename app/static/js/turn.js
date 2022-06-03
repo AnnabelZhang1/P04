@@ -74,6 +74,11 @@ let buyGoldMine = function(){
     // add to hex tile
     map.grid[curHex[0]][curHex[1]].building = "goldMine";
 }
+let deleteGoldMine = function(){
+    map.grid[curHex[0]][curHex[1]].building = "";
+    players[turnCounter].goldMine -= 1;
+    updatevalues();
+}
 
 //update all values on screen for current player
 let updatevalues = function(){
@@ -118,19 +123,42 @@ let eraseNotifs = function(){
 
 
 let showOptions = function(hex){
+    if (!turnIsPlanning){
+        return;
+    }
+    // shows what building is on tile when tile is clicked
     let build = document.getElementById("buildOptions");
     let building = map.grid[curHex[0]][curHex[1]].building;
-    if (building == "")
+    let showBuild = document.createElement("p");
+    if (building == ""){
+        showBuild.innerHTML = "Has No Buildings";
+    }
+    else{
+        showBuild.innerHTML = "Building: " + building;
+    }
+    build.appendChild(showBuild);
+    // if it's player's tile, shows building options
     // color is used instead of name b/c hex doesnt have name porperty
     if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){
-      // adds button to page
-      let goldMineCreated = document.createElement("button");
-      goldMineCreated.innerHTML = "Build Gold Mine";
-      goldMineCreated.setAttribute("id", "goldMineBuy");
-      goldMineCreated.setAttribute("class", "btn btn-warning");
-      build.appendChild(goldMineCreated);
-      //console.log(goldMineButton);
-      goldMineCreated.addEventListener('click', buyGoldMine); //buyGoldMine is in turn.js
+        if (building == "goldMine"){
+            let deleteMineButton = document.createElement("button");
+            deleteMineButton.innerHTML = "Delete Gold Mine";
+            deleteMineButton.setAttribute("id", "goldMineDelete");
+            deleteMineButton.setAttribute("class", "btn btn-dark");
+            build.appendChild(deleteMineButton);
+            //console.log(goldMineButton);
+            deleteMineButton.addEventListener('click', deleteGoldMine); //buyGoldMine is in turn.js
+        }
+        if (building == ""){
+            // adds goldMine button to page
+            let goldMineCreated = document.createElement("button");
+            goldMineCreated.innerHTML = "Build Gold Mine";
+            goldMineCreated.setAttribute("id", "goldMineBuy");
+            goldMineCreated.setAttribute("class", "btn btn-warning");
+            build.appendChild(goldMineCreated);
+            //console.log(goldMineButton);
+            goldMineCreated.addEventListener('click', buyGoldMine); //buyGoldMine is in turn.js
+        }
       }
   }
   
