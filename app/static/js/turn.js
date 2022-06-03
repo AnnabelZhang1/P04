@@ -115,3 +115,32 @@ let eraseNotifs = function(){
         notifs.removeChild(notifs.firstChild);
     }
 }
+
+
+let showOptions = function(hex){
+    let build = document.getElementById("buildOptions");
+    let building = map.grid[curHex[0]][curHex[1]].building;
+    if (building == "")
+    // color is used instead of name b/c hex doesnt have name porperty
+    if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){
+      // adds button to page
+      let goldMineCreated = document.createElement("button");
+      goldMineCreated.innerHTML = "Build Gold Mine";
+      goldMineCreated.setAttribute("id", "goldMineBuy");
+      goldMineCreated.setAttribute("class", "btn btn-warning");
+      build.appendChild(goldMineCreated);
+      //console.log(goldMineButton);
+      goldMineCreated.addEventListener('click', buyGoldMine); //buyGoldMine is in turn.js
+      }
+  }
+  
+  let deleteOptions = function(){
+    let build = document.getElementById("buildOptions");
+    let children = build.childNodes;
+    // console.log(children);
+    while (build.hasChildNodes()){
+      build.removeChild(build.firstChild);
+    }
+  
+  }
+  

@@ -102,35 +102,13 @@ function hexClick(event) {
     console.log(curHex);
   }
   else {
-    console.log(curHex[1]);
+    console.log(curHex);
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
   }
 
   // if building options are shown, they will be deleted 
   deleteOptions();
   showOptions(curHex); 
-
-}
-
-let showOptions = function(){
-  // adds button to page
-  let goldMineCreated = document.createElement("button");
-  goldMineCreated.innerHTML = "Build Gold Mine";
-  goldMineCreated.setAttribute("id", "goldMineBuy");
-  goldMineCreated.setAttribute("class", "btn btn-warning");
-  let build = document.getElementById("buildOptions");
-  build.appendChild(goldMineCreated);
-  //console.log(goldMineButton);
-  goldMineCreated.addEventListener('click', buyGoldMine); //buyGoldMine is in turn.js
-}
-
-let deleteOptions = function(){
-  let build = document.getElementById("buildOptions");
-  let children = build.childNodes;
-  // console.log(children);
-  while (build.hasChildNodes()){
-    build.removeChild(build.firstChild);
-  }
 
 }
 
