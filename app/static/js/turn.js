@@ -6,10 +6,16 @@ let blue = new Emperor("Blue", "#4169E1", 7, 2, 0 );
 let green = new Emperor("Green", "#00A36C", 7, 2, 0 );
 
 let players = [red, yellow, blue, green];
+
+for (let i = 0; i < 4; i++){
+    players[i].capital = capitals[i];
+}
+/* Capitals init version
 players[0].capital = map.grid[capitalRows[0]][capitalCols[0]];
 players[1].capital = map.grid[capitalRows[1]][capitalCols[1]];
 players[2].capital = map.grid[capitalRows[2]][capitalCols[2]];
 players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
+*/
 
 let turnCounter = 0;
 let turnIsStart = true; // is the first cycle of planning, so don't add new troops to capital
@@ -138,11 +144,14 @@ let eraseNotifs = function(){
 
 
 let showOptions = function(hex){
+    let build = document.getElementById("buildOptions");
+    let tile = document.createElement("p");
+    tile.innerHTML = "Tile: (" + curHex[0] + ", " + curHex[1] + ")";
+    build.appendChild(tile);
     if (!turnIsPlanning){
         return;
     }
     // shows what building is on tile when tile is clicked
-    let build = document.getElementById("buildOptions");
     let building = map.grid[curHex[0]][curHex[1]].building;
     let showBuild = document.createElement("p");
     if (building == ""){

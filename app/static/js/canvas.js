@@ -79,16 +79,23 @@ function clearHexagon(x, y, hex) {  //draws hexagons
 
 // initiates canvas in brwoser
 let map = new Grid(11, 6);
-/*
+
+let capitals = [];
+let colors = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
 // topright red
-map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)].color = "#E30B5C";
+capitals[0] = map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)];
 // top left yellow
-map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)].color = "#FDDA0D";
+capitals[1] = map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)];
 // bottom right blue
-map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)].color = "#4169E1";
+capitals[2] = map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)];
 // bottom left green
-map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)].color = "#00A36C";
-*/
+capitals[3] = map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)];
+for (let i = 0; i < 4; i++){
+  capitals[i].color = colors[i];
+  capitals[i].building = "Capital";
+  capitals[i].troops = 2;
+}
+/* OTHER VERSION- capitals allowed anywhere
 // initates capital coordinates
 let capitalRows = [0, 0, 0, 0];
 let capitalCols = [0, 0, 0, 0];
@@ -127,7 +134,7 @@ map.grid[capitalRows[3]][capitalCols[3]].color = "#00A36C";
 map.grid[capitalRows[3]][capitalCols[3]].building = "Capital";
 map.grid[capitalRows[3]][capitalCols[3]].troops = 2;
 //players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
-
+*/
 drawGrid(map);
 
 
