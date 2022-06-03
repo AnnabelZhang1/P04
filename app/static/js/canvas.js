@@ -79,7 +79,7 @@ function clearHexagon(x, y, hex) {  //draws hexagons
 
 // initiates canvas in brwoser
 let map = new Grid(11, 6);
-
+/*
 // topright red
 map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)].color = "#E30B5C";
 // top left yellow
@@ -88,8 +88,40 @@ map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)].color = "#FDD
 map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)].color = "#4169E1";
 // bottom left green
 map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)].color = "#00A36C";
+*/
+// initates capital coordinates
+let capitalRows = [0, 0, 0, 0];
+let capitalCols = [0, 0, 0, 0];
+for (let i = 0; i < 4; i++){
+  let row = Math.floor(Math.random()*6);
+  let col = Math.floor(Math.random()*11);
+  //console.log(row);
+  while (capitalRows.includes(row)){
+    row = Math.floor(Math.random()*6);
+    //console.log("repeat: " + row);
+  }
+  while (capitalCols.includes(col)){
+    col = Math.floor(Math.random()*11);
+  }
+  capitalRows[i]= row;
+  capitalCols[i] = col;
+}
+// red 
+console.log(map.grid)
+map.grid[capitalRows[0]][capitalCols[0]].color = "#E30B5C";
+map.grid[capitalRows[0]][capitalCols[0]].building = "Capital";
+// yellow
+map.grid[capitalRows[1]][capitalCols[1]].color = "#FDDA0D";
+map.grid[capitalRows[1]][capitalCols[1]].building = "Capital";
+// blue
+map.grid[capitalRows[2]][capitalCols[2]].color = "#4169E1";
+map.grid[capitalRows[2]][capitalCols[2]].building = "Capital";
+// green
+map.grid[capitalRows[3]][capitalCols[3]].color = "#00A36C";
+map.grid[capitalRows[3]][capitalCols[3]].building = "Capital";
 
 drawGrid(map);
+
 
 /* calls isClicked (defined in structures.js) on every hexagon
 in the grid. modifies the elements of the curHex array.
