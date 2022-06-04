@@ -5,6 +5,8 @@
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const canvasHL = document.getElementById('interactions');
+const ctxHL = canvasHL.getContext('2d');
 let curHex = [-1,-1];
 
 // background of canvas behind hexagons
@@ -55,14 +57,14 @@ function drawHexagon(x, y, hex) {  //draws hexagons
 
 
 function drawHexNoFill(x,y,radius) {
-  ctx.lineWidth = 5;
-  ctx.fillStyle = 'orange';
-  ctx.beginPath();
+  ctxHL.lineWidth = 5;
+  ctxHL.fillStyle = 'black';
+  ctxHL.beginPath();
   for (let i = 0; i < 6; i++) {
-    ctx.lineTo(x + radius * Math.cos(a * i), y + radius * Math.sin(a * i));
+    ctxHL.lineTo(x + radius * Math.cos(a * i), y + radius * Math.sin(a * i));
   }
-  ctx.closePath();
-  ctx.stroke();
+  ctxHL.closePath();
+  ctxHL.stroke();
 }
 
 function clearHexagon(x, y, hex) {  //draws hexagons
@@ -113,7 +115,7 @@ for (let i = 0; i < 4; i++){
   capitalRows[i]= row;
   capitalCols[i] = col;
 }
-// red 
+// red
 console.log(map.grid)
 map.grid[capitalRows[0]][capitalCols[0]].color = "#E30B5C";
 map.grid[capitalRows[0]][capitalCols[0]].building = "Capital";
@@ -136,7 +138,7 @@ map.grid[capitalRows[3]][capitalCols[3]].troops = 2;
 //players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 */
 
-map.grid[3][6].color = "#E30B5C"; // for testing buildings 
+map.grid[3][6].color = "#E30B5C"; // for testing buildings
 
 drawGrid(map);
 
@@ -163,6 +165,7 @@ function hexClick(event) {
   }
   else {
     console.log(curHex);
+    ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
   }
 
