@@ -49,6 +49,10 @@ class Hexagon {
     clearHexagon(this.centerX,this.centerY, this);
     drawHexagon(this.centerX, this.centerY, this);
   }
+  addTroops(num){
+    let prev = this.troops;
+    this.modifyTroops(prev + num);
+  }
 
   // x and y are event.offsetX and event.offsetY respectively
   isClicked(x,y) {

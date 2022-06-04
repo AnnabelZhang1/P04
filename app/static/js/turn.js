@@ -53,7 +53,7 @@ let nextTurn = function(){
         if (!turnIsStart){
             getResources();
         }
-        updatevalues();
+        updateValues();
     }
 }
 
@@ -86,9 +86,9 @@ let buyGoldMine = function(){
         currentPlayer.gold -= cost;
         currentPlayer.goldMine++;
         // add to hex tile
-        map.grid[curHex[0]][curHex[1]].building = "goldMine";
+        map.grid[curHex[0]][curHex[1]].building = "Gold Mine";
         // update new vales on screen
-        updatevalues();
+        updateValues();
         deleteOptions();
         showOptions();
     }
@@ -97,13 +97,13 @@ let buyGoldMine = function(){
 let deleteGoldMine = function(){
     map.grid[curHex[0]][curHex[1]].building = "";
     players[turnCounter].goldMine -= 1;
-    updatevalues();
+    updateValues();
     deleteOptions();
     showOptions();
 }
 
 //update all values on screen for current player
-let updatevalues = function(){
+let updateValues = function(){
     let currentPlayer = players[turnCounter];
     goldShow.innerHTML = "Gold: " + currentPlayer.gold;
     goldMineShow.innerHTML = "Gold Mines: "+currentPlayer.goldMine;
@@ -111,20 +111,26 @@ let updatevalues = function(){
 
 let getResources = function(){
     let currentPlayer = players[turnCounter];
+    // 3 gold from capital
+    let addGold = 3;
+
     // 5 gold from each gold mine comes in at start of planning turn 
-    
     let goldMine = currentPlayer.goldMine;
     // has mine, add + send notif
     if (goldMine != 0){
         addGold = goldMine * 5;
-        currentPlayer.gold += addGold;
-        addNotif("*recevied " + addGold + " from mines");
+        //currentPlayer.gold += addGold;
+        //addNotif("*recevied " + addGold + " from mines");
     }
+    currentPlayer.gold += addGold;
+    addNotif("*received " + addGold + " gold");
+    /*  AMEND- capital gives 3 gold per turn
     // 2 troops spawn at capital 
     let prevTroop = currentPlayer.capital.troops;
     //console.log(currentPlayer.capital.troops);
     currentPlayer.capital.modifyTroops(prevTroop + 2);
     addNotif("*2 troops spawn at capital");
+    */
 }
 
 let addNotif = function(notification){
@@ -154,6 +160,7 @@ let showOptions = function(hex){
     let tile = document.createElement("p");
     tile.innerHTML = "Tile: (" + curHex[0] + ", " + curHex[1] + ")";
     build.appendChild(tile);
+
     if (!turnIsPlanning){
         return;
     }
@@ -171,15 +178,6 @@ let showOptions = function(hex){
 
     // if it's player's tile, shows building options
     if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){ // color is used instead of name b/c hex doesnt have name porperty
-        if (building == "goldMine"){
-            let deleteMineButton = document.createElement("button");
-            deleteMineButton.innerHTML = "Delete Gold Mine";
-            deleteMineButton.setAttribute("id", "goldMineDelete");
-            deleteMineButton.setAttribute("class", "btn btn-dark");
-            build.appendChild(deleteMineButton);
-            //console.log(goldMineButton);
-            deleteMineButton.addEventListener('click', deleteGoldMine); //buyGoldMine is in turn.js
-        }
         if (building == ""){
             // adds goldMine button to page
             let goldMineCreated = document.createElement("button");
@@ -199,6 +197,33 @@ let showOptions = function(hex){
             build.appendChild(fortCreated);
             fortCreated.addEventListener('click', buyFort);
         }
+        else if (building == "Gold Mine"){
+            let deleteMineButton = document.createElement("button");
+            deleteMineButton.innerHTML = "Delete Gold Mine";
+            //deleteMineButton.setAttribute("id", "goldMineDelete");
+            deleteMineButton.setAttribute("class", "btn btn-dark");
+            build.appendChild(deleteMineButton);
+            //console.log(goldMineButton);
+            deleteMineButton.addEventListener('click', deleteGoldMine); //buyGoldMine is in turn.js
+        }
+        else if (building == "Fort"){
+            // delete 
+            let deleteFortButton = document.createElement("button");
+            deleteFortButton.innerHTML = "Delete Fort";
+            deleteFortButton.setAttribute("class", "btn btn-dark");
+            build.appendChild(deleteFortButton);
+            deleteFortButton.addEventListener('click', deleteFort);
+
+            build.appendChild(document.createElement("br"));
+
+            // spawn troops
+            let buyTroopsButton = document.createElement("button");
+            buyTroopsButton.innerHTML = "Buy Troops";
+            buyTroopsButton.setAttribute("class", "btn btn-info");
+            build.appendChild(buyTroopsButton);
+            buyTroopsButton.addEventListener('click', buyTroops);
+            
+        }
     }
 }
   
@@ -212,9 +237,47 @@ let deleteOptions = function(){
 }
   
 let buyFort = function(){
+    // fort costs 5
+    let cost = 5;
+    if (players[turnCounter].gold < cost){
+        alert("fort costs 5 gold");
+        return;
+    }
+    players[turnCounter].gold -= cost;
     map.grid[curHex[0]][curHex[1]].building = "Fort";
     players[turnCounter].forts.push(map.grid[curHex[0]][curHex[1]]);   
-    console.log(players[turnCounter]);
+    // IDK if we really need fort in player but oh well its here
+    //console.log(players[turnCounter]);
+
+    updateValues();
+    deleteOptions();
+    showOptions();
+}
+
+let deleteFort = function(){
+    map.grid[curHex[0]][curHex[1]].building = "";
+    // rid of fort in player
+    players[turnCounter].forts = players[turnCounter].forts.filter(fort => fort != map.grid[curHex[0]][curHex[1]]);
+    //console.log(players[turnCounter]);
+
+    updateValues();
+    deleteOptions();
+    showOptions();
+}
+
+let buyTroops = function(){
+    let num = 1;
+    // one troop costs 2 gold
+    let cost = 2 * num;
+    if (players[turnCounter] < cost){
+        alert("costs " + cost + "gold");
+        return;
+    }
+    players[turnCounter].gold -= cost;
+    map.grid[curHex[0]][curHex[1]].addTroops(num);
+    players[turnCounter].troops += num; // dont really need but why not
+
+    updateValues();
     deleteOptions();
     showOptions();
 }
