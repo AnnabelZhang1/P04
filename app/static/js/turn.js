@@ -219,7 +219,7 @@ let showOptions = function(hex){
             // spawn troops
             let buyTroopsButton = document.createElement("button");
             buyTroopsButton.innerHTML = "Buy Troops";
-            buyTroopsButton.setAttribute("class", "btn btn-info");
+            buyTroopsButton.setAttribute("class", "btn btn-primary");
             build.appendChild(buyTroopsButton);
             buyTroopsButton.addEventListener('click', buyTroops);
             
