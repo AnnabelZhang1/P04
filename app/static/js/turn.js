@@ -222,20 +222,28 @@ let showOptions = function(hex){
 
             build.appendChild(document.createElement("br"));
 
-            // spawn troops
-            let buyTroopsButton = document.createElement("button");
-            buyTroopsButton.innerHTML = "Buy Troops";
-            buyTroopsButton.setAttribute("class", "btn btn-primary");
-            build.appendChild(buyTroopsButton);
-            buyTroopsButton.addEventListener('click', buyTroops);
+            spawnTroops();
 
+        }
+        else if (building == "Capital"){
+            spawnTroops();
         }
     }
 }
 
+// used in capital + fort in options
+let spawnTroops = function(){
+    let build = document.getElementById("buildOptions");
+    
+    let buyTroopsButton = document.createElement("button");
+    buyTroopsButton.innerHTML = "Buy Troops";
+    buyTroopsButton.setAttribute("class", "btn btn-primary");
+    build.appendChild(buyTroopsButton);
+    buyTroopsButton.addEventListener('click', buyTroops);
+}
+
 let deleteOptions = function(){
     let build = document.getElementById("buildOptions");
-    let children = build.childNodes;
     // console.log(children);
     while (build.hasChildNodes()){
         build.removeChild(build.firstChild);
@@ -275,8 +283,8 @@ let buyTroops = function(){
     let num = 1;
     // one troop costs 2 gold
     let cost = 2 * num;
-    if (players[turnCounter] < cost){
-        alert("costs " + cost + "gold");
+    if (players[turnCounter].gold < cost){
+        alert("costs " + cost + " gold");
         return;
     }
     players[turnCounter].gold -= cost;
