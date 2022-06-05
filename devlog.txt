@@ -117,3 +117,6 @@ qinaL -- 2022-06-03 21:27
 - capital no longers spawns 2 troops, it gives 3 gold per planning turn
 - when click on your fort tile, delete fort button appears, button functionality works (will delete the fort)
 - when click on your fort tile, buy troops button appears, button works and will buy 1 troop
+
+qinaL -- 2022-06-04 20:12
+- can spawn troops on your capital + fixed buying troop w/o enough gold mistake
