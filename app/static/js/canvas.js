@@ -138,6 +138,7 @@ map.grid[capitalRows[3]][capitalCols[3]].troops = 2;
 //players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 */
 
+map.grid[2][2].color = colors[1]; // yellow testing
 map.grid[4][4].color = colors[1]; // yellow testing
 map.grid[3][3].color = colors[2]; // blue testing
 map.grid[3][4].color = colors[3]; // green testing

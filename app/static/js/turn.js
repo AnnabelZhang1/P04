@@ -39,8 +39,13 @@ let turnPlayer = document.getElementById("turnPlayer");
 let nextTurn = function(){
     eraseNotifs();
     deleteOptions();
-
     turnCounter++;
+
+    // to clear the last selected hexagon upon clicking next turn.
+    const canvasHL = document.getElementById('interactions');
+    const ctxHL = canvasHL.getContext('2d');
+    ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
+
     // every player has gone
     if (turnCounter > 3){
         changeTurnCycle();
@@ -60,20 +65,20 @@ let nextTurn = function(){
 let nextTurnButton = document.getElementById("nextTurn");
 nextTurnButton.addEventListener('click', nextTurn);
 
-// shows resouces of player's turn 
-let goldShow = document.getElementById("gold"); 
+// shows resouces of player's turn
+let goldShow = document.getElementById("gold");
 
 // user wants to buy a gold mine
 let goldMineShow = document.getElementById("goldMineShow");
 let goldMineButton = document.getElementById("goldMineBuy");
 let buyGoldMine = function(){
-    // might be made redddundant later but for now still needed 
+    // might be made redddundant later but for now still needed
     // can only buy during planning
     if (!turnIsPlanning){
         alert("Can Only Buy During Planning");
         return;
     }
-    // gold mines cost 7 gold 
+    // gold mines cost 7 gold
     let cost = 7;
     // add to player
     let currentPlayer = players[turnCounter];
@@ -114,7 +119,7 @@ let getResources = function(){
     // 3 gold from capital
     let addGold = 3;
 
-    // 5 gold from each gold mine comes in at start of planning turn 
+    // 5 gold from each gold mine comes in at start of planning turn
     let goldMine = currentPlayer.goldMine;
     // has mine, add + send notif
     if (goldMine != 0){
@@ -125,7 +130,7 @@ let getResources = function(){
     currentPlayer.gold += addGold;
     addNotif("*received " + addGold + " gold");
     /*  AMEND- capital gives 3 gold per turn
-    // 2 troops spawn at capital 
+    // 2 troops spawn at capital
     let prevTroop = currentPlayer.capital.troops;
     //console.log(currentPlayer.capital.troops);
     currentPlayer.capital.modifyTroops(prevTroop + 2);
@@ -175,9 +180,10 @@ let showOptions = function(hex){
         showBuild.innerHTML = "Building: " + building;
     }
     build.appendChild(showBuild);
-
     // if it's player's tile, shows building options
+    console.log(map.grid[curHex[0]][curHex[1]].color);
     if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){ // color is used instead of name b/c hex doesnt have name porperty
+      console.log("worky?");
         if (building == ""){
             // adds goldMine button to page
             let goldMineCreated = document.createElement("button");
@@ -189,7 +195,7 @@ let showOptions = function(hex){
 
             build.appendChild(document.createElement("br"));
 
-            // fortbuy button 
+            // fortbuy button
             let fortCreated = document.createElement("button");
             fortCreated.innerHTML = "Build Fort";
             fortCreated.setAttribute("id", "fortBuy");
@@ -207,7 +213,7 @@ let showOptions = function(hex){
             deleteMineButton.addEventListener('click', deleteGoldMine); //buyGoldMine is in turn.js
         }
         else if (building == "Fort"){
-            // delete 
+            // delete
             let deleteFortButton = document.createElement("button");
             deleteFortButton.innerHTML = "Delete Fort";
             deleteFortButton.setAttribute("class", "btn btn-dark");
@@ -222,11 +228,11 @@ let showOptions = function(hex){
             buyTroopsButton.setAttribute("class", "btn btn-primary");
             build.appendChild(buyTroopsButton);
             buyTroopsButton.addEventListener('click', buyTroops);
-            
+
         }
     }
 }
-  
+
 let deleteOptions = function(){
     let build = document.getElementById("buildOptions");
     let children = build.childNodes;
@@ -235,7 +241,7 @@ let deleteOptions = function(){
         build.removeChild(build.firstChild);
     }
 }
-  
+
 let buyFort = function(){
     // fort costs 5
     let cost = 5;
@@ -245,7 +251,7 @@ let buyFort = function(){
     }
     players[turnCounter].gold -= cost;
     map.grid[curHex[0]][curHex[1]].building = "Fort";
-    players[turnCounter].forts.push(map.grid[curHex[0]][curHex[1]]);   
+    players[turnCounter].forts.push(map.grid[curHex[0]][curHex[1]]);
     // IDK if we really need fort in player but oh well its here
     //console.log(players[turnCounter]);
 
