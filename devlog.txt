@@ -130,3 +130,6 @@ qinaL -- 2022-06-04 22:04
 - move troop button calls planMoveTroops which allows user to click an adajecent tile to press move troop here, which calls planMoveTroopsHere
 - decision is stored in plannedActions, and uses an action boolean to determine if tile is for buildings or troop movement 
 
+qinaL -- 2022-06-04 22:43
+- if u move troops, and click on original tiles, u get option to cancel move troops
+

@@ -182,6 +182,7 @@ let showOptions = function(hex){
     }
     build.appendChild(showBuild);
 
+    /* moved to canvas hexClick
     // moving troops
     if (action){
         console.log("move otpions")
@@ -192,6 +193,7 @@ let showOptions = function(hex){
         moveButton.addEventListener('click', planMoveTroopsHere); // fxn in troop.js
         return;
     }
+    */
 
     // not moving
     // if it's player's tile, shows building options
