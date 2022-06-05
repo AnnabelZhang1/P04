@@ -44,7 +44,7 @@ function drawHexagon(x, y, hex) {  //draws hexagons
     ctx.fillStyle = hex.color + "";
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
-        ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+        ctx.lineTo(x + r * Math.cos(a * i) + 2.5, y + r * Math.sin(a * i));
     }
     ctx.closePath();
     ctx.stroke();
@@ -52,7 +52,7 @@ function drawHexagon(x, y, hex) {  //draws hexagons
     ctx.fillStyle = "orange";
     ctx.textAlign = "center";
     ctx.font = "25px Arial";
-    ctx.fillText(hex.troops + "", x, y + 10);
+    ctx.fillText(hex.troops + "", x + 2.5, y + 10);
 }
 
 
@@ -71,7 +71,7 @@ function clearHexagon(x, y, hex) {  //draws hexagons
     ctx.strokeStyle = "#c4d9ec"
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
-        ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+        ctx.lineTo(x + r * Math.cos(a * i) + 2.5, y + r * Math.sin(a * i));
     }
     ctx.closePath();
     ctx.stroke();
@@ -174,7 +174,7 @@ function hexClick(event) {
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
   }
 
-  // moving troop 
+  // moving troop
   if (action){
     console.log('action move')
     console.log(curHex);

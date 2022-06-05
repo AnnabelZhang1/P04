@@ -120,3 +120,6 @@ qinaL -- 2022-06-03 21:27
 
 qinaL -- 2022-06-04 20:12
 - can spawn troops on your capital + fixed buying troop w/o enough gold mistake
+
+sophieL -- 2022-06-04 9:56
+- moved hexagons over by 2.5 pixels? 

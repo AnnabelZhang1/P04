@@ -1,7 +1,7 @@
 // movement of troops + combat stuff prolly
 
 let plannedActions = [[], [], [], []];
-// red, yellow, blue, green 
+// red, yellow, blue, green
 
 let action = false;
 let selectedHex = "";
@@ -23,11 +23,6 @@ let planMoveTroopsHere = function(){
     deleteOptions();
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
 
-    // planning movement done 
+    // planning movement done
     action = false;
 }
-
-let test = "ji";
-let tee = test;
-test = "jnew";
-console.log(test + tee);

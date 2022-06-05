@@ -36,7 +36,7 @@ class Hexagon {
     this.troops = 0;
     this.xcoordinates = x;
     this.ycoordinate = y;
-    this.centerX = (y*75+50);
+    this.centerX = (y*75+50) + 2.5;
     this.centerY = (x*50*Math.sqrt(3)+50);
     if (y % 2 == 1) {this.centerY += 25*Math.sqrt(3);}
   }
@@ -46,7 +46,7 @@ class Hexagon {
   }
   modifyTroops(newNum){
     this.troops = newNum;
-    clearHexagon(this.centerX,this.centerY, this);
+    clearHexagon(this.centerX, this.centerY, this);
     drawHexagon(this.centerX, this.centerY, this);
   }
   addTroops(num){
