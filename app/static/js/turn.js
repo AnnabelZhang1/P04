@@ -20,6 +20,7 @@ players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 let turnCounter = 0;
 let turnIsStart = true; // is the first cycle of planning, so don't add new troops to capital
 
+
 // handles the switch from planning plase to action phase of turn cycle
 let turnIsPlanning = true; // switches btwn planning and action
 let turnShow = document.getElementById("turnPhase");
@@ -180,10 +181,23 @@ let showOptions = function(hex){
         showBuild.innerHTML = "Building: " + building;
     }
     build.appendChild(showBuild);
+
+    // moving troops
+    if (action){
+        console.log("move otpions")
+        let moveButton = document.createElement("button");
+        moveButton.innerHTML = "Move Troops Here";
+        moveButton.setAttribute("class", "btn btn-danger");
+        build.appendChild(moveButton);
+        moveButton.addEventListener('click', planMoveTroopsHere); // fxn in troop.js
+        return;
+    }
+
+    // not moving
     // if it's player's tile, shows building options
     console.log(map.grid[curHex[0]][curHex[1]].color);
     if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){ // color is used instead of name b/c hex doesnt have name porperty
-      console.log("worky?");
+        //console.log("worky?");
         if (building == ""){
             // adds goldMine button to page
             let goldMineCreated = document.createElement("button");
@@ -227,6 +241,16 @@ let showOptions = function(hex){
         }
         else if (building == "Capital"){
             spawnTroops();
+        }
+
+        // hex has troops
+        if (map.grid[curHex[0]][curHex[1]].troops != 0){
+            // allow to plan movement of these troops
+            let moveTroopsButton = document.createElement("button");
+            moveTroopsButton.innerHTML = "Move Troops";
+            moveTroopsButton.setAttribute("class", "btn btn-danger");
+            build.appendChild(moveTroopsButton);
+            moveTroopsButton.addEventListener('click', planMoveTroops);
         }
     }
 }

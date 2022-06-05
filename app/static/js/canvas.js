@@ -174,9 +174,30 @@ function hexClick(event) {
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
   }
 
-  // if building options are shown, they will be deleted
-  deleteOptions();
-  showOptions(curHex);
+  // moving troop 
+  if (action){
+    console.log('action move')
+    console.log(curHex);
+    console.log(selectedHex);
+    // hex is within 1 of the original hex
+    if (Math.abs(curHex[0]-selectedHex[0]) == 1 || Math.abs(curHex[1]-selectedHex[1]) == 1){
+      // only show for adjacent hexs, rest are blocked from showing
+      deleteOptions();
+      console.log("adajencet");
+      showOptions(curHex);
+    }
+    else{
+      // not adjacent, prevent showing
+      deleteOptions();
+      return;
+    }
+  }
+  // not moving troops
+  else{
+    // show correct building + planning options of hex
+    deleteOptions();
+    showOptions(curHex);
+  }
 
 }
 
