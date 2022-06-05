@@ -121,5 +121,12 @@ qinaL -- 2022-06-03 21:27
 qinaL -- 2022-06-04 20:12
 - can spawn troops on your capital + fixed buying troop w/o enough gold mistake
 
-sophieL -- 2022-06-04 9:56
+sophieL -- 2022-06-04 21:56
 - moved hexagons over by 2.5 pixels? 
+
+qinaL -- 2022-06-04 22:04
+- if your tile has troops on it, move troops button appears
+- troop.js created for troop movement functions
+- move troop button calls planMoveTroops which allows user to click an adajecent tile to press move troop here, which calls planMoveTroopsHere
+- decision is stored in plannedActions, and uses an action boolean to determine if tile is for buildings or troop movement 
+

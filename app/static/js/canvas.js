@@ -180,7 +180,7 @@ function hexClick(event) {
     console.log(curHex);
     console.log(selectedHex);
     // hex is within 1 of the original hex
-    if (Math.abs(curHex[0]-selectedHex[0]) == 1 || Math.abs(curHex[1]-selectedHex[1]) == 1){
+    if (Math.abs(curHex[0]-selectedHex[0]) <= 1 &&  Math.abs(curHex[1]-selectedHex[1]) <= 1){
       // only show for adjacent hexs, rest are blocked from showing
       deleteOptions();
       console.log("adajencet");
