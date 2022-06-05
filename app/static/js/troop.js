@@ -23,6 +23,8 @@ let planMoveTroopsHere = function(){
     deleteOptions();
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
 
+    // planning movement done 
+    action = false;
 }
 
 let test = "ji";
