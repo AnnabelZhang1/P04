@@ -204,7 +204,8 @@ let showOptions = function(hex){
             // adds goldMine button to page
             let goldMineCreated = document.createElement("button");
             goldMineCreated.innerHTML = "Build Gold Mine";
-            goldMineCreated.setAttribute("id", "goldMineBuy");
+            //goldMineCreated.setAttribute("id", "goldMineBuy");
+            goldMineCreated.setAttribute("title", "costs 7");
             goldMineCreated.setAttribute("class", "btn btn-warning");
             build.appendChild(goldMineCreated);
             goldMineCreated.addEventListener('click', buyGoldMine); //buyGoldMine is in turn.js
