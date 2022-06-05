@@ -9,10 +9,14 @@ h1, h2 {
 
 h1 {
     font-size:10vw;
+    animation-name: reveal-anim;
+    animation-duration: 2s;
 }
 
 h2 {
   font-size: 6vw;
+  animation-name: reveal-anim;
+  animation-duration: 4s;
 }
 
 #h2-part2 {
@@ -40,4 +44,37 @@ button {
   box-shadow: 0px 0px 50px 20px blue;
   border-radius: 35%;
   background-color: gray;
+  animation-name: reveal-anim, pulsing-shadow;
+  animation-duration: 5.5s,2.5s;
+  animation-iteration-count: 1, infinite;
+  animation-timing-function: ease, linear;
+}
+
+@keyframes reveal-anim {
+  0% {
+    opacity: 0%;
+  }
+
+  80% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes pulsing-shadow {
+  0% {
+    box-shadow: 0px 0px 50px 20px #46250a;
+  }
+
+  50% {
+    box-shadow: 0px 0px 75px 30px green;
+  }
+
+
+  100% {
+    box-shadow: 0px 0px 50px 20px #46250a;
+  }
 }
