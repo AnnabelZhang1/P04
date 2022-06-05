@@ -34,10 +34,8 @@ class Hexagon {
     this.building = "";
     // holds how many troops are on tile
     this.troops = 0;
-    this.xcoordinates = x;
-    this.ycoordinate = y;
-    this.centerX = (y*75+50) + 2.5;
-    this.centerY = (x*50*Math.sqrt(3)+50);
+    this.centerX = (y * 75 +50) + 2.5;
+    this.centerY = (x * 50 * Math.sqrt(3) + 50);
     if (y % 2 == 1) {this.centerY += 25*Math.sqrt(3);}
   }
   // modifying functins technically not needed
@@ -46,8 +44,8 @@ class Hexagon {
   }
   modifyTroops(newNum){
     this.troops = newNum;
-    clearHexagon(this.centerX, this.centerY, this);
-    drawHexagon(this.centerX, this.centerY, this);
+    clearHexagon(this.centerX - 2.5, this.centerY, this);
+    drawHexagon(this.centerX - 2.5, this.centerY, this);
   }
   addTroops(num){
     let prev = this.troops;
