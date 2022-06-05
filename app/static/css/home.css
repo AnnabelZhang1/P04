@@ -16,8 +16,18 @@ h2 {
 }
 
 #h2-part2 {
-  color:red;
   display: inline;
+  position: relative;
+  color: #46250a;
+}
+
+#h2-part2 span{
+  display: inline;
+  height: 50%;
+  position: absolute;
+
+  color: #0f0;
+  overflow: hidden;
 }
 
 #home-forms-flexbox {
