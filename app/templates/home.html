@@ -5,22 +5,27 @@ P04: Forged By Land
 
 <!DOCTYPE html>
 <html>
-  
+
 {% extends "base.html" %}
 
 {% block title %} Home {% endblock %}
 
 {% block css %}
+  <link rel="stylesheet" href="../static/css/home.css">
 {% endblock %}
 
 {% block body %}
-<p> hello there </p>
+<h1> Forged </h1>
+<h2> in <div id="h2-part2">FIRE</div> </h2>
+<div id="home-forms-flexbox">
 <form action="/game">
-  <button type="submit">Go to game</button>
+  <button id="game-btn" type="submit">Go to game</button>
 </form>
+<br> <br>
 <form action="/login">
-  <button type="submit">Login</button>
+  <button id="Login-btn" type="submit">Login</button>
 </form>
+</div>
 {% endblock %}
 
 </html>
