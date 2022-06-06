@@ -49,10 +49,12 @@ function drawHexagon(x, y, hex) {  //draws hexagons
     ctx.closePath();
     ctx.stroke();
     ctx.fill();
-    ctx.fillStyle = "orange";
-    ctx.textAlign = "center";
-    ctx.font = "25px Arial";
-    ctx.fillText(hex.troops + "", x + 2.5, y + 10);
+    if (hex.troops != 0) {
+        ctx.fillStyle = "orange";
+        ctx.textAlign = "center";
+        ctx.font = "25px Arial";
+        ctx.fillText(hex.troops + "", x + 2.5, y + 10);
+    }
 }
 
 
@@ -174,7 +176,7 @@ function hexClick(event) {
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
   }
 
-  // **MAKE BETTER LATER- REFACTOR THIS CODE 
+  // **MAKE BETTER LATER- REFACTOR THIS CODE
   // moving troop
   if (action){
     console.log('action move')
@@ -223,14 +225,6 @@ function hexClick(event) {
   }
 
 }
-
-// testing troops
-let tester = map.grid[0][0]
-console.log("troops:" + tester.troops);
-tester.modifyTroops(3);
-console.log("new troops:" + tester.troops);
-tester.troops = 4;
-console.log("troops:" + tester.troops);
 
 // window.addEventListener("DOMContentLoaded", () => {
 //   // Initialize the UI.
