@@ -131,7 +131,7 @@ let getResources = function(){
     let goldMine = currentPlayer.goldMine;
     // has mine, add + send notif
     if (goldMine != 0){
-        addGold = goldMine * 5;
+        addGold += goldMine * 5;
         //currentPlayer.gold += addGold;
         //addNotif("*recevied " + addGold + " from mines");
     }
@@ -173,7 +173,7 @@ let showOptions = function(hex){
     let tile = document.createElement("p");
     tile.innerHTML = "Tile: (" + curHex[0] + ", " + curHex[1] + ")";
     build.appendChild(tile);
-    
+
     // shows what building is on tile when tile is clicked
     let building = map.grid[curHex[0]][curHex[1]].building;
     let showBuild = document.createElement("p");
