@@ -132,7 +132,7 @@ let getAdjacentTiles = function(){
 
 // includes() and indexOf() doesn't work D: prolly cuz 2d array
 let isIn = function (adjacents, curHex){
-    for (let i = 0; i<5; i++){
+    for (let i = 0; i<= 5; i++){
         if (adjacents[i][0] == curHex[0] && adjacents[i][1] == curHex[1]){
             //console.log("true");
             return true;
@@ -146,14 +146,17 @@ let moveTroopsFrom = function(){
     action = true;
     selectedHex = [curHex[0], curHex[1]]; // for some reason, selectedHex = curHex just makes a refernece to curHex and when cur changes so does selected
     // in canvas hexClick, waits for player to click adajaceent in whereMoveTroops
-    //(Math.abs(curHex[0]-selectedHex[0]) <= 1 &&  Math.abs(curHex[1]-selectedHex[1]) <= 1)
+
+    whereMoveTroops(); // to get auto troop highlight
     
     deleteOptions();
 }
 
 let moveTroopsHere = function(){
-    plannedActions[turnCounter].push(selectedHex + " -> " + curHex);
+    //plannedActions[turnCounter].push(selectedHex + " -> " + curHex);
     // action will happen during action phase
+
+    console.log("move tbd");
 
     // clear
     deleteOptions();

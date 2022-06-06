@@ -62,9 +62,9 @@ let nextTurn = function(){
         /// avoid capitals getting troops at first cycle
     if (!turnIsStart){
         getResources();
-
-    updateValues();
     }
+    
+    updateValues();
     
 }
 

@@ -166,17 +166,11 @@ function hexClick(event) {
       }
     }
   }
-  if(!hexClicked) {
-    curHex[0] = -1; curHex[1] = -1;
-    console.log(curHex);
-  }
-  else {
-    console.log(curHex);
-    ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
-    drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
-  }
 
+  ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
   deleteOptions();
+
+  // before drawHexNoFill so hex highlight is on top of troop highlight
 
   // moving troop
   if (action){
@@ -186,6 +180,16 @@ function hexClick(event) {
   else{
     // show correct building + planning options of hex
     showOptions(curHex);
+  }
+
+
+  if(!hexClicked) {
+    curHex[0] = -1; curHex[1] = -1;
+    console.log(curHex);
+  }
+  else {
+    console.log(curHex);
+    drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }
 
 }
@@ -204,11 +208,11 @@ function hexClick(event) {
 
 let troopHighlight = function(x, y){
   ctxHL.lineWidth = 1;
-  ctxHL.strokeStyle = 'rgba(255, 0, 0, 0.5)';
-  ctxHL.fillStyle = 'rgba(255, 0, 0, 0.5)';
+  ctxHL.strokeStyle = 'rgba(100, 100, 100, 0.75)';
+  ctxHL.fillStyle = 'rgba(200, 200, 200, 0.5)';
   ctxHL.beginPath();
   for (let i = 0; i < 6; i++) {
-      ctxHL.lineTo(x + r * Math.cos(a * i) + 2.5, y + r * Math.sin(a * i));
+      ctxHL.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
   }
   ctxHL.closePath();
   ctxHL.stroke();

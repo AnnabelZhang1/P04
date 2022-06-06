@@ -146,3 +146,7 @@ qinaL -- 2022-06-06 17:35
 - got rid of planning + action phases
 - planMoveTroops is now moveTroopsFrom, and planMoveTroopsHere is moveTroopsHere
 - fixed adjacent tile code, and put into whereMoveTroops fxn in troop.js instead of in hexClick in canvas.js
+
+qinaL -- 2022-06-06 18:24
+- whereMoveTroops will call troopHighlight on all 6 adjacent tiles so adj tiles get gray highlight over hexs to visually indicate where troops can move
+
