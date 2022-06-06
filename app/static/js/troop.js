@@ -2,7 +2,7 @@ class Battalion {
   // no treason
   // no resurrection
   // no crippling moving speed
-  constructor(health, attack, cost, moveSpeed, ownerCol, troopCol) {
+  constructor(health, attack, cost, moveSpeed, ownerCol, troopCol, inBuild) {
     this.hp = health;
     this.atk = attack;
 
@@ -11,6 +11,7 @@ class Battalion {
     this.mvSpd = moveSpeed;
     this.ownCol = ownerCol;
     this.trpCol = troopCol;
+    this.inBuild = false;
   }
 
   takeDmg(dmg) {
@@ -29,22 +30,32 @@ class Battalion {
     return this.cost;
   }
 
-  move(xInd, yInd, r, hex) {  //draws hexagons
+  shelterIn(y_o_n) {
+    this.inBuild = y_o_n;
+  }
+
+  move(xInd, yInd) {  //draws hexagons
+    if (!inBuild) {
       ctx.strokeStyle = "black";
-      ctx.fillStyle = hex.color + "";
+      ctx.fillStyle = this.ownerCol + "";
       ctx.beginPath();
       for (let i = 0; i < 6; i++) {
-          ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+          ctx.lineTo(x + 30 * Math.cos(a * i), y + 30 * Math.sin(a * i));
       }
       ctx.closePath();
       ctx.stroke();
       ctx.fill();
-      /*
-      ctx.fillStyle = "orange";
-      ctx.textAlign = "center";
-      ctx.font = "25px Arial";
-      */
-      ctx.fillText(hex.troops + "", x, y + 10);
+
+      ctx.strokeStyle = "black";
+      ctx.fillStyle = this.troopCol + "";
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+          ctx.lineTo(x + 10 * Math.cos(a * i), y + 10 * Math.sin(a * i));
+      }
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+    }
   }
 
 }
