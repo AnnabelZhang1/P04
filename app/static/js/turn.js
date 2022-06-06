@@ -42,6 +42,13 @@ let changeTurnCycle = function(){
 // handles the switch from player to player
 let turnPlayer = document.getElementById("turnPlayer");
 let nextTurn = function(){
+    // player is in progress of choosing to move troops and has not finished
+    if (action){
+        alert("you are moving troops");
+        return;
+    }
+
+
     eraseNotifs();
     deleteOptions();
     turnCounter++;
@@ -63,7 +70,7 @@ let nextTurn = function(){
     if (!turnIsStart){
         getResources();
     }
-    
+
     updateValues();
     
 }
@@ -256,6 +263,7 @@ let showOptions = function(hex){
 
         // hex has troops
         if (map.grid[curHex[0]][curHex[1]].troops != 0){
+            build.appendChild(document.createElement("br"));
             // allow to plan movement of these troops
             let moveTroopsButton = document.createElement("button");
             moveTroopsButton.innerHTML = "Move Troops";

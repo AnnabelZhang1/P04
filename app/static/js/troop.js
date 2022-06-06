@@ -79,7 +79,7 @@ let whereMoveTroops = function(){
     console.log(adjacents);
 
     // highlights adjacent tiles
-    for (let i = 0; i < 6; i++){
+    for (let i = 0; i < adjacents.length; i++){
         troopHighlight(map.grid[adjacents[i][0]][adjacents[i][1]].centerX,map.grid[adjacents[i][0]][adjacents[i][1]].centerY);
     }
 
@@ -126,13 +126,18 @@ let getAdjacentTiles = function(){
         adjacents[4] = [selectedHex[0]+1, selectedHex[1]-1];
         adjacents[5] = [selectedHex[0]+1, selectedHex[1]+1];
     }
-    // console.log(adjacents);
+
+    // eliminate edge cases
+    console.log(adjacents);
+    adjacents = adjacents.filter(tile => tile[0]>= 0 && tile[0] <= 5 && tile[1]>=0 && tile[1]<=10);
+    console.log(adjacents);
+
     return adjacents;
 }
 
 // includes() and indexOf() doesn't work D: prolly cuz 2d array
 let isIn = function (adjacents, curHex){
-    for (let i = 0; i<= 5; i++){
+    for (let i = 0; i< adjacents.length; i++){
         if (adjacents[i][0] == curHex[0] && adjacents[i][1] == curHex[1]){
             //console.log("true");
             return true;
