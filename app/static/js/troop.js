@@ -78,6 +78,11 @@ let whereMoveTroops = function(){
     adajcents = getAdjacentTiles();
     console.log(adjacents);
 
+    // highlights adjacent tiles
+    for (let i = 0; i < 6; i++){
+        troopHighlight(map.grid[adjacents[i][0]][adjacents[i][1]].centerX,map.grid[adjacents[i][0]][adjacents[i][1]].centerY);
+    }
+
 
     // clicked original hex, allow cancel action
     if (curHex[0]===selectedHex[0] && curHex[1]===selectedHex[1]){

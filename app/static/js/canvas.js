@@ -200,3 +200,17 @@ function hexClick(event) {
 //   receiveMoves(board, websocket);
 //   sendMoves(board, websocket);
 // });
+
+
+let troopHighlight = function(x, y){
+  ctxHL.lineWidth = 1;
+  ctxHL.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+  ctxHL.fillStyle = 'rgba(255, 0, 0, 0.5)';
+  ctxHL.beginPath();
+  for (let i = 0; i < 6; i++) {
+      ctxHL.lineTo(x + r * Math.cos(a * i) + 2.5, y + r * Math.sin(a * i));
+  }
+  ctxHL.closePath();
+  ctxHL.stroke();
+  ctxHL.fill();
+}
