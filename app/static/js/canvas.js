@@ -58,12 +58,12 @@ function drawHexagon(x, y, hex) {  //draws hexagons
 }
 
 
-function drawHexNoFill(x,y,radius) {
+function drawHexNoFill(x,y,color) {
   ctxHL.lineWidth = 5;
-  ctxHL.fillStyle = 'black';
+  ctxHL.strokeStyle = color;
   ctxHL.beginPath();
   for (let i = 0; i < 6; i++) {
-    ctxHL.lineTo(x + radius * Math.cos(a * i), y + radius * Math.sin(a * i));
+    ctxHL.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
   }
   ctxHL.closePath();
   ctxHL.stroke();
@@ -173,7 +173,7 @@ function hexClick(event) {
   else {
     console.log(curHex);
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
-    drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY,50);
+    drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }
 
   // **MAKE BETTER LATER- REFACTOR THIS CODE

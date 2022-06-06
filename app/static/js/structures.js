@@ -34,7 +34,9 @@ class Hexagon {
     this.building = "";
     // holds how many troops are on tile
     this.troops = 0;
-    this.centerX = (y * 75 +50) + 2.5;
+    this.x = x;
+    this.y = y;
+    this.centerX = (y * 75 + 50) + 2.5;
     this.centerY = (x * 50 * Math.sqrt(3) + 50);
     if (y % 2 == 1) {this.centerY += 25*Math.sqrt(3);}
   }
