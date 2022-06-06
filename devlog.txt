@@ -141,3 +141,8 @@ qinaL -- 2022-06-06 9:28
 
 sophieL -- 2022-06-06 9:25
 - change color of drawHexNoFill
+
+qinaL -- 2022-06-06 17:35
+- got rid of planning + action phases
+- planMoveTroops is now moveTroopsFrom, and planMoveTroopsHere is moveTroopsHere
+- fixed adjacent tile code, and put into whereMoveTroops fxn in troop.js instead of in hexClick in canvas.js

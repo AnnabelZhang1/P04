@@ -23,7 +23,7 @@ let turnIsStart = true; // is the first cycle of planning, so don't add new troo
 
 // handles the switch from planning plase to action phase of turn cycle
 //let turnIsPlanning = true; // switches btwn planning and action
-let turnShow = document.getElementById("turnPhase");
+//let turnShow = document.getElementById("turnPhase");
 /*
 let changeTurnCycle = function(){
     
@@ -166,8 +166,7 @@ let eraseNotifs = function(){
     }
 }
 
-
-let showOptions = function(hex){
+let showTile = function(){
     // tile
     let build = document.getElementById("buildOptions");
     let tile = document.createElement("p");
@@ -184,6 +183,12 @@ let showOptions = function(hex){
         showBuild.innerHTML = "Building: " + building;
     }
     build.appendChild(showBuild);
+}
+let showOptions = function(hex){
+    // tile
+    let build = document.getElementById("buildOptions");
+    let building = map.grid[curHex[0]][curHex[1]].building;
+    showTile();
 
     /* moved to canvas hexClick
     // moving troops
@@ -256,7 +261,7 @@ let showOptions = function(hex){
             moveTroopsButton.innerHTML = "Move Troops";
             moveTroopsButton.setAttribute("class", "btn btn-danger");
             build.appendChild(moveTroopsButton);
-            moveTroopsButton.addEventListener('click', planMoveTroops);
+            moveTroopsButton.addEventListener('click', moveTroopsFrom);
         }
     }
 }

@@ -176,51 +176,15 @@ function hexClick(event) {
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }
 
-  // **MAKE BETTER LATER- REFACTOR THIS CODE
+  deleteOptions();
+
   // moving troop
   if (action){
-    console.log('action move')
-    console.log(curHex);
-    console.log(selectedHex);
-    // clicked original hex, allow cancel action
-    if (curHex[0]===selectedHex[0] && curHex[1]===selectedHex[1]){
-      console.log("samsies");
-      deleteOptions();
-
-      let build = document.getElementById("buildOptions");
-      let cancelMoveButton = document.createElement("button");
-      cancelMoveButton.innerHTML = "Cancel Move Troops";
-      cancelMoveButton.setAttribute("class", "btn btn-dark");
-      build.appendChild(cancelMoveButton);
-      cancelMoveButton.addEventListener('click', function(){
-        action = false;
-        deleteOptions();
-        ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
-      })
-    }
-    // hex is within 1 of the original hex
-    else if (Math.abs(curHex[0]-selectedHex[0]) <= 1 &&  Math.abs(curHex[1]-selectedHex[1]) <= 1){
-      // allow to move troop to curHex
-      deleteOptions();
-      console.log("adajencet");
-
-      let build= document.getElementById("buildOptions");
-      let moveButton = document.createElement("button");
-      moveButton.innerHTML = "Move Troops Here";
-      moveButton.setAttribute("class", "btn btn-danger");
-      build.appendChild(moveButton);
-      moveButton.addEventListener('click', planMoveTroopsHere); // fxn in troop.js
-      //showOptions(curHex);
-    }
-    // not adjacent, prevent showing
-    else{
-      deleteOptions();
-    }
+    whereMoveTroops(); // in troop.js
   }
   // not moving troops
   else{
     // show correct building + planning options of hex
-    deleteOptions();
     showOptions(curHex);
   }
 
