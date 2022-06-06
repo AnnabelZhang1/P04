@@ -22,9 +22,11 @@ let turnIsStart = true; // is the first cycle of planning, so don't add new troo
 
 
 // handles the switch from planning plase to action phase of turn cycle
-let turnIsPlanning = true; // switches btwn planning and action
+//let turnIsPlanning = true; // switches btwn planning and action
 let turnShow = document.getElementById("turnPhase");
+/*
 let changeTurnCycle = function(){
+    
     if (turnIsPlanning){
         turnIsPlanning = false;
         turnShow.innerHTML="Phase: Action";
@@ -33,7 +35,9 @@ let changeTurnCycle = function(){
         turnIsPlanning = true;
         turnShow.innerHTML="Phase: Planning";
     }
+    
 }
+*/
 
 // handles the switch from player to player
 let turnPlayer = document.getElementById("turnPlayer");
@@ -49,18 +53,19 @@ let nextTurn = function(){
 
     // every player has gone
     if (turnCounter > 3){
-        changeTurnCycle();
+        //changeTurnCycle();
         turnCounter = 0;
         turnIsStart = false;
     }
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
-    if (turnIsPlanning){
+    //if (turnIsPlanning){
         /// avoid capitals getting troops at first cycle
-        if (!turnIsStart){
-            getResources();
-        }
-        updateValues();
+    if (!turnIsStart){
+        getResources();
+
+    updateValues();
     }
+    
 }
 
 let nextTurnButton = document.getElementById("nextTurn");
@@ -75,10 +80,12 @@ let goldMineButton = document.getElementById("goldMineBuy");
 let buyGoldMine = function(){
     // might be made redddundant later but for now still needed
     // can only buy during planning
+    /*
     if (!turnIsPlanning){
         alert("Can Only Buy During Planning");
         return;
     }
+    */
     // gold mines cost 7 gold
     let cost = 7;
     // add to player
@@ -166,11 +173,7 @@ let showOptions = function(hex){
     let tile = document.createElement("p");
     tile.innerHTML = "Tile: (" + curHex[0] + ", " + curHex[1] + ")";
     build.appendChild(tile);
-
-    if (!turnIsPlanning){
-        return;
-    }
-
+    
     // shows what building is on tile when tile is clicked
     let building = map.grid[curHex[0]][curHex[1]].building;
     let showBuild = document.createElement("p");
