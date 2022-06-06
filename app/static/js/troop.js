@@ -75,6 +75,11 @@ let planMoveTroops = function(){
     selectedHex = [curHex[0], curHex[1]];
     // for some reason, selectedHex = curHex just makes a refernece to curHex and when cur changes so does selected
     // in canvas hexClick, waits for player to click adajcent tile and click planMoveHere
+    //(Math.abs(curHex[0]-selectedHex[0]) <= 1 &&  Math.abs(curHex[1]-selectedHex[1]) <= 1)
+    
+
+
+    }
     deleteOptions();
 }
 
