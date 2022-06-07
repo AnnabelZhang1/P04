@@ -157,3 +157,7 @@ qinaL -- 2022-06-06 18:42
 alifA -- 2022-06-06 22:14
 created a troopCanvas.
 implemented displaying troops and moving troops.
+
+annabelZ -- 2022-06-06 23:44
+Switched over to flask-socketio
+Added drawFort() in `turn.js` (lines 298-329 and 346-350)

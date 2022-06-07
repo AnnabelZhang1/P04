@@ -295,6 +295,38 @@ let deleteOptions = function(){
     }
 }
 
+// can be changed to diff canvas
+var c = document.getElementById('troopCanv');
+var ctx1 = c.getContext("2d");
+
+// Loads in the different images
+let img0 = document.createElement("img");
+img0.src = '../static/assets/castle_blue.png';
+
+let img1 = document.createElement("img");
+img1.src = '../static/assets/castle_green.png';
+
+let img2 = document.createElement("img");
+img2.src = '../static/assets/castle_yellow.png';
+
+let img3 = document.createElement("img");
+img3.src = '../static/assets/castle_red.png';
+
+function drawFort(color, x, y){
+  if (color === "Blue"){
+    ctx1.drawImage(img0, x, y, 90, 90);
+  }
+  else if (color === "Green"){
+    ctx1.drawImage(img1, x, y, 90, 90);
+  }
+  else if (color === "Yellow"){
+    ctx1.drawImage(img2, x, y, 90, 90);
+  }
+  else if (color === "Red"){
+    ctx3.drawImage(img2, x, y, 90, 90);
+  }
+};
+
 let buyFort = function(){
     // fort costs 5
     let cost = 5;
@@ -311,6 +343,11 @@ let buyFort = function(){
     updateValues();
     deleteOptions();
     showOptions();
+
+    // idk how you find the middle of the hexagon
+    x = 0;
+    y = 0;
+    drawFort(players[turnCounter].name, x, y);
 }
 
 let deleteFort = function(){
