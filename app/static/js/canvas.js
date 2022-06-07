@@ -158,6 +158,8 @@ in the grid. modifies the elements of the curHex array.
 function hexClick(event) {
   mX = event.offsetX;
   mY = event.offsetY;
+  console.log(mX);
+  console.log(mY);
   let hexClicked = false;
   for (let i = 0; i < map.height; i++) {
     for (let j = 0; j < map.length; j++) {
@@ -168,7 +170,6 @@ function hexClick(event) {
       }
     }
   }
-
   ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
   deleteOptions();
 
@@ -191,6 +192,7 @@ function hexClick(event) {
   }
   else {
     console.log(curHex);
+    console.log("troops is here? " + map.grid[curHex[0]][curHex[1]].troop);
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }
 

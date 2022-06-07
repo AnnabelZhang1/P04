@@ -37,16 +37,21 @@ class Battalion {
   }
 
   move(xInd, yInd, isInit) {  //draws hexagons
-    if (!this.inBuild) {
+    if(map.grid[curHex[0]][curHex[1]].troop != null && !isInit) {
+      addNotif("illegal troop movement!")
+    } else {
       this.x = xInd;
       this.y = yInd;
       xInd = map.grid[curHex[0]][curHex[1]].centerX;
       yInd = map.grid[curHex[0]][curHex[1]].centerY;
-      let clearX = map.grid[startTroopPos[0]][startTroopPos[1]].centerX;
-      let clearY = map.grid[startTroopPos[0]][startTroopPos[1]].centerY;
-      if (!isInit) {ctxTC.clearRect(clearX-31,clearY-31,clearX+31,clearY+31);}
-      console.log(xInd);
-      console.log(yInd);
+      if (!isInit) {
+        let clearX = Math.round(map.grid[selectedHex[0]][selectedHex[1]].centerX);
+        let clearY = Math.round(map.grid[selectedHex[0]][selectedHex[1]].centerY);
+        ctxTC.clearRect(clearX-31,clearY-31,65,60);
+        map.grid[selectedHex[0]][selectedHex[1]].troop = null;
+      }
+      map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,10,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+      if (!this.inBuild) {
       ctxTC.strokeStyle = "black";
       ctxTC.fillStyle = this.troopCol + "";
       ctxTC.beginPath();
@@ -56,7 +61,6 @@ class Battalion {
       ctxTC.closePath();
       ctxTC.stroke();
       ctxTC.fill();
-
       ctxTC.strokeStyle = "black";
       ctxTC.fillStyle = this.ownerCol + "";
       ctxTC.beginPath();
@@ -68,6 +72,7 @@ class Battalion {
       ctxTC.fill();
     }
   }
+}
 
 }
 
@@ -157,23 +162,12 @@ let isIn = function (adjacents, curHex){
     return false;
 }
 
-let moveTroopsFrom = function(){
-    startTroopPos[0] = curHex[0];
-    startTroopPos[1] = curHex[1];
-    console.log("moving");
-    action = true;
-    selectedHex = [curHex[0], curHex[1]]; // for some reason, selectedHex = curHex just makes a refernece to curHex and when cur changes so does selected
-    // in canvas hexClick, waits for player to click adajaceent in whereMoveTroops
-
-    whereMoveTroops(); // to get auto troop highlight
-
-    deleteOptions();
-}
-
 let moveTroopsHere = function(){
     //plannedActions[turnCounter].push(selectedHex + " -> " + curHex);
     // action will happen during action phase
-    map.grid[startTroopPos[0]][startTroopPos[1]].troop.move(selectedHex[0],selectedHex[1],false);
+
+    map.grid[selectedHex[0]][selectedHex[1]].troop.move(curHex[0],curHex[1],false);
+
     console.log("move tbd");
 
     // clear

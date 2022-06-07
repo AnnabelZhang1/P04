@@ -161,3 +161,7 @@ implemented displaying troops and moving troops.
 annabelZ -- 2022-06-06 23:44
 Switched over to flask-socketio
 Added drawFort() in `turn.js` (lines 298-329 and 346-350)
+
+alifA -- 2022-06-07
+Fixed bug where previous troops were not properly cleared.
+Troops of any color will be unable to move onto a tile where another troop is (plan to have this only for troops of the same color, and have battle interactions for troops of different colors)
