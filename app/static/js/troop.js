@@ -63,7 +63,7 @@ class Battalion {
   move(xInd, yInd, isInit) {  //draws hexagons
     if(map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.troopCol == this.troopCol && !isInit) {
       addNotif("illegal troop movement!")
-      
+
     } else {
       this.x = xInd;
       this.y = yInd;
@@ -179,10 +179,10 @@ let moveTroopsHere = function(){
     // action will happen during action phase
 
     map.grid[selectedHex[0]][selectedHex[1]].troop.move(curHex[0],curHex[1],false);
-    console.log(map.grid[curHex[0]][curHex[1]].color)
-    if (map.grid[curHex[0]][curHex[1]].color == "white") {
-        map.grid[curHex[0]][curHex[1]].modifyColor(map.grid[curHex[0]][curHex[1]].troop.ownerCol);
-    }
+    // console.log(map.grid[curHex[0]][curHex[1]].color)
+    // if (map.grid[curHex[0]][curHex[1]].color == "white") {
+    //     map.grid[curHex[0]][curHex[1]].modifyColor(map.grid[curHex[0]][curHex[1]].troop.ownerCol);
+    // }
     // clear
     deleteOptions();
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
