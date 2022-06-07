@@ -3,72 +3,17 @@
 # P04: Forged By Land
 # 2022-05-24
 
-from flask import Flask, request, render_template, redirect, session, jsonify
+from flask import *
+from flask_socketio import *
+from database import *
 import sqlite3
+
+# Socket initialization--
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'muffins'
+socketio = SocketIO(app, cors_allowed_origins='*')
 
-db = sqlite3.connect('USERSd.db')
-cursor = db.cursor()
-
-# TODO: Make SQL statement to create table
-create_users_table_sql ="""
-	CREATE TABLE IF NOT EXISTS users(
-	rowid INTEGER PRIMARY KEY,
-	user_name TEXT NOT NULL,
-	hash_string TEXT NOT NULL,
-	wins INTEGER NOT NULL
-	);
-"""
-
-cursor.execute(create_users_table_sql)
-
-db.commit()
-db.close()
-
-#insertNewUser has not been tested yet
-def insertNewUser(user, hash, wins):
-	db = sqlite3.connect('USERSd.db')
-	cursor = db.cursor()
-
-	cursor.execute("""
-	INSERT INTO users (user_name, hash_string, wins) VALUES
-	("""+ user +""","""+ hash +""",""" + wins + """);
-	""")
-
-	db.commit()
-	db.close()
-
-#getWins has not been tested yet
-def getWins(user):
-	db = sqlite3.connect('USERSd.db')
-	cursor = db.cursor()
-
-	cursor.execute("""
-	SELECT * FROM users WHERE user_name = """ + user + """
-	""")
-
-	row = cursor.fetchone()
-
-	db.commit()
-	db.close()
-
-	return row['wins']
-
-#addWin has not been tested yet
-def addWin(user):
-	db = sqlite3.connect('USERSd.db')
-	cursor = db.cursor()
-
-	cursor.execute("""
-	UPDATE users
-	SET wins = """ + (getWins(user)+1) + """
-
-	""")
-
-	db.commit()
-	db.close()
-
-
+# Flask app routes--
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
 	return redirect("/home")
@@ -93,6 +38,14 @@ def login():
 def register():
     return render_template("register.html")
 
+# Flask-socketio functions--
+# @socketio.on('send_mouse')
+# def message_recieved(data):
+#     # print(data['text'])
+#     emit('draw_to_all', data, broadcast=True)
+
+# if __name__ == "__main__":
+#     app.run(debug=True)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, port=8000, debug=True)
