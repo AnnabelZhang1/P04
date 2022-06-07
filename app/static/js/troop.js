@@ -36,13 +36,15 @@ class Battalion {
     this.inBuild = y_o_n;
   }
 
-  move(xInd, yInd) {  //draws hexagons
+  move(xInd, yInd, isInit) {  //draws hexagons
     if (!this.inBuild) {
-      ctxTC.clearRect(0,0,canvasTC.width,canvasTC.height);
       this.x = xInd;
       this.y = yInd;
       xInd = map.grid[curHex[0]][curHex[1]].centerX;
       yInd = map.grid[curHex[0]][curHex[1]].centerY;
+      let clearX = map.grid[startTroopPos[0]][startTroopPos[1]].centerX;
+      let clearY = map.grid[startTroopPos[0]][startTroopPos[1]].centerY;
+      if (!isInit) {ctxTC.clearRect(clearX-31,clearY-31,clearX+31,clearY+31);}
       console.log(xInd);
       console.log(yInd);
       ctxTC.strokeStyle = "black";
@@ -156,6 +158,8 @@ let isIn = function (adjacents, curHex){
 }
 
 let moveTroopsFrom = function(){
+    startTroopPos[0] = curHex[0];
+    startTroopPos[1] = curHex[1];
     console.log("moving");
     action = true;
     selectedHex = [curHex[0], curHex[1]]; // for some reason, selectedHex = curHex just makes a refernece to curHex and when cur changes so does selected
@@ -169,7 +173,7 @@ let moveTroopsFrom = function(){
 let moveTroopsHere = function(){
     //plannedActions[turnCounter].push(selectedHex + " -> " + curHex);
     // action will happen during action phase
-    map.grid[startTroopPos[0]][startTroopPos[1]].troop.move(selectedHex[0],selectedHex[1]);
+    map.grid[startTroopPos[0]][startTroopPos[1]].troop.move(selectedHex[0],selectedHex[1],false);
     console.log("move tbd");
 
     // clear

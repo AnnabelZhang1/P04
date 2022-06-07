@@ -272,8 +272,6 @@ let showOptions = function(hex){
             moveTroopsButton.setAttribute("class", "btn btn-danger");
             build.appendChild(moveTroopsButton);
             moveTroopsButton.addEventListener('click', moveTroopsFrom);
-            startTroopPos[0] = curHex[0];
-            startTroopPos[1] = curHex[1];
         }
     }
 }
@@ -337,7 +335,7 @@ let buyTroops = function(){
     players[turnCounter].gold -= cost;
     map.grid[curHex[0]][curHex[1]].addTroops(num);
     map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,10,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
-    map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y);
+    map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y,true);
     players[turnCounter].troops += num; // dont really need but why not
 
     updateValues();
