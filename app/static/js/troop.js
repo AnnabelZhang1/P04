@@ -14,6 +14,7 @@ class Battalion {
     this.inBuild = false;
     this.x = x;
     this.y = y;
+    this.currMoves = 0;
   }
 
   takeDmg(dmg) {
@@ -36,9 +37,33 @@ class Battalion {
     this.inBuild = y_o_n;
   }
 
+  drawTroop(xInd,yInd,tCol,oCol) {
+    ctxTC.strokeStyle = "black";
+    ctxTC.fillStyle = tCol + "";
+    ctxTC.beginPath();
+    // outer hexagon, denoting troop color
+    for (let i = 0; i < 6; i++) {
+        ctxTC.lineTo(xInd + 30 * Math.cos(a * i), yInd + 30 * Math.sin(a * i));
+    }
+    ctxTC.closePath();
+    ctxTC.stroke();
+    ctxTC.fill();
+    ctxTC.strokeStyle = "black";
+    ctxTC.fillStyle = oCol + "";
+    ctxTC.beginPath();
+    //inner hexagon denoting empire color
+    for (let i = 0; i < 6; i++) {
+        ctxTC.lineTo(xInd + 10 * Math.cos(a * i), yInd + 10 * Math.sin(a * i));
+    }
+    ctxTC.closePath();
+    ctxTC.stroke();
+    ctxTC.fill();
+  }
+
   move(xInd, yInd, isInit) {  //draws hexagons
-    if(map.grid[curHex[0]][curHex[1]].troop != null && !isInit) {
+    if(map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.troopCol == this.troopCol && !isInit) {
       addNotif("illegal troop movement!")
+
     } else {
       this.x = xInd;
       this.y = yInd;
@@ -49,27 +74,14 @@ class Battalion {
         let clearY = Math.round(map.grid[selectedHex[0]][selectedHex[1]].centerY);
         ctxTC.clearRect(clearX-31,clearY-31,65,60);
         map.grid[selectedHex[0]][selectedHex[1]].troop = null;
+        console.log("isnt init");
+        this.currMoves += 1;
+        console.log("currMoves " + this.currMoves);
       }
-      map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,10,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+      map.grid[curHex[0]][curHex[1]].troop = new Battalion(this.hp,this.atk,this.cost,this.moveSpeed,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+      map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
       if (!this.inBuild) {
-      ctxTC.strokeStyle = "black";
-      ctxTC.fillStyle = this.troopCol + "";
-      ctxTC.beginPath();
-      for (let i = 0; i < 6; i++) {
-          ctxTC.lineTo(xInd + 30 * Math.cos(a * i), yInd + 30 * Math.sin(a * i));
-      }
-      ctxTC.closePath();
-      ctxTC.stroke();
-      ctxTC.fill();
-      ctxTC.strokeStyle = "black";
-      ctxTC.fillStyle = this.ownerCol + "";
-      ctxTC.beginPath();
-      for (let i = 0; i < 6; i++) {
-          ctxTC.lineTo(xInd + 10 * Math.cos(a * i), yInd + 10 * Math.sin(a * i));
-      }
-      ctxTC.closePath();
-      ctxTC.stroke();
-      ctxTC.fill();
+      this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
     }
   }
 }
@@ -167,9 +179,10 @@ let moveTroopsHere = function(){
     // action will happen during action phase
 
     map.grid[selectedHex[0]][selectedHex[1]].troop.move(curHex[0],curHex[1],false);
-
-    console.log("move tbd");
-
+    // console.log(map.grid[curHex[0]][curHex[1]].color)
+    // if (map.grid[curHex[0]][curHex[1]].color == "white") {
+    //     map.grid[curHex[0]][curHex[1]].modifyColor(map.grid[curHex[0]][curHex[1]].troop.ownerCol);
+    // }
     // clear
     deleteOptions();
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);

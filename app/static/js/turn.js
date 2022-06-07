@@ -58,6 +58,18 @@ let nextTurn = function(){
     const ctxHL = canvasHL.getContext('2d');
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
 
+
+    // this works for now. in future, maybe make army array for each
+    // emperor, holding the x and y coords of each troop for each emperor.
+    // then, only set the currMoves of those troops to zero.
+    for (let i = 0; i < map.grid.length; i++) {
+      for (let j = 0; j < map.grid[i].length;j++) {
+        if (map.grid[i][j].troop != null) {
+          map.grid[i][j].troop.currMoves = 0;
+        }
+      }
+    }
+
     // every player has gone
     if (turnCounter > 3){
         //changeTurnCycle();
@@ -212,7 +224,19 @@ let showOptions = function(hex){
 
     // not moving
     // if it's player's tile, shows building options
-    console.log(map.grid[curHex[0]][curHex[1]].color);
+    console.log("color "+map.grid[curHex[0]][curHex[1]].color);
+    if (map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
+        console.log("allow movement");
+        console.log("currMoves "+map.grid[curHex[0]][curHex[1]].troop.currMoves);
+        build.appendChild(document.createElement("br"));
+        // allow to plan movement of these troops
+        let moveTroopsButton = document.createElement("button");
+        moveTroopsButton.innerHTML = "Move Troops";
+        moveTroopsButton.setAttribute("class", "btn btn-danger");
+        build.appendChild(moveTroopsButton);
+        moveTroopsButton.addEventListener('click', moveTroopsFrom);
+    }
+
     if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){ // color is used instead of name b/c hex doesnt have name porperty
         //console.log("worky?");
         if (building == ""){
@@ -261,16 +285,6 @@ let showOptions = function(hex){
             spawnTroops();
         }
 
-        // hex has troops
-        if (map.grid[curHex[0]][curHex[1]].troops != 0 && map.grid[curHex[0]][curHex[1]].troop != null){
-            build.appendChild(document.createElement("br"));
-            // allow to plan movement of these troops
-            let moveTroopsButton = document.createElement("button");
-            moveTroopsButton.innerHTML = "Move Troops";
-            moveTroopsButton.setAttribute("class", "btn btn-danger");
-            build.appendChild(moveTroopsButton);
-            moveTroopsButton.addEventListener('click', moveTroopsFrom);
-        }
     }
 }
 
