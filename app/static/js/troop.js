@@ -82,6 +82,9 @@ class Battalion {
       map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
       if (!this.inBuild) {
       this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
+
+      console.log("moved");
+      conquerTile(this);
     }
   }
 }
@@ -189,4 +192,13 @@ let moveTroopsHere = function(){
 
     // planning movement done
     action = false;
+}
+
+let conquerTile = function(troop){
+  // assumes no other troop is on tile
+
+  // tile changes color accordingly
+  map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
+  drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]])
+
 }
