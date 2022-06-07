@@ -13,6 +13,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'muffins'
 socketio = SocketIO(app, cors_allowed_origins='*')
 
+clients = []
+
 # Flask app routes--
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
@@ -39,13 +41,19 @@ def register():
     return render_template("register.html")
 
 # Flask-socketio functions--
-# @socketio.on('send_mouse')
-# def message_recieved(data):
-#     # print(data['text'])
-#     emit('draw_to_all', data, broadcast=True)
+@socketio.on('connect', namespace='/game')
+def connecting():
+	clients.append(request.sid)
+	room = session.get('room')
+	join_room(room)
+	emit('status', {'msg': session.get('name') + 'has joined.'}, room=clients[0])
+	# make status emit on js file
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+@socketio.on('send_mouse')
+def message_recieved(data):
+    # print(data['text'])
+    emit('draw_to_all', data, broadcast=True)
 
+# Run app
 if __name__ == "__main__":
     socketio.run(app, port=8000, debug=True)
