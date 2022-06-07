@@ -33,7 +33,10 @@ class Hexagon {
     // what building is on tile (only 1 can be on building at once); buildings for now strings
     this.building = "";
     // holds how many troops are on tile
+    //deprecated. replace in all files
     this.troops = 0;
+
+    this.troop = null;
     this.x = x;
     this.y = y;
     this.centerX = (y * 75 + 50) + 2.5;

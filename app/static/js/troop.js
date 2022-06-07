@@ -2,16 +2,18 @@ class Battalion {
   // no treason
   // no resurrection
   // no crippling moving speed
-  constructor(health, attack, cost, moveSpeed, ownerCol, troopCol, inBuild) {
+  constructor(health, attack, cost, mvSpd, ownCol, trpCol, inBuild, x, y) {
     this.hp = health;
     this.atk = attack;
 
     // this value will be reduced from the emperor(player character)'s gold funds.
     this.cost = cost;
-    this.mvSpd = moveSpeed;
-    this.ownCol = ownerCol;
-    this.trpCol = troopCol;
+    this.moveSpeed = mvSpd;
+    this.ownerCol = ownCol;
+    this.troopCol = trpCol;
     this.inBuild = false;
+    this.x = x;
+    this.y = y;
   }
 
   takeDmg(dmg) {
@@ -35,26 +37,33 @@ class Battalion {
   }
 
   move(xInd, yInd) {  //draws hexagons
-    if (!inBuild) {
-      ctx.strokeStyle = "black";
-      ctx.fillStyle = this.ownerCol + "";
-      ctx.beginPath();
+    if (!this.inBuild) {
+      ctxTC.clearRect(0,0,canvasTC.width,canvasTC.height);
+      this.x = xInd;
+      this.y = yInd;
+      xInd = map.grid[curHex[0]][curHex[1]].centerX;
+      yInd = map.grid[curHex[0]][curHex[1]].centerY;
+      console.log(xInd);
+      console.log(yInd);
+      ctxTC.strokeStyle = "black";
+      ctxTC.fillStyle = this.troopCol + "";
+      ctxTC.beginPath();
       for (let i = 0; i < 6; i++) {
-          ctx.lineTo(x + 30 * Math.cos(a * i), y + 30 * Math.sin(a * i));
+          ctxTC.lineTo(xInd + 30 * Math.cos(a * i), yInd + 30 * Math.sin(a * i));
       }
-      ctx.closePath();
-      ctx.stroke();
-      ctx.fill();
+      ctxTC.closePath();
+      ctxTC.stroke();
+      ctxTC.fill();
 
-      ctx.strokeStyle = "black";
-      ctx.fillStyle = this.troopCol + "";
-      ctx.beginPath();
+      ctxTC.strokeStyle = "black";
+      ctxTC.fillStyle = this.ownerCol + "";
+      ctxTC.beginPath();
       for (let i = 0; i < 6; i++) {
-          ctx.lineTo(x + 10 * Math.cos(a * i), y + 10 * Math.sin(a * i));
+          ctxTC.lineTo(xInd + 10 * Math.cos(a * i), yInd + 10 * Math.sin(a * i));
       }
-      ctx.closePath();
-      ctx.stroke();
-      ctx.fill();
+      ctxTC.closePath();
+      ctxTC.stroke();
+      ctxTC.fill();
     }
   }
 
@@ -116,12 +125,12 @@ let getAdjacentTiles = function(){
     adjacents = [[selectedHex[0]-1, selectedHex[1]], [selectedHex[0]+1, selectedHex[1]], // up and down
                  [selectedHex[0], selectedHex[1]-1], [selectedHex[0], selectedHex[1]+1] // left and right
                 ]
-    // even column has top diagonals as adjacents 
+    // even column has top diagonals as adjacents
     if (selectedHex[1]%2 == 0){
         adjacents[4] = [selectedHex[0]-1, selectedHex[1]-1];
         adjacents[5] = [selectedHex[0]-1, selectedHex[1]+1];
     }
-    // odds have bottom diagonals 
+    // odds have bottom diagonals
     else {
         adjacents[4] = [selectedHex[0]+1, selectedHex[1]-1];
         adjacents[5] = [selectedHex[0]+1, selectedHex[1]+1];
@@ -153,14 +162,14 @@ let moveTroopsFrom = function(){
     // in canvas hexClick, waits for player to click adajaceent in whereMoveTroops
 
     whereMoveTroops(); // to get auto troop highlight
-    
+
     deleteOptions();
 }
 
 let moveTroopsHere = function(){
     //plannedActions[turnCounter].push(selectedHex + " -> " + curHex);
     // action will happen during action phase
-
+    map.grid[startTroopPos[0]][startTroopPos[1]].troop.move(selectedHex[0],selectedHex[1]);
     console.log("move tbd");
 
     // clear

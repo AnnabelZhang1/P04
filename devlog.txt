@@ -151,6 +151,9 @@ qinaL -- 2022-06-06 18:24
 - whereMoveTroops will call troopHighlight on all 6 adjacent tiles so adj tiles get gray highlight over hexs to visually indicate where troops can move
 
 qinaL -- 2022-06-06 18:42
-- getAdjacents() will cover edges cases where the selectedHex is on the edge of board 
+- getAdjacents() will cover edges cases where the selectedHex is on the edge of board
 - if player has selected to move troops and does not either cancel or click where to move, they are now prohibited from clicking Next Turn
 
+alifA -- 2022-06-06 22:14
+created a troopCanvas.
+implemented displaying troops and moving troops.

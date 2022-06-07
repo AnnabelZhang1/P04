@@ -17,6 +17,10 @@ canvas {
     transform:translate(-50%,-50%)
 }
 
+#troopCanv {
+  z-index: 3;
+}
+
 #interactions {
     z-index: 2;
 }

@@ -7,6 +7,8 @@ let green = new Emperor("Green", "#00A36C", 7, 2, 0 );
 
 let players = [red, yellow, blue, green];
 
+let startTroopPos = [0,0];
+
 for (let i = 0; i < 4; i++){
     players[i].capital = capitals[i];
 }
@@ -26,7 +28,7 @@ let turnIsStart = true; // is the first cycle of planning, so don't add new troo
 //let turnShow = document.getElementById("turnPhase");
 /*
 let changeTurnCycle = function(){
-    
+
     if (turnIsPlanning){
         turnIsPlanning = false;
         turnShow.innerHTML="Phase: Action";
@@ -35,7 +37,7 @@ let changeTurnCycle = function(){
         turnIsPlanning = true;
         turnShow.innerHTML="Phase: Planning";
     }
-    
+
 }
 */
 
@@ -72,7 +74,7 @@ let nextTurn = function(){
     }
 
     updateValues();
-    
+
 }
 
 let nextTurnButton = document.getElementById("nextTurn");
@@ -262,7 +264,7 @@ let showOptions = function(hex){
         }
 
         // hex has troops
-        if (map.grid[curHex[0]][curHex[1]].troops != 0){
+        if (map.grid[curHex[0]][curHex[1]].troops != 0 && map.grid[curHex[0]][curHex[1]].troop != null){
             build.appendChild(document.createElement("br"));
             // allow to plan movement of these troops
             let moveTroopsButton = document.createElement("button");
@@ -270,6 +272,8 @@ let showOptions = function(hex){
             moveTroopsButton.setAttribute("class", "btn btn-danger");
             build.appendChild(moveTroopsButton);
             moveTroopsButton.addEventListener('click', moveTroopsFrom);
+            startTroopPos[0] = curHex[0];
+            startTroopPos[1] = curHex[1];
         }
     }
 }
@@ -277,7 +281,7 @@ let showOptions = function(hex){
 // used in capital + fort in options
 let spawnTroops = function(){
     let build = document.getElementById("buildOptions");
-    
+
     let buyTroopsButton = document.createElement("button");
     buyTroopsButton.innerHTML = "Buy Troops";
     buyTroopsButton.setAttribute("class", "btn btn-primary");
@@ -332,6 +336,8 @@ let buyTroops = function(){
     }
     players[turnCounter].gold -= cost;
     map.grid[curHex[0]][curHex[1]].addTroops(num);
+    map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,10,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+    map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y);
     players[turnCounter].troops += num; // dont really need but why not
 
     updateValues();
