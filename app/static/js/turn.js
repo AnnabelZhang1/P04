@@ -7,8 +7,6 @@ let green = new Emperor("Green", "#00A36C", 7, 2, 0 );
 
 let players = [red, yellow, blue, green];
 
-let startTroopPos = [0,0];
-
 for (let i = 0; i < 4; i++){
     players[i].capital = capitals[i];
 }
@@ -276,6 +274,18 @@ let showOptions = function(hex){
     }
 }
 
+let moveTroopsFrom = function(){
+    console.log("moving");
+    action = true;
+    selectedHex = [curHex[0], curHex[1]]; // for some reason, selectedHex = curHex just makes a refernece to curHex and when cur changes so does selected
+    // in canvas hexClick, waits for player to click adajaceent in whereMoveTroops
+
+    whereMoveTroops(); // to get auto troop highlight
+
+    deleteOptions();
+}
+
+
 // used in capital + fort in options
 let spawnTroops = function(){
     let build = document.getElementById("buildOptions");
@@ -285,6 +295,25 @@ let spawnTroops = function(){
     buyTroopsButton.setAttribute("class", "btn btn-primary");
     build.appendChild(buyTroopsButton);
     buyTroopsButton.addEventListener('click', buyTroops);
+}
+
+let buyTroops = function(){
+    let num = 1;
+    // one troop costs 2 gold
+    let cost = 2 * num;
+    if (players[turnCounter].gold < cost){
+        alert("costs " + cost + " gold");
+        return;
+    }
+    players[turnCounter].gold -= cost;
+    map.grid[curHex[0]][curHex[1]].addTroops(num);
+    map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,10,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+    map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y,true);
+    players[turnCounter].troops += num; // dont really need but why not
+
+    updateValues();
+    deleteOptions();
+    showOptions();
 }
 
 let deleteOptions = function(){
@@ -355,25 +384,6 @@ let deleteFort = function(){
     // rid of fort in player
     players[turnCounter].forts = players[turnCounter].forts.filter(fort => fort != map.grid[curHex[0]][curHex[1]]);
     //console.log(players[turnCounter]);
-
-    updateValues();
-    deleteOptions();
-    showOptions();
-}
-
-let buyTroops = function(){
-    let num = 1;
-    // one troop costs 2 gold
-    let cost = 2 * num;
-    if (players[turnCounter].gold < cost){
-        alert("costs " + cost + " gold");
-        return;
-    }
-    players[turnCounter].gold -= cost;
-    map.grid[curHex[0]][curHex[1]].addTroops(num);
-    map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,10,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
-    map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y,true);
-    players[turnCounter].troops += num; // dont really need but why not
 
     updateValues();
     deleteOptions();
