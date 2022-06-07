@@ -167,9 +167,10 @@ let moveTroopsHere = function(){
     // action will happen during action phase
 
     map.grid[selectedHex[0]][selectedHex[1]].troop.move(curHex[0],curHex[1],false);
-
-    console.log("move tbd");
-
+    console.log(map.grid[curHex[0]][curHex[1]].color)
+    if (map.grid[curHex[0]][curHex[1]].color == "white") {
+        map.grid[curHex[0]][curHex[1]].modifyColor(map.grid[curHex[0]][curHex[1]].troop.ownerCol);
+    }
     // clear
     deleteOptions();
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);

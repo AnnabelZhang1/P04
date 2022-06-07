@@ -64,6 +64,11 @@ class Hexagon {
     }
     return false;
   }
+  modifyColor(newColor) {
+    this.color = newColor;
+    clearHexagon(this.centerX - 2.5, this.centerY, this);
+    drawHexagon(this.centerX - 2.5, this.centerY, this);
+  }
 
 }
 
