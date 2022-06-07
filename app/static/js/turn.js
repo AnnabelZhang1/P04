@@ -225,7 +225,7 @@ let showOptions = function(hex){
     // not moving
     // if it's player's tile, shows building options
     console.log("color "+map.grid[curHex[0]][curHex[1]].color);
-    if (map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
+    if (players[turnCounter].color == map.grid[curHex[0]][curHex[1]].color && map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
         console.log("allow movement");
         console.log("currMoves "+map.grid[curHex[0]][curHex[1]].troop.currMoves);
         build.appendChild(document.createElement("br"));
