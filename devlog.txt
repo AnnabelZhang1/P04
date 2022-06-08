@@ -188,7 +188,7 @@ qinaL -- 2022-06-08 16:47
 - when troop moves, it no longer needs to create a new troop, so that the troop stored in emperor has consistent x and y properties
 - if your troop is on an enemy capital on the start of your turn, it will automatically deal damage to capital
 
-qinaL -- 2022-06-08 
+qinaL -- 2022-06-08 18:47
 - resetting troop curMoves to 0 now utilizes troop array in emperor for efficiency 
-- death mechanic implemented! when capital dies, the player is now eliminated, its color tiles reset, capital is gone, troop is gone (not visually yet tho)
+- death mechanic implemented! when capital dies, the player is now eliminated, its color tiles reset, capital is gone, all troops are gone 
 - conquerTiles now gives the exisitng building on the tile (if any) to new empire, and old empire loses those buildings

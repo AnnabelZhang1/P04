@@ -83,7 +83,7 @@ class Battalion {
         if (defHex.troop.hp <= 0) {
           defHex.troop = null;
           ctxTC.clearRect(clearX-31,clearY-31,65,60);
-          atkHex.troop.move(clearX,clearT,false);
+          atkHex.troop.move(clearX,clearY,false);
         }
       }
     } else {
@@ -251,7 +251,7 @@ let conquerTile = function(troop, tile){
     }
     else if (building == "Fort"){
       players[turnCounter].forts.push(tile);
-      console.log(tile);
+      // console.log(tile);
       players[attackedPlayer].forts = players[attackedPlayer].forts.filter(fort => fort != tile);
     }
     updateValues();

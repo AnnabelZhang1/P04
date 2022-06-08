@@ -111,6 +111,10 @@ class Capital {
         let currTroop = players[colors.indexOf(this.color)].troop[i];
         map.grid[currTroop.x][currTroop.y].troop = null;
 
+        // clear troop on map
+        let clearX = Math.round(map.grid[currTroop.x][currTroop.y].centerX);
+        let clearY = Math.round(map.grid[currTroop.x][currTroop.y].centerY);
+        ctxTC.clearRect(clearX-31,clearY-31,65,60);
       }
 
       // player is eliminated in turn
