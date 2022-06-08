@@ -198,30 +198,6 @@ function hexClick(event) {
 
 }
 
-// socket interactions
-var socket;
-var clients;
-$(document).ready(function() {
-    // // The http vs. https is important. Use http for localhost!
-    socket = io.connect('http://' + document.domain + ':' + location.port);
-
-    console.log("socket is ready");
-
-    socket.on('conjs', function(data) {
-        const event = data
-        clients = data
-        console.log("connection received")
-        console.log("Current clients: " + event.data)
-    });
-
-    socket.on('disconjs', function(msg) {
-        const event = data
-        console.log(event.msg)
-    });
-
-
-  });
-
 
 let troopHighlight = function(x, y){
   ctxHL.lineWidth = 1;
@@ -235,3 +211,27 @@ let troopHighlight = function(x, y){
   ctxHL.stroke();
   ctxHL.fill();
 }
+
+
+// socket interactions
+var socket;
+$(document).ready(function() {
+    // // The http vs. https is important. Use http for localhost!
+    socket = io.connect('http://' + document.domain + ':' + location.port);
+    console.log("socket is ready");
+
+    // receives connecting msg
+    socket.on('conjs', function(data) {
+        const event = data
+        console.log("connection received")
+        console.log("Current clients: " + event.data)
+    });
+
+    // receives disconnecting msg
+    socket.on('disconjs', function(data) {
+        const event = data
+        console.log(event.msg)
+    });
+
+
+  });
