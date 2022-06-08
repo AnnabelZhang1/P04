@@ -283,6 +283,9 @@ let showOptions = function(hex){
         }
         else if (building == "Capital"){
             spawnTroops();
+            let health = document.createElement("p");
+            health.innerHTML = "Health: " + players[turnCounter].capital.health;
+            build.append(health);
         }
 
     }
