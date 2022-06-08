@@ -51,12 +51,6 @@ function drawHexagon(x, y, hex) {  //draws hexagons
     ctx.closePath();
     ctx.stroke();
     ctx.fill();
-    if (hex.troops != 0) {
-        ctx.fillStyle = "orange";
-        ctx.textAlign = "center";
-        ctx.font = "25px Arial";
-        ctx.fillText(hex.troops + "", x + 2.5, y + 10);
-    }
 }
 
 
