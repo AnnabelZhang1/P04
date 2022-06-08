@@ -32,10 +32,7 @@ class Hexagon {
     this.color = "white";
     // what building is on tile (only 1 can be on building at once); buildings for now strings
     this.building = "";
-    // holds how many troops are on tile
-    //deprecated. replace in all files
-    this.troops = 0;
-
+    // Checks the type of troop on the tile
     this.troop = null;
     this.x = x;
     this.y = y;
@@ -47,15 +44,15 @@ class Hexagon {
   modifyBuildings(newBuildings){
     this.buildings = newBuildings;
   }
-  modifyTroops(newNum){
-    this.troops = newNum;
-    clearHexagon(this.centerX - 2.5, this.centerY, this);
-    drawHexagon(this.centerX - 2.5, this.centerY, this);
-  }
-  addTroops(num){
-    let prev = this.troops;
-    this.modifyTroops(prev + num);
-  }
+  // modifyTroops(newNum){
+  //   this.troops = newNum;
+  //   clearHexagon(this.centerX - 2.5, this.centerY, this);
+  //   drawHexagon(this.centerX - 2.5, this.centerY, this);
+  // }
+  // addTroops(num){
+  //   let prev = this.troops;
+  //   this.modifyTroops(prev + num);
+  // }
 
   // x and y are event.offsetX and event.offsetY respectively
   isClicked(x,y) {

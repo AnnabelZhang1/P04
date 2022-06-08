@@ -77,8 +77,14 @@ class Battalion {
         let clearX = Math.round(defHex.centerX);
         let clearY = Math.round(defHex.centerY);
         ctxTC.clearRect(clearX-31,clearY-31,65,60);
+        this.currMoves += 1;
         atkHex.troop.dealDmg(defHex.troop);
         defHex.troop.drawTroop(defHex.centerX,defHex.centerY,defHex.troop.troopCol,defHex.troop.ownerCol);
+        if (defHex.troop.hp <= 0) {
+          defHex.troop = null;
+          ctxTC.clearRect(clearX-31,clearY-31,65,60);
+          atkHex.troop.move(clearX,clearT,false);
+        }
       }
     } else {
       this.x = xInd;
@@ -137,7 +143,7 @@ let whereMoveTroops = function(){
 
       let build = document.getElementById("buildOptions");
       let cancelMoveButton = document.createElement("button");
-      cancelMoveButton.innerHTML = "Cancel Move Troops";
+      cancelMoveButton.innerHTML = "Cancel Move Troop";
       cancelMoveButton.setAttribute("class", "btn btn-dark");
       build.appendChild(cancelMoveButton);
       cancelMoveButton.addEventListener('click', function(){
@@ -152,7 +158,7 @@ let whereMoveTroops = function(){
 
         let build= document.getElementById("buildOptions");
         let moveButton = document.createElement("button");
-        moveButton.innerHTML = "Move Troops Here";
+        moveButton.innerHTML = "Move Troop Here";
         moveButton.setAttribute("class", "btn btn-danger");
         build.appendChild(moveButton);
         moveButton.addEventListener('click', moveTroopsHere);
