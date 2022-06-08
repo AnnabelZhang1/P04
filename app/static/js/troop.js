@@ -59,8 +59,9 @@ class Battalion {
     ctxTC.stroke();
     ctxTC.fill();
     ctxTC.fillStyle = "orange";
+    ctxTC.textAlign = "center";
     ctxTC.font="12px Arial";
-    ctxTC.fillText(this.hp,map.grid[curHex[0]][curHex[1]].centerX-8,map.grid[curHex[0]][curHex[1]].centerY+5);
+    ctxTC.fillText(this.hp,map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY + 5);
     console.log("hp text done: " + this.hp);
   }
 
@@ -76,8 +77,14 @@ class Battalion {
         let clearX = Math.round(defHex.centerX);
         let clearY = Math.round(defHex.centerY);
         ctxTC.clearRect(clearX-31,clearY-31,65,60);
+        this.currMoves += 1;
         atkHex.troop.dealDmg(defHex.troop);
         defHex.troop.drawTroop(defHex.centerX,defHex.centerY,defHex.troop.troopCol,defHex.troop.ownerCol);
+        if (defHex.troop.hp <= 0) {
+          defHex.troop = null;
+          ctxTC.clearRect(clearX-31,clearY-31,65,60);
+          atkHex.troop.move(clearX,clearT,false);
+        }
       }
     } else {
       this.x = xInd;
@@ -136,7 +143,7 @@ let whereMoveTroops = function(){
 
       let build = document.getElementById("buildOptions");
       let cancelMoveButton = document.createElement("button");
-      cancelMoveButton.innerHTML = "Cancel Move Troops";
+      cancelMoveButton.innerHTML = "Cancel Move Troop";
       cancelMoveButton.setAttribute("class", "btn btn-dark");
       build.appendChild(cancelMoveButton);
       cancelMoveButton.addEventListener('click', function(){
@@ -151,7 +158,7 @@ let whereMoveTroops = function(){
 
         let build= document.getElementById("buildOptions");
         let moveButton = document.createElement("button");
-        moveButton.innerHTML = "Move Troops Here";
+        moveButton.innerHTML = "Move Troop Here";
         moveButton.setAttribute("class", "btn btn-danger");
         build.appendChild(moveButton);
         moveButton.addEventListener('click', moveTroopsHere);
@@ -211,9 +218,16 @@ let moveTroopsHere = function(){
 
 let conquerTile = function(troop){
   // assumes no other troop is on tile
-
-  // tile changes color accordingly
-  map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
-  drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]])
+  if (map.grid[curHex[0]][curHex[1]].building == "Capital"){
+    console.log('capital');
+    console.log(capitals[turnCounter]);
+    let col = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
+    // players[col.findIndex(map.grid[curHex[0]][curHex[1]].color)].capital.health -= troop.attack;
+  }
+  else{
+    // tile changes color accordingly
+    map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
+    drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]]);
+  }
 
 }
