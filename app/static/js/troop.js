@@ -58,12 +58,27 @@ class Battalion {
     ctxTC.closePath();
     ctxTC.stroke();
     ctxTC.fill();
+    ctxTC.fillStyle = "orange";
+    ctxTC.font="12px Arial";
+    ctxTC.fillText(this.hp,map.grid[curHex[0]][curHex[1]].centerX-8,map.grid[curHex[0]][curHex[1]].centerY+5);
+    console.log("hp text done: " + this.hp);
   }
 
   move(xInd, yInd, isInit) {  //draws hexagons
-    if(map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.troopCol == this.troopCol && !isInit) {
-      addNotif("illegal troop movement!")
-
+    if(map.grid[curHex[0]][curHex[1]].troop != null && !isInit) {
+      // troop of one empire tries to move onto a tile with a troop from the same empire
+      if (map.grid[curHex[0]][curHex[1]].troop.ownerCol == this.ownerCol) {
+        addNotif("illegal troop movement!");
+     // combat phase
+      } else {
+        let atkHex = map.grid[selectedHex[0]][selectedHex[1]];
+        let defHex = map.grid[curHex[0]][curHex[1]];
+        let clearX = Math.round(defHex.centerX);
+        let clearY = Math.round(defHex.centerY);
+        ctxTC.clearRect(clearX-31,clearY-31,65,60);
+        atkHex.troop.dealDmg(defHex.troop);
+        defHex.troop.drawTroop(defHex.centerX,defHex.centerY,defHex.troop.troopCol,defHex.troop.ownerCol);
+      }
     } else {
       this.x = xInd;
       this.y = yInd;
