@@ -178,3 +178,8 @@ sophieL -- 2022-06-08 9:16
 
 alifA - 2022-06-08 9:20
 troop combat works. yay
+
+qinaL -- 2022-06-08 16:01
+- emperor now has a capital property, and capital is now an object with health property, and capital health is shown when click on tile
+- when troop lands on capital tile to conquer, it deals damage to capital but capitals stays color
+

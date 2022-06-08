@@ -76,7 +76,7 @@ class Emperor {
     this.gold = gold;
     this.troops = troops;
     this.goldMine = goldMine;
-    this.capital = ''; // refers to hexagon tile; done after declaring players
+    this.capital = ''; // refers to capital object, assigned in turn.js
     this.forts = []; //array of hexs w/ fort
     this.requestid = requestid;
   }
