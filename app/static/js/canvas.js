@@ -83,13 +83,13 @@ let map = new Grid(11, 6);
 let capitals = [];
 let colors = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
 // topright red
-capitals[0] = new Capital(players[0], map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
+capitals[0] = new Capital(colors[0], map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
 // top left yellow
-capitals[1] = new Capital(players[1], map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
+capitals[1] = new Capital(colors[1], map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
 // bottom right blue
-capitals[2] = new Capital(players[2], map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
+capitals[2] = new Capital(colors[2], map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
 // bottom left green
-capitals[3] = new Capital(players[3], map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
+capitals[3] = new Capital(colors[3], map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
 for (let i = 0; i < 4; i++){
   capitals[i].tile.color = colors[i];
   capitals[i].tile.building = "Capital";
