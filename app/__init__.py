@@ -24,9 +24,10 @@ def welcome():
 def home():
 	return render_template("home.html")
 
+# only one lobby at a time
 @app.route("/lobby", methods=['GET', 'POST'])
 def lobby():
-    return render_template("lobby.html")
+    return render_template("lobby.html", list=clients)
 
 @app.route("/game", methods=['GET', 'POST'])
 def game():

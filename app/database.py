@@ -19,7 +19,19 @@ create_users_table_sql ="""
 	);
 """
 
+# create_lobbytable ="""
+# 	CREATE TABLE IF NOT EXISTS lobbies(
+# 	rowid INTEGER PRIMARY KEY,
+# 	lobbycode TEXT NOT NULL,
+# 	p1 TEXT NOT NULL,
+# 	p2 TEXT NOT NULL,
+# 	p3 TEXT NOT NULL,
+# 	p4 TEXT NOT NULL
+# 	);
+# """
+
 cursor.execute(create_users_table_sql)
+# cursor.execute(create_lobbytable)
 
 db.commit()
 db.close()

@@ -15,7 +15,15 @@ P04: Forged By Land
 
 {% block body %}
 <!-- users  -->
-<p> /4 players joined</p>
+
+
+<p> {{num}}/4 players joined</p>
+
+{% for user in list %}
+  <!-- center this -->
+  <p>{user}</p>
+{% endfor %}
+
     <form action="/game">
       <!-- change from fake button to real button once it hits 4 -->
       <button type="submit">Start Game</button>
