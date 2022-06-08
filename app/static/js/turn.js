@@ -110,7 +110,7 @@ let buyGoldMine = function(){
     // add to player
     let currentPlayer = players[turnCounter];
     //currentGold = currentPlayer.gold;
-    if (currentPlayer.gold < cost){
+    if (currentPlayer.gold < cost){capital
         alert("Gold Mines cost " + cost + " gold");
         return;
     }
@@ -282,6 +282,10 @@ let showOptions = function(hex){
 
         }
         else if (building == "Capital"){
+            let health = document.createElement("p");
+            health.innerHTML = "Health: " + players[turnCounter].capital.health;
+            build.append(health);
+
             spawnTroops();
         }
 
