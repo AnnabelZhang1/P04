@@ -90,5 +90,6 @@ class Capital {
   }
   takeDamage(damage){
     this.health -= damage;
+    // console.log(this.color, this.health);
   }
 }

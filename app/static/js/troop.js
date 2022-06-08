@@ -218,16 +218,20 @@ let moveTroopsHere = function(){
 
 let conquerTile = function(troop){
   // assumes no other troop is on tile
-  if (map.grid[curHex[0]][curHex[1]].building == "Capital"){
-    console.log('capital');
-    console.log(capitals[turnCounter]);
-    let col = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
-    players[col.indexOf(map.grid[curHex[0]][curHex[1]].color)].capital.health -= troop.atk;
-  }
-  else{
-    // tile changes color accordingly
-    map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
-    drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]]);
-  }
 
+  if (map.grid[curHex[0]][curHex[1]].color != troop.ownerCol){
+    // troop is conquering capital
+    if (map.grid[curHex[0]][curHex[1]].building == "Capital"){
+      console.log('capital');
+      let col = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
+      capitals[col.indexOf(map.grid[curHex[0]][curHex[1]].color)].takeDamage(troop.atk);
+      // console.log(capitals[turnCounter]);
+      // console.log(players[col.indexOf(map.grid[curHex[0]][curHex[1]].color)].capital);
+    }
+    else{
+      // tile changes color accordingly
+      map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
+      drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]]);
+    }
+  }
 }
