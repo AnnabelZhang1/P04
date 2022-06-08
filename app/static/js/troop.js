@@ -77,8 +77,14 @@ class Battalion {
         let clearX = Math.round(defHex.centerX);
         let clearY = Math.round(defHex.centerY);
         ctxTC.clearRect(clearX-31,clearY-31,65,60);
+        this.currMoves += 1;
         atkHex.troop.dealDmg(defHex.troop);
         defHex.troop.drawTroop(defHex.centerX,defHex.centerY,defHex.troop.troopCol,defHex.troop.ownerCol);
+        if (defHex.troop.hp <= 0) {
+          defHex.troop = null;
+          ctxTC.clearRect(clearX-31,clearY-31,65,60);
+          atkHex.troop.move(clearX,clearT,false);
+        }
       }
     } else {
       this.x = xInd;
@@ -215,6 +221,6 @@ let conquerTile = function(troop){
 
   // tile changes color accordingly
   map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
-  drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]])
+  drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]]);
 
 }

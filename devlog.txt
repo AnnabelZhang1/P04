@@ -175,3 +175,6 @@ Site now registers users connecting and disconnecting
 sophieL -- 2022-06-08 9:16
 - removed references to numerical troops
 - blocked the ability to buy troops when tile already contains one
+
+alifA - 2022-06-08 9:20
+troop combat works. yay
