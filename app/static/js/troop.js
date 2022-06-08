@@ -100,13 +100,14 @@ class Battalion {
         this.currMoves += 1;
         console.log("currMoves " + this.currMoves);
       }
-      map.grid[curHex[0]][curHex[1]].troop = new Battalion(this.hp,this.atk,this.cost,this.moveSpeed,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
-      map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
+      // map.grid[curHex[0]][curHex[1]].troop = new Battalion(this.hp,this.atk,this.cost,this.moveSpeed,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+      // map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
+      map.grid[curHex[0]][curHex[1]].troop = this;
       if (!this.inBuild) {
       this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
 
       console.log("moved");
-      conquerTile(this);
+      conquerTile(this, map.grid[curHex[0]][curHex[1]]);
     }
   }
 }
@@ -216,22 +217,23 @@ let moveTroopsHere = function(){
     action = false;
 }
 
-let conquerTile = function(troop){
+let conquerTile = function(troop, tile){
   // assumes no other troop is on tile
 
-  if (map.grid[curHex[0]][curHex[1]].color != troop.ownerCol){
+  // tile is not already yours
+  if (tile.color != troop.ownerCol){
     // troop is conquering capital
-    if (map.grid[curHex[0]][curHex[1]].building == "Capital"){
+    if (tile.building == "Capital"){
       console.log('capital');
       let col = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
-      capitals[col.indexOf(map.grid[curHex[0]][curHex[1]].color)].takeDamage(troop.atk);
+      capitals[col.indexOf(tile.color)].takeDamage(troop.atk);
       // console.log(capitals[turnCounter]);
       // console.log(players[col.indexOf(map.grid[curHex[0]][curHex[1]].color)].capital);
     }
     else{
       // tile changes color accordingly
-      map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
-      drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]]);
+      tile.color = troop.ownerCol;
+      drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
     }
   }
 }

@@ -70,15 +70,15 @@ class Hexagon {
 }
 
 class Emperor {
-  constructor(name, color, gold, troops, goldMine, requestid) {
+  constructor(name, color, gold, goldMine, requestid) {
     this.name = name;
     this.color = color;
     this.gold = gold;
-    this.troops = troops;
     this.goldMine = goldMine;
     this.capital = ''; // refers to capital object, assigned in turn.js
     this.forts = []; //array of hexs w/ fort
     this.requestid = requestid;
+    this.troop = []; // array of Battalion emperor has
   }
 }
 

@@ -1,9 +1,9 @@
 
 // each player start off w/ 7 gold, 2 troops
-let red = new Emperor("Red", "#E30B5C", 7, 2, 0 , "");
-let yellow = new Emperor("Yellow", "#FDDA0D", 7, 2, 0, "");
-let blue = new Emperor("Blue", "#4169E1", 7, 2, 0 );
-let green = new Emperor("Green", "#00A36C", 7, 2, 0, "");
+let red = new Emperor("Red", "#E30B5C", 7, 0 , "");
+let yellow = new Emperor("Yellow", "#FDDA0D", 7, 0, "");
+let blue = new Emperor("Blue", "#4169E1", 7, 0 );
+let green = new Emperor("Green", "#00A36C", 7, 0, "");
 
 let players = [red, yellow, blue, green];
 
@@ -69,6 +69,7 @@ let nextTurn = function(){
         }
       }
     }
+    
 
     // every player has gone
     if (turnCounter > 3){
@@ -84,6 +85,15 @@ let nextTurn = function(){
     }
 
     updateValues();
+
+    // if your troop is on enemy capital, capital takes damage
+    for (let i = 0; i < players[turnCounter].troop.length; i++){
+        let troop = players[turnCounter].troop[i];
+        let tile = map.grid[troop.x][troop.y];
+        if (tile.building == "Capital"){
+            conquerTile(troop, tile);
+        }
+    }
 
 }
 
@@ -202,6 +212,14 @@ let showTile = function(){
         showBuild.innerHTML = "Building: " + building;
     }
     build.appendChild(showBuild);
+
+    // capital health
+    if (building == "Capital"){
+        let health = document.createElement("p");
+        health.innerHTML = "Health: " + players[colors.indexOf(map.grid[curHex[0]][curHex[1]].color)].capital.health;
+        build.append(health);
+    }
+
 }
 let showOptions = function(hex){
     // tile
@@ -269,10 +287,6 @@ let showOptions = function(hex){
 
         }
         else if (building == "Capital"){
-            let health = document.createElement("p");
-            health.innerHTML = "Health: " + players[turnCounter].capital.health;
-            build.append(health);
-
             spawnTroops();
         }
 
@@ -335,8 +349,10 @@ let buyTroops = function(){
 
 
     // foot soldier
-    map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,5,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+    let soldier = new Battalion(10,5,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+    map.grid[curHex[0]][curHex[1]].troop = soldier;
     map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y,true);
+    players[turnCounter].troop.push(soldier);
 
     updateValues();
     deleteOptions();

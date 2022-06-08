@@ -181,5 +181,9 @@ troop combat works. yay
 
 qinaL -- 2022-06-08 16:01
 - emperor now has a capital property, and capital is now an object with health property, and capital health is shown when click on tile
-- when troop lands on capital tile to conquer, it deals damage to capital but capitals stays color
+- when troop lands on enemy capital tile to conquer, it deals damage to capital but capitals stays color
 
+qinaL -- 2022-06-08 16:47
+- emperor now has troop property which is an array that contains all of the troops it has brought
+- when troop moves, it no longer needs to create a new troop, so that the troop stored in emperor has consistent x and y properties
+- if your troop is on an enemy capital on the start of your turn, it will automatically deal damage to capital
