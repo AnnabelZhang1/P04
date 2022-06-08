@@ -91,5 +91,33 @@ class Capital {
   takeDamage(damage){
     this.health -= damage;
     // console.log(this.color, this.health);
+
+    // capital goes down
+    if (this.health <= 0){
+
+      // tiles reset
+      this.tile.building = "";
+      for (let i = 0; i < map.grid.length; i++){
+        for (let j = 0; j < map.grid[i].length; j++){
+          if (map.grid[i][j].color == this.color){
+            map.grid[i][j].color = "white";
+          }
+        }
+      }
+      drawGrid(map);
+
+      // troops are gone
+      for (let i = 0; i < players[colors.indexOf(this.color)].troop.length; i++){
+        let currTroop = players[colors.indexOf(this.color)].troop[i];
+        map.grid[currTroop.x][currTroop.y].troop = null;
+
+      }
+
+      // player is eliminated in turn
+      players[colors.indexOf(this.color)] = null;
+
+      return true;
+    }
+    return false;
   }
 }

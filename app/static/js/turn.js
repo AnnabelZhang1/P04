@@ -48,7 +48,7 @@ let nextTurn = function(){
         return;
     }
 
-
+    
     eraseNotifs();
     deleteOptions();
     turnCounter++;
@@ -58,25 +58,20 @@ let nextTurn = function(){
     const ctxHL = canvasHL.getContext('2d');
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
 
-
-    // this works for now. in future, maybe make army array for each
-    // emperor, holding the x and y coords of each troop for each emperor.
-    // then, only set the currMoves of those troops to zero.
-    for (let i = 0; i < map.grid.length; i++) {
-      for (let j = 0; j < map.grid[i].length;j++) {
-        if (map.grid[i][j].troop != null) {
-          map.grid[i][j].troop.currMoves = 0;
-        }
-      }
-    }
-    
-
     // every player has gone
     if (turnCounter > 3){
         //changeTurnCycle();
         turnCounter = 0;
         turnIsStart = false;
     }
+
+    // this player has been eliminated
+    if (players[turnCounter] == null){
+        console.log(turnCounter);
+        nextTurn();
+        return;
+    }
+
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
     //if (turnIsPlanning){
         /// avoid capitals getting troops at first cycle
@@ -85,10 +80,13 @@ let nextTurn = function(){
     }
 
     updateValues();
-
-    // if your troop is on enemy capital, capital takes damage
+      
+    // troop recalibration 
     for (let i = 0; i < players[turnCounter].troop.length; i++){
+        // reset currMoves for all your troops
         let troop = players[turnCounter].troop[i];
+        troop.currMoves = 0;
+        // if your troop is on enemy capital, capital takes damage
         let tile = map.grid[troop.x][troop.y];
         if (tile.building == "Capital"){
             conquerTile(troop, tile);
@@ -153,6 +151,7 @@ let updateValues = function(){
 
 let getResources = function(){
     let currentPlayer = players[turnCounter];
+    console.log(currentPlayer);
     // 3 gold from capital
     let addGold = 3;
 
