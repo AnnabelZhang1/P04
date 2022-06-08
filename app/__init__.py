@@ -41,14 +41,6 @@ def register():
     return render_template("register.html")
 
 # Flask-socketio functions--
-# @socketio.on('connect')
-# def connecting():
-# 	clients.append(request.sid)
-# 	room = session.get('room')
-# 	join_room(room)
-# 	emit('status', {'msg': 'someone has joined.'}, room=clients[0])
-	# make status emit on js file
-
 @socketio.on('connect')
 def connecting():
 	clients.append(request.sid)
@@ -63,6 +55,13 @@ def disconnecting():
 	print('Client disconnected')
 	emit('disconjs', {'msg': "Client disconnected"}, broadcast=True)
 
+# useless rn
+@socketio.on('turn_red')
+def playTurn():
+	emit('action', {'player':'Red'}, to=clients[0])
+	emit(broadcast=True, include_self=False)
+
+# useless rn
 @socketio.on('send_mouse')
 def message_recieved(data):
     # print(data['text'])
