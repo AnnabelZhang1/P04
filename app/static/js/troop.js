@@ -222,7 +222,7 @@ let conquerTile = function(troop){
     console.log('capital');
     console.log(capitals[turnCounter]);
     let col = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
-    players[col.findIndex(map.grid[curHex[0]][curHex[1]].color)].capital.health -= troop.attack;
+    // players[col.findIndex(map.grid[curHex[0]][curHex[1]].color)].capital.health -= troop.attack;
   }
   else{
     // tile changes color accordingly
