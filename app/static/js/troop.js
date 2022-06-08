@@ -59,8 +59,9 @@ class Battalion {
     ctxTC.stroke();
     ctxTC.fill();
     ctxTC.fillStyle = "orange";
+    ctxTC.textAlign = "center";
     ctxTC.font="12px Arial";
-    ctxTC.fillText(this.hp,map.grid[curHex[0]][curHex[1]].centerX-8,map.grid[curHex[0]][curHex[1]].centerY+5);
+    ctxTC.fillText(this.hp,map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY + 5);
     console.log("hp text done: " + this.hp);
   }
 
