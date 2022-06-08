@@ -1,9 +1,9 @@
 
 // each player start off w/ 7 gold, 2 troops
-let red = new Emperor("Red", "#E30B5C", 7, 2, 0 );
-let yellow = new Emperor("Yellow", "#FDDA0D", 7, 2, 0 );
+let red = new Emperor("Red", "#E30B5C", 7, 2, 0 , "");
+let yellow = new Emperor("Yellow", "#FDDA0D", 7, 2, 0, "");
 let blue = new Emperor("Blue", "#4169E1", 7, 2, 0 );
-let green = new Emperor("Green", "#00A36C", 7, 2, 0 );
+let green = new Emperor("Green", "#00A36C", 7, 2, 0, "");
 
 let players = [red, yellow, blue, green];
 

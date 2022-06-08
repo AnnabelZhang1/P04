@@ -233,5 +233,15 @@ $(document).ready(function() {
         console.log(event.msg)
     });
 
+    // sets id of connecting players in order of connection
+    socket.on('setid', function(data) {
+        const event = data
+        red.requestid = event.data[0]
+        // console.log(red.requestid)
+        yellow.requestid = event.data[1]
+        blue.requestid = event.data[2]
+        green.requestid = event.data[3]
+    });
 
-  });
+
+});

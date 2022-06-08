@@ -54,6 +54,7 @@ def connecting():
 	clients.append(request.sid)
 	print(clients)
 	emit('conjs', {'data': clients}, broadcast=True)
+	emit('setid', {'data': clients}, broadcast=True)
 
 @socketio.on('disconnect')
 def disconnecting():

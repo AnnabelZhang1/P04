@@ -73,7 +73,7 @@ class Hexagon {
 }
 
 class Emperor {
-  constructor(name, color, gold, troops, goldMine) {
+  constructor(name, color, gold, troops, goldMine, requestid) {
     this.name = name;
     this.color = color;
     this.gold = gold;
@@ -81,5 +81,6 @@ class Emperor {
     this.goldMine = goldMine;
     this.capital = ''; // refers to hexagon tile; done after declaring players
     this.forts = []; //array of hexs w/ fort
+    this.requestid = requestid;
   }
 }
