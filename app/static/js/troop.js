@@ -212,9 +212,15 @@ let moveTroopsHere = function(){
 
 let conquerTile = function(troop){
   // assumes no other troop is on tile
-
-  // tile changes color accordingly
-  map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
-  drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]])
+  if (map.grid[curHex[0]][curHex[1]].building == "Capital"){
+    console.log('capital');
+    console.log(capitals[turnCounter]);
+    // map.grid[curHex[0]][curHex[1]].health -= troop.attack;
+  }
+  else{
+    // tile changes color accordingly
+    map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
+    drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]]);
+  }
 
 }

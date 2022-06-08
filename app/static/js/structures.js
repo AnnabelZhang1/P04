@@ -86,8 +86,8 @@ class Emperor {
 }
 
 class Capital {
-  constructor(color, tile){
-    this.color = color;
+  constructor(empire, tile){
+    this.empire = empire;
     this.health = 50;
     this.tile = tile;
   }

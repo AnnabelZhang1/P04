@@ -224,18 +224,6 @@ let showOptions = function(hex){
 
     // not moving
     // if it's player's tile, shows building options
-    console.log("color "+map.grid[curHex[0]][curHex[1]].color);
-    if (players[turnCounter].color == map.grid[curHex[0]][curHex[1]].color && map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
-        console.log("allow movement");
-        console.log("currMoves "+map.grid[curHex[0]][curHex[1]].troop.currMoves);
-        build.appendChild(document.createElement("br"));
-        // allow to plan movement of these troops
-        let moveTroopsButton = document.createElement("button");
-        moveTroopsButton.innerHTML = "Move Troops";
-        moveTroopsButton.setAttribute("class", "btn btn-danger");
-        build.appendChild(moveTroopsButton);
-        moveTroopsButton.addEventListener('click', moveTroopsFrom);
-    }
 
     if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){ // color is used instead of name b/c hex doesnt have name porperty
         //console.log("worky?");
@@ -290,6 +278,22 @@ let showOptions = function(hex){
         }
 
     }
+
+    // not moving
+    // if it's player's tile, shows building options
+    console.log("color "+map.grid[curHex[0]][curHex[1]].color);
+    if (players[turnCounter].color == map.grid[curHex[0]][curHex[1]].color && map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
+        console.log("allow movement");
+        console.log("currMoves "+map.grid[curHex[0]][curHex[1]].troop.currMoves);
+        build.appendChild(document.createElement("br"));
+        // allow to plan movement of these troops
+        let moveTroopsButton = document.createElement("button");
+        moveTroopsButton.innerHTML = "Move Troops";
+        moveTroopsButton.setAttribute("class", "btn btn-danger");
+        build.appendChild(moveTroopsButton);
+        moveTroopsButton.addEventListener('click', moveTroopsFrom);
+    }
+
 }
 
 let moveTroopsFrom = function(){
