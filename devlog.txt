@@ -168,3 +168,6 @@ Troops of any color will be unable to move onto a tile where another troop is (p
 
 qinaL -- 2022-06-07 14:48
 - when troop moves to tile, tile changes color accordingly
+
+annabelZ -- 2022-06-07 22:19
+Site now registers users connecting and disconnecting

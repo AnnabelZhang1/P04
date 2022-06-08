@@ -198,16 +198,29 @@ function hexClick(event) {
 
 }
 
-// window.addEventListener("DOMContentLoaded", () => {
-//   // Initialize the UI.
-//   const board = document.getElementById('canvas');
-//   createBoard(board);
-//   // Open the WebSocket connection and register event handlers.
-//   const websocket = new WebSocket("ws://localhost:6789/");
-//   initGame(websocket);
-//   receiveMoves(board, websocket);
-//   sendMoves(board, websocket);
-// });
+// socket interactions
+var socket;
+var clients;
+$(document).ready(function() {
+    // // The http vs. https is important. Use http for localhost!
+    socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    console.log("socket is ready");
+
+    socket.on('conjs', function(data) {
+        const event = data
+        clients = data
+        console.log("connection received")
+        console.log("Current clients: " + event.data)
+    });
+
+    socket.on('disconjs', function(msg) {
+        const event = data
+        console.log(event.msg)
+    });
+
+
+  });
 
 
 let troopHighlight = function(x, y){

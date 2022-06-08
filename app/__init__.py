@@ -41,13 +41,26 @@ def register():
     return render_template("register.html")
 
 # Flask-socketio functions--
-@socketio.on('connect', namespace='/game')
+# @socketio.on('connect')
+# def connecting():
+# 	clients.append(request.sid)
+# 	room = session.get('room')
+# 	join_room(room)
+# 	emit('status', {'msg': 'someone has joined.'}, room=clients[0])
+	# make status emit on js file
+
+@socketio.on('connect')
 def connecting():
 	clients.append(request.sid)
-	room = session.get('room')
-	join_room(room)
-	emit('status', {'msg': session.get('name') + 'has joined.'}, room=clients[0])
-	# make status emit on js file
+	print(clients)
+	emit('conjs', {'data': clients}, broadcast=True)
+
+@socketio.on('disconnect')
+def disconnecting():
+	# index = clients.index(request.sid)
+	clients.remove(request.sid)
+	print('Client disconnected')
+	emit('disconjs', {'msg': "Client disconnected"}, broadcast=True)
 
 @socketio.on('send_mouse')
 def message_recieved(data):
