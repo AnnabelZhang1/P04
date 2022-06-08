@@ -84,3 +84,14 @@ class Emperor {
     this.requestid = requestid;
   }
 }
+
+class Capital {
+  constructor(color, tile){
+    this.color = color;
+    this.health = 50;
+    this.tile = tile;
+  }
+  takeDamage(damage){
+    this.health -= damage;
+  }
+}
