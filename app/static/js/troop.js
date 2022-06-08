@@ -137,7 +137,7 @@ let whereMoveTroops = function(){
 
       let build = document.getElementById("buildOptions");
       let cancelMoveButton = document.createElement("button");
-      cancelMoveButton.innerHTML = "Cancel Move Troops";
+      cancelMoveButton.innerHTML = "Cancel Move Troop";
       cancelMoveButton.setAttribute("class", "btn btn-dark");
       build.appendChild(cancelMoveButton);
       cancelMoveButton.addEventListener('click', function(){
@@ -152,7 +152,7 @@ let whereMoveTroops = function(){
 
         let build= document.getElementById("buildOptions");
         let moveButton = document.createElement("button");
-        moveButton.innerHTML = "Move Troops Here";
+        moveButton.innerHTML = "Move Troop Here";
         moveButton.setAttribute("class", "btn btn-danger");
         build.appendChild(moveButton);
         moveButton.addEventListener('click', moveTroopsHere);

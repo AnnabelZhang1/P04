@@ -231,7 +231,7 @@ let showOptions = function(hex){
         build.appendChild(document.createElement("br"));
         // allow to plan movement of these troops
         let moveTroopsButton = document.createElement("button");
-        moveTroopsButton.innerHTML = "Move Troops";
+        moveTroopsButton.innerHTML = "Move Troop";
         moveTroopsButton.setAttribute("class", "btn btn-danger");
         build.appendChild(moveTroopsButton);
         moveTroopsButton.addEventListener('click', moveTroopsFrom);
@@ -322,10 +322,11 @@ let buyTroops = function(){
     players[turnCounter].gold -= cost;
     //map.grid[curHex[0]][curHex[1]].addTroops(num);
 
+    if(map.grid[map.grid[curHex[0]][curHex[1]]].)
+
     // foot soldier
     map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,5,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
     map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y,true);
-    players[turnCounter].troops += num; // dont really need but why not
 
     updateValues();
     deleteOptions();
