@@ -32,10 +32,7 @@ class Hexagon {
     this.color = "white";
     // what building is on tile (only 1 can be on building at once); buildings for now strings
     this.building = "";
-    // holds how many troops are on tile
-    //deprecated. replace in all files
-    this.troops = 0;
-
+    // Checks the type of troop on the tile
     this.troop = null;
     this.x = x;
     this.y = y;
@@ -47,15 +44,15 @@ class Hexagon {
   modifyBuildings(newBuildings){
     this.buildings = newBuildings;
   }
-  modifyTroops(newNum){
-    this.troops = newNum;
-    clearHexagon(this.centerX - 2.5, this.centerY, this);
-    drawHexagon(this.centerX - 2.5, this.centerY, this);
-  }
-  addTroops(num){
-    let prev = this.troops;
-    this.modifyTroops(prev + num);
-  }
+  // modifyTroops(newNum){
+  //   this.troops = newNum;
+  //   clearHexagon(this.centerX - 2.5, this.centerY, this);
+  //   drawHexagon(this.centerX - 2.5, this.centerY, this);
+  // }
+  // addTroops(num){
+  //   let prev = this.troops;
+  //   this.modifyTroops(prev + num);
+  // }
 
   // x and y are event.offsetX and event.offsetY respectively
   isClicked(x,y) {
@@ -73,14 +70,58 @@ class Hexagon {
 }
 
 class Emperor {
-  constructor(name, color, gold, troops, goldMine, requestid) {
+  constructor(name, color, gold, goldMine, requestid) {
     this.name = name;
     this.color = color;
     this.gold = gold;
-    this.troops = troops;
     this.goldMine = goldMine;
-    this.capital = ''; // refers to hexagon tile; done after declaring players
+    this.capital = ''; // refers to capital object, assigned in turn.js
     this.forts = []; //array of hexs w/ fort
     this.requestid = requestid;
+    this.troop = []; // array of Battalion emperor has
+  }
+}
+
+class Capital {
+  constructor(color, tile){
+    this.color = color;
+    this.health = 50;
+    this.tile = tile;
+  }
+  takeDamage(damage){
+    this.health -= damage;
+    // console.log(this.color, this.health);
+
+    // capital goes down
+    if (this.health <= 0){
+
+      // tiles reset
+      this.tile.building = "";
+      for (let i = 0; i < map.grid.length; i++){
+        for (let j = 0; j < map.grid[i].length; j++){
+          if (map.grid[i][j].color == this.color){
+            map.grid[i][j].color = "white";
+          }
+        }
+      }
+      drawGrid(map);
+
+      // troops are gone
+      for (let i = 0; i < players[colors.indexOf(this.color)].troop.length; i++){
+        let currTroop = players[colors.indexOf(this.color)].troop[i];
+        map.grid[currTroop.x][currTroop.y].troop = null;
+
+        // clear troop on map
+        let clearX = Math.round(map.grid[currTroop.x][currTroop.y].centerX);
+        let clearY = Math.round(map.grid[currTroop.x][currTroop.y].centerY);
+        ctxTC.clearRect(clearX-31,clearY-31,65,60);
+      }
+
+      // player is eliminated in turn
+      players[colors.indexOf(this.color)] = null;
+
+      return true;
+    }
+    return false;
   }
 }

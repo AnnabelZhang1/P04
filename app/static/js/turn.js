@@ -1,9 +1,9 @@
 
 // each player start off w/ 7 gold, 2 troops
-let red = new Emperor("Red", "#E30B5C", 7, 2, 0 , "");
-let yellow = new Emperor("Yellow", "#FDDA0D", 7, 2, 0, "");
-let blue = new Emperor("Blue", "#4169E1", 7, 2, 0 );
-let green = new Emperor("Green", "#00A36C", 7, 2, 0, "");
+let red = new Emperor("Red", "#E30B5C", 7, 0 , "");
+let yellow = new Emperor("Yellow", "#FDDA0D", 7, 0, "");
+let blue = new Emperor("Blue", "#4169E1", 7, 0 );
+let green = new Emperor("Green", "#00A36C", 7, 0, "");
 
 let players = [red, yellow, blue, green];
 
@@ -58,24 +58,20 @@ let nextTurn = function(){
     const ctxHL = canvasHL.getContext('2d');
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
 
-
-    // this works for now. in future, maybe make army array for each
-    // emperor, holding the x and y coords of each troop for each emperor.
-    // then, only set the currMoves of those troops to zero.
-    for (let i = 0; i < map.grid.length; i++) {
-      for (let j = 0; j < map.grid[i].length;j++) {
-        if (map.grid[i][j].troop != null) {
-          map.grid[i][j].troop.currMoves = 0;
-        }
-      }
-    }
-
     // every player has gone
     if (turnCounter > 3){
         //changeTurnCycle();
         turnCounter = 0;
         turnIsStart = false;
     }
+
+    // this player has been eliminated
+    if (players[turnCounter] == null){
+        console.log(turnCounter);
+        nextTurn();
+        return;
+    }
+
     turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
     //if (turnIsPlanning){
         /// avoid capitals getting troops at first cycle
@@ -84,6 +80,18 @@ let nextTurn = function(){
     }
 
     updateValues();
+
+    // troop recalibration
+    for (let i = 0; i < players[turnCounter].troop.length; i++){
+        // reset currMoves for all your troops
+        let troop = players[turnCounter].troop[i];
+        troop.currMoves = 0;
+        // if your troop is on enemy capital, capital takes damage
+        let tile = map.grid[troop.x][troop.y];
+        if (tile.building == "Capital"){
+            conquerTile(troop, tile);
+        }
+    }
 
 }
 
@@ -110,7 +118,7 @@ let buyGoldMine = function(){
     // add to player
     let currentPlayer = players[turnCounter];
     //currentGold = currentPlayer.gold;
-    if (currentPlayer.gold < cost){
+    if (currentPlayer.gold < cost){capital
         alert("Gold Mines cost " + cost + " gold");
         return;
     }
@@ -143,6 +151,7 @@ let updateValues = function(){
 
 let getResources = function(){
     let currentPlayer = players[turnCounter];
+    console.log(currentPlayer);
     // 3 gold from capital
     let addGold = 3;
 
@@ -202,6 +211,14 @@ let showTile = function(){
         showBuild.innerHTML = "Building: " + building;
     }
     build.appendChild(showBuild);
+
+    // capital health
+    if (building == "Capital"){
+        let health = document.createElement("p");
+        health.innerHTML = "Health: " + players[colors.indexOf(map.grid[curHex[0]][curHex[1]].color)].capital.health;
+        build.append(health);
+    }
+
 }
 let showOptions = function(hex){
     // tile
@@ -224,19 +241,6 @@ let showOptions = function(hex){
 
     // not moving
     // if it's player's tile, shows building options
-    console.log("color "+map.grid[curHex[0]][curHex[1]].color);
-    if (players[turnCounter].color == map.grid[curHex[0]][curHex[1]].color && map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
-        console.log("allow movement");
-        console.log("currMoves "+map.grid[curHex[0]][curHex[1]].troop.currMoves);
-        build.appendChild(document.createElement("br"));
-        // allow to plan movement of these troops
-        let moveTroopsButton = document.createElement("button");
-        moveTroopsButton.innerHTML = "Move Troops";
-        moveTroopsButton.setAttribute("class", "btn btn-danger");
-        build.appendChild(moveTroopsButton);
-        moveTroopsButton.addEventListener('click', moveTroopsFrom);
-    }
-
     if (map.grid[curHex[0]][curHex[1]].color == players[turnCounter].color){ // color is used instead of name b/c hex doesnt have name porperty
         //console.log("worky?");
         if (building == ""){
@@ -286,6 +290,23 @@ let showOptions = function(hex){
         }
 
     }
+
+    // not moving
+    // if it's player's tile, shows building options
+    // UPDATE: this code should check to see if a troop exists on the curHex tile and whether you can move it
+    console.log("color "+map.grid[curHex[0]][curHex[1]].color);
+    if (map.grid[curHex[0]][curHex[1]].troop != null && players[turnCounter].color == map.grid[curHex[0]][curHex[1]].troop.ownerCol && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
+        console.log("allow movement");
+        console.log("currMoves "+map.grid[curHex[0]][curHex[1]].troop.currMoves);
+        build.appendChild(document.createElement("br"));
+        // allow to plan movement of these troops
+        let moveTroopsButton = document.createElement("button");
+        moveTroopsButton.innerHTML = "Move Troops";
+        moveTroopsButton.setAttribute("class", "btn btn-danger");
+        build.appendChild(moveTroopsButton);
+        moveTroopsButton.addEventListener('click', moveTroopsFrom);
+    }
+
 }
 
 let moveTroopsFrom = function(){
@@ -315,6 +336,10 @@ let buyTroops = function(){
     let num = 1;
     // one troop costs 2 gold
     let cost = 2 * num;
+    if(map.grid[curHex[0]][curHex[1]].troop != null) {
+        alert("troop already on tile!");
+        return;
+    }
     if (players[turnCounter].gold < cost){
         alert("costs " + cost + " gold");
         return;
@@ -322,9 +347,12 @@ let buyTroops = function(){
     players[turnCounter].gold -= cost;
     //map.grid[curHex[0]][curHex[1]].addTroops(num);
 
-    map.grid[curHex[0]][curHex[1]].troop = new Battalion(10,10,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+
+    // foot soldier
+    let soldier = new Battalion(10,5,2,1,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+    map.grid[curHex[0]][curHex[1]].troop = soldier;
     map.grid[curHex[0]][curHex[1]].troop.move(map.grid[curHex[0]][curHex[1]].troop.x,map.grid[curHex[0]][curHex[1]].troop.y,true);
-    players[turnCounter].troops += num; // dont really need but why not
+    players[turnCounter].troop.push(soldier);
 
     updateValues();
     deleteOptions();

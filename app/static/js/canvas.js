@@ -51,12 +51,6 @@ function drawHexagon(x, y, hex) {  //draws hexagons
     ctx.closePath();
     ctx.stroke();
     ctx.fill();
-    if (hex.troops != 0) {
-        ctx.fillStyle = "orange";
-        ctx.textAlign = "center";
-        ctx.font = "25px Arial";
-        ctx.fillText(hex.troops + "", x + 2.5, y + 10);
-    }
 }
 
 
@@ -89,17 +83,17 @@ let map = new Grid(11, 6);
 let capitals = [];
 let colors = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
 // topright red
-capitals[0] = map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)];
+capitals[0] = new Capital(colors[0], map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
+//capitals[0] = new Capital(colors[0], map.grid[3][9]);
 // top left yellow
-capitals[1] = map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)];
+capitals[1] = new Capital(colors[1], map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
 // bottom right blue
-capitals[2] = map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)];
+capitals[2] = new Capital(colors[2], map.grid[4+Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
 // bottom left green
-capitals[3] = map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)];
+capitals[3] = new Capital(colors[3], map.grid[4+Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
 for (let i = 0; i < 4; i++){
-  capitals[i].color = colors[i];
-  capitals[i].building = "Capital";
-  capitals[i].troops = 2;
+  capitals[i].tile.color = colors[i];
+  capitals[i].tile.building = "Capital";
 }
 /* OTHER VERSION- capitals allowed anywhere
 // initates capital coordinates
@@ -123,22 +117,18 @@ for (let i = 0; i < 4; i++){
 console.log(map.grid)
 map.grid[capitalRows[0]][capitalCols[0]].color = "#E30B5C";
 map.grid[capitalRows[0]][capitalCols[0]].building = "Capital";
-map.grid[capitalRows[0]][capitalCols[0]].troops = 2;
 // players[0].capital = map.grid[capitalRows[0]][capitalCols[0]];
 // yellow
 map.grid[capitalRows[1]][capitalCols[1]].color = "#FDDA0D";
 map.grid[capitalRows[1]][capitalCols[1]].building = "Capital";
-map.grid[capitalRows[1]][capitalCols[1]].troops = 2;
 // players[1].capital = map.grid[capitalRows[1]][capitalCols[1]];
 // blue
 map.grid[capitalRows[2]][capitalCols[2]].color = "#4169E1";
 map.grid[capitalRows[2]][capitalCols[2]].building = "Capital";
-map.grid[capitalRows[2]][capitalCols[2]].troops = 2;
 //players[2].capital = map.grid[capitalRows[2]][capitalCols[2]];
 // green
 map.grid[capitalRows[3]][capitalCols[3]].color = "#00A36C";
 map.grid[capitalRows[3]][capitalCols[3]].building = "Capital";
-map.grid[capitalRows[3]][capitalCols[3]].troops = 2;
 //players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 */
 
@@ -192,7 +182,7 @@ function hexClick(event) {
   }
   else {
     console.log(curHex);
-    console.log("troops is here? " + map.grid[curHex[0]][curHex[1]].troop);
+    console.log("troop is here? " + map.grid[curHex[0]][curHex[1]].troop);
     drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }
 

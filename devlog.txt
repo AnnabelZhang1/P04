@@ -171,3 +171,24 @@ qinaL -- 2022-06-07 14:48
 
 annabelZ -- 2022-06-07 22:19
 Site now registers users connecting and disconnecting
+
+sophieL -- 2022-06-08 9:16
+- removed references to numerical troops
+- blocked the ability to buy troops when tile already contains one
+
+alifA - 2022-06-08 9:20
+troop combat works. yay
+
+qinaL -- 2022-06-08 16:01
+- emperor now has a capital property, and capital is now an object with health property, and capital health is shown when click on tile
+- when troop lands on enemy capital tile to conquer, it deals damage to capital but capitals stays color
+
+qinaL -- 2022-06-08 16:47
+- emperor now has troop property which is an array that contains all of the troops it has brought
+- when troop moves, it no longer needs to create a new troop, so that the troop stored in emperor has consistent x and y properties
+- if your troop is on an enemy capital on the start of your turn, it will automatically deal damage to capital
+
+qinaL -- 2022-06-08 18:47
+- resetting troop curMoves to 0 now utilizes troop array in emperor for efficiency 
+- death mechanic implemented! when capital dies, the player is now eliminated, its color tiles reset, capital is gone, all troops are gone 
+- conquerTiles now gives the exisitng building on the tile (if any) to new empire, and old empire loses those buildings

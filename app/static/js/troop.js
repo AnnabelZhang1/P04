@@ -58,12 +58,34 @@ class Battalion {
     ctxTC.closePath();
     ctxTC.stroke();
     ctxTC.fill();
+    ctxTC.fillStyle = "orange";
+    ctxTC.textAlign = "center";
+    ctxTC.font="12px Arial";
+    ctxTC.fillText(this.hp,map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY + 5);
+    console.log("hp text done: " + this.hp);
   }
 
   move(xInd, yInd, isInit) {  //draws hexagons
-    if(map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.troopCol == this.troopCol && !isInit) {
-      addNotif("illegal troop movement!")
-
+    if(map.grid[curHex[0]][curHex[1]].troop != null && !isInit) {
+      // troop of one empire tries to move onto a tile with a troop from the same empire
+      if (map.grid[curHex[0]][curHex[1]].troop.ownerCol == this.ownerCol) {
+        addNotif("illegal troop movement!");
+     // combat phase
+      } else {
+        let atkHex = map.grid[selectedHex[0]][selectedHex[1]];
+        let defHex = map.grid[curHex[0]][curHex[1]];
+        let clearX = Math.round(defHex.centerX);
+        let clearY = Math.round(defHex.centerY);
+        ctxTC.clearRect(clearX-31,clearY-31,65,60);
+        this.currMoves += 1;
+        atkHex.troop.dealDmg(defHex.troop);
+        defHex.troop.drawTroop(defHex.centerX,defHex.centerY,defHex.troop.troopCol,defHex.troop.ownerCol);
+        if (defHex.troop.hp <= 0) {
+          defHex.troop = null;
+          ctxTC.clearRect(clearX-31,clearY-31,65,60);
+          atkHex.troop.move(clearX,clearY,false);
+        }
+      }
     } else {
       this.x = xInd;
       this.y = yInd;
@@ -80,11 +102,12 @@ class Battalion {
       }
       map.grid[curHex[0]][curHex[1]].troop = new Battalion(this.hp,this.atk,this.cost,this.moveSpeed,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
       map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
+      map.grid[curHex[0]][curHex[1]].troop = this;
       if (!this.inBuild) {
       this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
 
       console.log("moved");
-      conquerTile(this);
+      conquerTile(this, map.grid[curHex[0]][curHex[1]]);
     }
   }
 }
@@ -121,7 +144,7 @@ let whereMoveTroops = function(){
 
       let build = document.getElementById("buildOptions");
       let cancelMoveButton = document.createElement("button");
-      cancelMoveButton.innerHTML = "Cancel Move Troops";
+      cancelMoveButton.innerHTML = "Cancel Move Troop";
       cancelMoveButton.setAttribute("class", "btn btn-dark");
       build.appendChild(cancelMoveButton);
       cancelMoveButton.addEventListener('click', function(){
@@ -136,7 +159,7 @@ let whereMoveTroops = function(){
 
         let build= document.getElementById("buildOptions");
         let moveButton = document.createElement("button");
-        moveButton.innerHTML = "Move Troops Here";
+        moveButton.innerHTML = "Move Troop Here";
         moveButton.setAttribute("class", "btn btn-danger");
         build.appendChild(moveButton);
         moveButton.addEventListener('click', moveTroopsHere);
@@ -194,11 +217,43 @@ let moveTroopsHere = function(){
     action = false;
 }
 
-let conquerTile = function(troop){
+let conquerTile = function(troop, tile){
   // assumes no other troop is on tile
+  let col = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
+  let attackedPlayer = col.indexOf(tile.color);
 
-  // tile changes color accordingly
-  map.grid[curHex[0]][curHex[1]].color = troop.ownerCol;
-  drawHexagon(map.grid[curHex[0]][curHex[1]].centerX - 2.5, map.grid[curHex[0]][curHex[1]].centerY, map.grid[curHex[0]][curHex[1]])
+  // tile is not already yours
+  if (tile.color != troop.ownerCol){
+    // troop is conquering capital
+    if (tile.building == "Capital"){
+      console.log('capital');
+      let result = capitals[attackedPlayer].takeDamage(troop.atk);
+      // capital is not down
+      if (!result){
+        return;
+      }
+      else{
+        // tile changes color accordingly
+        tile.color = troop.ownerCol;
+        drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
+        return;
+      }
+    }
 
+    // non-capital conquer
+    tile.color = troop.ownerCol;
+    drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
+
+    let building = tile.building;
+    if (building == "Gold Mine"){
+      players[turnCounter].goldMine += 1;
+      players[attackedPlayer].goldMine -= 1;
+    }
+    else if (building == "Fort"){
+      players[turnCounter].forts.push(tile);
+      // console.log(tile);
+      players[attackedPlayer].forts = players[attackedPlayer].forts.filter(fort => fort != tile);
+    }
+    updateValues();
+  }
 }
