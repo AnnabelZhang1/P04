@@ -1,25 +1,52 @@
-//retrieve node in DOM via ID
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-const canvasHL = document.getElementById('interactions');
-const ctxHL = canvasHL.getContext('2d');
-const canvasTC = document.getElementById('troopCanv');
-const ctxTC = canvasTC.getContext('2d');
-let curHex = [-1,-1];
+// The Convicts: Annabel Zhang, Alif Abdullah, Sophie Liu, Qina Liu (Mang, The Eagle In The Sand, Quacky, Nyx)
+// SoftDev
+// P04: Forged By Land
+// 2022-05-28
 
+// const canvas = document.getElementById('canvas');
+// const ctx = canvas.getContext('2d');
+// const canvasHL = document.getElementById('interactions');
+// const ctxHL = canvasHL.getContext('2d');
+// const canvasTC = document.getElementById('troopCanv');
+// const ctxTC = canvasTC.getContext('2d');
+// let curHex = [-1,-1];
+
+// socket interactions
 var socket;
 $(document).ready(function() {
     // // The http vs. https is important. Use http for localhost!
     socket = io.connect('http://' + document.domain + ':' + location.port);
-
     console.log("socket is ready");
 
-    socket.on('status', function(data) {
-      console.log("status received")
-      console.log(data);
-    }
+    // receives connecting msg
+    socket.on('conjs', function(data) {
+        const event = data
+        console.log("connection received")
+        console.log("Current clients: " + event.data)
+    });
+
+    // receives disconnecting msg
+    socket.on('disconjs', function(data) {
+        const event = data
+        console.log(event.msg)
+    });
+
+    // sets id of connecting players in order of connection
+    socket.on('setid', function(data) {
+        const event = data
+        red.requestid = event.data[0]
+        // console.log(red.requestid)
+        yellow.requestid = event.data[1]
+        blue.requestid = event.data[2]
+        green.requestid = event.data[3]
+    });
+
+    socket.on('draw_to_all', function(data){
+        const event = data
+        console.log(data)
+        if (event.action === "makeBorder")
+          drawHexNoFill(map.grid[event.curHexX][event.curHexY].centerX,map.grid[event.curHexX][event.curHexY].centerY, "black");
+    });
 
 
-  });
-
-}
+});

@@ -146,6 +146,7 @@ drawGrid(map);
 in the grid. modifies the elements of the curHex array.
  */
 function hexClick(event) {
+// var hexClick = function(e) {
   mX = event.offsetX;
   mY = event.offsetY;
   console.log(mX);
@@ -183,9 +184,10 @@ function hexClick(event) {
   else {
     console.log(curHex);
     console.log("troop is here? " + map.grid[curHex[0]][curHex[1]].troop);
-    drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
+    // drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }
 
+  socket.emit('send_mouse', {'action':'makeBorder', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
 }
 
 
@@ -201,37 +203,3 @@ let troopHighlight = function(x, y){
   ctxHL.stroke();
   ctxHL.fill();
 }
-
-
-// socket interactions
-var socket;
-$(document).ready(function() {
-    // // The http vs. https is important. Use http for localhost!
-    socket = io.connect('http://' + document.domain + ':' + location.port);
-    console.log("socket is ready");
-
-    // receives connecting msg
-    socket.on('conjs', function(data) {
-        const event = data
-        console.log("connection received")
-        console.log("Current clients: " + event.data)
-    });
-
-    // receives disconnecting msg
-    socket.on('disconjs', function(data) {
-        const event = data
-        console.log(event.msg)
-    });
-
-    // sets id of connecting players in order of connection
-    socket.on('setid', function(data) {
-        const event = data
-        red.requestid = event.data[0]
-        // console.log(red.requestid)
-        yellow.requestid = event.data[1]
-        blue.requestid = event.data[2]
-        green.requestid = event.data[3]
-    });
-
-
-});
