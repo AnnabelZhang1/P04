@@ -2,7 +2,7 @@
 // each player start off w/ 7 gold, 2 troops
 let red = new Emperor("Red", "#E30B5C", 7, 0 , "");
 let yellow = new Emperor("Yellow", "#FDDA0D", 7, 0, "");
-let blue = new Emperor("Blue", "#4169E1", 7, 0 );
+let blue = new Emperor("Blue", "#4169E1", 7, 0, "");
 let green = new Emperor("Green", "#00A36C", 7, 0, "");
 
 let players = [red, yellow, blue, green];
@@ -39,9 +39,24 @@ let changeTurnCycle = function(){
 }
 */
 
+// find correct player
+var findCurrentPlayer = function(id){
+  var found = players.find(function(element) {
+    return (element.requestid === id);
+  });
+
+  console.log(found);
+};
+
+
 // handles the switch from player to player
 let turnPlayer = document.getElementById("turnPlayer");
 let nextTurn = function(){
+
+    currentPlayer = players[turnCounter];
+    currentPlayerColor = players[turnCounter].name;
+    currentPlayerID = players[turnCounter].requestid;
+
     // player is in progress of choosing to move troops and has not finished
     if (action){
         alert("you are moving troops");
@@ -58,7 +73,7 @@ let nextTurn = function(){
     const ctxHL = canvasHL.getContext('2d');
     ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
 
-    // every player has gone
+    // every player has gone, resets player cycle
     if (turnCounter > 3){
         //changeTurnCycle();
         turnCounter = 0;
@@ -72,7 +87,9 @@ let nextTurn = function(){
         return;
     }
 
-    turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
+    console.log("entering this stage");
+    socket.emit('update_turn', {'playername': players[turnCounter].name, 'playerid': players[turnCounter].requestid})
+    // turnPlayer.innerHTML = players[turnCounter].name + "'s Turn";
     //if (turnIsPlanning){
         /// avoid capitals getting troops at first cycle
     if (!turnIsStart){

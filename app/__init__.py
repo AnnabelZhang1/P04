@@ -25,6 +25,7 @@ def home():
 	return render_template("home.html")
 
 # only one lobby at a time
+# useless rn
 @app.route("/lobby", methods=['GET', 'POST'])
 def lobby():
     return render_template("lobby.html", list=clients)
@@ -56,18 +57,21 @@ def disconnecting():
 	print('Client disconnected')
 	emit('disconjs', {'msg': "Client disconnected"}, broadcast=True)
 
-# useless rn
-@socketio.on('turn_red')
-def playTurn():
-	emit('action', {'player':'Red'}, to=clients[0])
-	emit(broadcast=True, include_self=False)
-
-# useless rn
 @socketio.on('send_mouse')
 def message_recieved(data):
     # print(data['text'])
     emit('draw_to_all', data, broadcast=True)
 
-# Run app
+# useless rn
+@socketio.on('turn_red')
+def playTurn():
+	emit('action', {'player':'Red'}, to=clients[0])
+	emit('hide', broadcast=True, include_self=False)
+
+@socketio.on('update_turn')
+def update(data):
+	emit('update_html', data, broadcast=True)
+
+# Run app--
 if __name__ == "__main__":
     socketio.run(app, port=8000, debug=True)

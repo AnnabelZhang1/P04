@@ -36,9 +36,19 @@ $(document).ready(function() {
     socket.on('draw_to_all', function(data){
         const event = data
         console.log(data)
+        // referenced in line 186 of canvas.js
         if (event.action === "makeBorder")
+          ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
           drawHexNoFill(map.grid[event.curHexX][event.curHexY].centerX,map.grid[event.curHexX][event.curHexY].centerY, "black");
+        // else if (event.action === "")
+          // do something
     });
 
+    // referenced in line 90
+    socket.on('update_html', function(data){
+      const event = data
+      console.log("updating html:" + data)
+      turnPlayer.innerHTML = event.playername + "'s Turn";
+    });
 
 });
