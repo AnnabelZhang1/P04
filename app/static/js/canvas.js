@@ -83,8 +83,8 @@ let map = new Grid(11, 6);
 let capitals = [];
 let colors = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
 // topright red
-//capitals[0] = new Capital(colors[0], map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
-capitals[0] = new Capital(colors[0], map.grid[3][9]);
+capitals[0] = new Capital(colors[0], map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
+//capitals[0] = new Capital(colors[0], map.grid[3][9]);
 // top left yellow
 capitals[1] = new Capital(colors[1], map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
 // bottom right blue

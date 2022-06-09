@@ -48,7 +48,7 @@ let nextTurn = function(){
         return;
     }
 
-    
+
     eraseNotifs();
     deleteOptions();
     turnCounter++;
@@ -80,8 +80,8 @@ let nextTurn = function(){
     }
 
     updateValues();
-      
-    // troop recalibration 
+
+    // troop recalibration
     for (let i = 0; i < players[turnCounter].troop.length; i++){
         // reset currMoves for all your troops
         let troop = players[turnCounter].troop[i];
@@ -293,8 +293,9 @@ let showOptions = function(hex){
 
     // not moving
     // if it's player's tile, shows building options
+    // UPDATE: this code should check to see if a troop exists on the curHex tile and whether you can move it
     console.log("color "+map.grid[curHex[0]][curHex[1]].color);
-    if (players[turnCounter].color == map.grid[curHex[0]][curHex[1]].color && map.grid[curHex[0]][curHex[1]].troop != null && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
+    if (map.grid[curHex[0]][curHex[1]].troop != null && players[turnCounter].color == map.grid[curHex[0]][curHex[1]].troop.ownerCol && map.grid[curHex[0]][curHex[1]].troop.currMoves < map.grid[curHex[0]][curHex[1]].troop.moveSpeed){
         console.log("allow movement");
         console.log("currMoves "+map.grid[curHex[0]][curHex[1]].troop.currMoves);
         build.appendChild(document.createElement("br"));
