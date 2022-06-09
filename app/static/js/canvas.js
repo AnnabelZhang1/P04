@@ -146,7 +146,6 @@ drawGrid(map);
 in the grid. modifies the elements of the curHex array.
  */
 function hexClick(event) {
-// var hexClick = function(e) {
   mX = event.offsetX;
   mY = event.offsetY;
   console.log(mX);
@@ -184,10 +183,10 @@ function hexClick(event) {
   else {
     console.log(curHex);
     console.log("troop is here? " + map.grid[curHex[0]][curHex[1]].troop);
+    socket.emit('send_mouse', {'action':'makeBorder', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
     // drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }
 
-  socket.emit('send_mouse', {'action':'makeBorder', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
 }
 
 
