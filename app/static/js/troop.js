@@ -100,8 +100,8 @@ class Battalion {
         this.currMoves += 1;
         console.log("currMoves " + this.currMoves);
       }
-      // map.grid[curHex[0]][curHex[1]].troop = new Battalion(this.hp,this.atk,this.cost,this.moveSpeed,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
-      // map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
+      map.grid[curHex[0]][curHex[1]].troop = new Battalion(this.hp,this.atk,this.cost,this.moveSpeed,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
+      map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
       map.grid[curHex[0]][curHex[1]].troop = this;
       if (!this.inBuild) {
       this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
@@ -239,7 +239,7 @@ let conquerTile = function(troop, tile){
         return;
       }
     }
-    
+
     // non-capital conquer
     tile.color = troop.ownerCol;
     drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
