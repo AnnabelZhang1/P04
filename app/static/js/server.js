@@ -3,6 +3,34 @@
 // P04: Forged By Land
 // 2022-05-28
 
+function drawTroop(xInd,yInd,tCol,oCol, hp) {
+    ctxTC.strokeStyle = "black";
+    ctxTC.fillStyle = tCol + "";
+    ctxTC.beginPath();
+    // outer hexagon, denoting troop color
+    for (let i = 0; i < 6; i++) {
+        ctxTC.lineTo(xInd + 30 * Math.cos(a * i), yInd + 30 * Math.sin(a * i));
+    }
+    ctxTC.closePath();
+    ctxTC.stroke();
+    ctxTC.fill();
+    ctxTC.strokeStyle = "black";
+    ctxTC.fillStyle = oCol + "";
+    ctxTC.beginPath();
+    //inner hexagon denoting empire color
+    for (let i = 0; i < 6; i++) {
+        ctxTC.lineTo(xInd + 10 * Math.cos(a * i), yInd + 10 * Math.sin(a * i));
+    }
+    ctxTC.closePath();
+    ctxTC.stroke();
+    ctxTC.fill();
+    ctxTC.fillStyle = "orange";
+    ctxTC.textAlign = "center";
+    ctxTC.font="12px Arial";
+    ctxTC.fillText(hp,map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY + 5);
+    console.log("hp text done: " + hp);
+  }
+
 // socket interactions
 var socket;
 $(document).ready(function() {
@@ -46,13 +74,25 @@ $(document).ready(function() {
           // ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
           drawHexNoFill(map.grid[event.curHexX][event.curHexY].centerX,map.grid[event.curHexX][event.curHexY].centerY, "black");
         }
-        // referenced in line 137 of troop.js
+        // referenced in line 138 of troop.js
         else if (event.action === "move_troops"){
           // console.log("moving troops")
           troopHighlight(map.grid[event.adjax][event.adjy].centerX,map.grid[event.adjax][event.adjy].centerY);
         }
+        // referenced in line 220 of troop.js
         else if (event.action === "clear_all"){
           ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
+        }
+        // referenced in lines 241 and 249 of troop.js
+        else if (event.action === "conquer_tile"){
+          console.log("drawing tileeee")
+          drawHexagon((event.tile).centerX - 2.5, (event.tile).centerY, event.tile);
+        }
+        // referenced in line 82 and 108 of troop.js
+        else if (event.action === "draw_troop"){
+          console.log("trooppp being drawn")
+          // (event.def).troop.drawTroop(def.centerX,def.centerY,def.troop.troopCol,def.troop.ownerCol);
+          drawTroop(event.x,event.y,event.tc,event.oc,event.hp);
         }
     });
 

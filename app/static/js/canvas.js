@@ -190,7 +190,7 @@ function hexClick(event) {
     currentPlayerColor = players[turnCounter].name;
     currentPlayerID = players[turnCounter].requestid;
     if (currentPlayerColor === players[findCurrentPlayer(currentPlayerID)].name) {
-      if (action == false){
+      if (action === false){
         socket.emit('send_mouse_all', {'action':'select_hex_notroop', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
       }
       else{

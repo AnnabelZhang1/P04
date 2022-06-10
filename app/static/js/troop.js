@@ -80,6 +80,7 @@ class Battalion {
         ctxTC.clearRect(clearX-31,clearY-31,65,60);
         this.currMoves += 1;
         atkHex.troop.dealDmg(defHex.troop);
+        // socket.emit('send_mouse_all', {'action':'draw_troop', 'def':defHex})
         defHex.troop.drawTroop(defHex.centerX,defHex.centerY,defHex.troop.troopCol,defHex.troop.ownerCol);
         if (defHex.troop.hp <= 0) {
           defHex.troop = null;
@@ -104,11 +105,17 @@ class Battalion {
       map.grid[curHex[0]][curHex[1]].troop = new Battalion(this.hp,this.atk,this.cost,this.moveSpeed,players[turnCounter].color,"#926F34",false,curHex[0],curHex[1]);
       map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
       map.grid[curHex[0]][curHex[1]].troop = this;
-      if (!this.inBuild) {
-      this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
 
-      console.log("moved");
-      conquerTile(this, map.grid[curHex[0]][curHex[1]]);
+      var troopC = this.troopCol;
+      var ownerC = this.ownerCol;
+
+      if (!this.inBuild) {
+        console.log("got to this stage")
+        socket.emit('send_mouse_all', {'action':'draw_troop','x':xInd,'y':yInd,'tc':troopC,'oc':ownerC, 'hp': this.hp})
+        this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
+
+        console.log("moved");
+        conquerTile(this, map.grid[curHex[0]][curHex[1]]);
     }
   }
 }
@@ -238,14 +245,16 @@ let conquerTile = function(troop, tile){
       else{
         // tile changes color accordingly
         tile.color = troop.ownerCol;
-        drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
+        socket.emit('send_mouse_all', {'action':'conquer_tile', 'tile':tile})
+        // drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
         return;
       }
     }
 
     // non-capital conquer
     tile.color = troop.ownerCol;
-    drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
+    socket.emit('send_mouse_all', {'action':'conquer_tile', 'tile':tile})
+    // drawHexagon(tile.centerX - 2.5, tile.centerY, tile);
 
     let building = tile.building;
     if (building == "Gold Mine"){

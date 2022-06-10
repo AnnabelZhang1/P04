@@ -63,6 +63,9 @@ def message_recieved_all(data):
 	# print("Request ID is: " + request.sid)
 	emit('draw_to_all', data, broadcast=True)
 
+# @socketio.on('conquer_tile')
+# 	emit('draw_to_all', data, broadcast=True)
+
 # useless rn
 @socketio.on('turn_red')
 def playTurn():
