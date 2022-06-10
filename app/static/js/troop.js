@@ -216,6 +216,7 @@ let moveTroopsHere = function(){
 
     // planning movement done
     action = false;
+    socket.emit('send_mouse_all', {'action':'clear_all'})
 }
 
 let conquerTile = function(troop, tile){

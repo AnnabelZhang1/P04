@@ -188,7 +188,12 @@ function hexClick(event) {
     currentPlayerColor = players[turnCounter].name;
     currentPlayerID = players[turnCounter].requestid;
     if (currentPlayerColor === players[findCurrentPlayer(currentPlayerID)].name) {
-      socket.emit('send_mouse_all', {'action':'select_hex', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
+      if (action == false){
+        socket.emit('send_mouse_all', {'action':'select_hex_notroop', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
+      }
+      else{
+        socket.emit('send_mouse_all', {'action':'select_hex_troop', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
+      }
       // socket.emit('deny_options_everyone_else')
     // drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
   }}

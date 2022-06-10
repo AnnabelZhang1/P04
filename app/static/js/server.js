@@ -37,23 +37,24 @@ $(document).ready(function() {
         const event = data
         console.log(data)
         // referenced in line 191 of canvas.js
-        if (event.action === "select_hex"){
+        if (event.action === "select_hex_notroop"){
           ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
           drawHexNoFill(map.grid[event.curHexX][event.curHexY].centerX,map.grid[event.curHexX][event.curHexY].centerY, "black");
         }
+        // referenced in line 185 of canvas.js
+        else if (event.action === "select_hex_troop"){
+          // ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
+          drawHexNoFill(map.grid[event.curHexX][event.curHexY].centerX,map.grid[event.curHexX][event.curHexY].centerY, "black");
+        }
+        // referenced in line 137 of troop.js
         else if (event.action === "move_troops"){
-          console.log("moving troops")
+          // console.log("moving troops")
           troopHighlight(map.grid[event.adjax][event.adjy].centerX,map.grid[event.adjax][event.adjy].centerY);
         }
+        else if (event.action === "clear_all"){
+          ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
+        }
     });
-
-    // socket.on('draw_to_self', function(data){
-    //     // referenced in line 137 of troop.js
-    //     if (event.action === "move_troops"){
-    //       console.log("moving troops")
-    //       troopHighlight(map.grid[event.adjax][event.adjy].centerX,map.grid[event.adjax][event.adjy].centerY);
-    //     }
-    // });
 
     // referenced in line 91 of turn.js
     socket.on('update_html', function(data){

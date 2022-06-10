@@ -68,7 +68,7 @@ let nextTurn = function(){
 
     eraseNotifs();
     // deleteOptions();
-    socket.emit('deny_options_everyone_else')
+    // socket.emit('deny_options_everyone_else')
     turnCounter++;
 
     // to clear the last selected hexagon upon clicking next turn.
