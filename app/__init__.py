@@ -57,10 +57,17 @@ def disconnecting():
 	print('Client disconnected')
 	emit('disconjs', {'msg': "Client disconnected"}, broadcast=True)
 
-@socketio.on('send_mouse')
+@socketio.on('send_mouse_all')
 def message_recieved(data):
-    # print(data['text'])
-    emit('draw_to_all', data, broadcast=True)
+	# prints request id of the user who clicks
+	print("Request ID is: " + request.sid)
+	emit('draw_to_all', data, broadcast=True)
+
+# @socketio.on('send_mouse_self')
+# def message_recieved(data):
+# 	# prints request id of the user who clicks
+# 	# print("Request ID is: " + request.sid)
+# 	emit('draw_to_self', data)
 
 # useless rn
 @socketio.on('turn_red')
@@ -71,6 +78,10 @@ def playTurn():
 @socketio.on('update_turn')
 def update(data):
 	emit('update_html', data, broadcast=True)
+
+@socketio.on('deny_options_everyone_else')
+def deny():
+	emit('deny_options', data, broadcast=True, include_self=False)
 
 # Run app--
 if __name__ == "__main__":

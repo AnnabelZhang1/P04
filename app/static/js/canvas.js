@@ -183,9 +183,15 @@ function hexClick(event) {
   else {
     console.log(curHex);
     console.log("troop is here? " + map.grid[curHex[0]][curHex[1]].troop);
-    socket.emit('send_mouse', {'action':'makeBorder', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
+
+    currentPlayer = players[turnCounter];
+    currentPlayerColor = players[turnCounter].name;
+    currentPlayerID = players[turnCounter].requestid;
+    if (currentPlayerColor === players[findCurrentPlayer(currentPlayerID)].name) {
+      socket.emit('send_mouse_all', {'action':'select_hex', 'curHexX': curHex[0], 'curHexY' : curHex[1]})
+      // socket.emit('deny_options_everyone_else')
     // drawHexNoFill(map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY, "black");
-  }
+  }}
 
 }
 

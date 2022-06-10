@@ -134,7 +134,8 @@ let whereMoveTroops = function(){
 
     // highlights adjacent tiles
     for (let i = 0; i < adjacents.length; i++){
-        troopHighlight(map.grid[adjacents[i][0]][adjacents[i][1]].centerX,map.grid[adjacents[i][0]][adjacents[i][1]].centerY);
+      socket.emit('send_mouse_all', {'action':'move_troops', 'adjax': adjacents[i][0], 'adjy': adjacents[i][1]})
+        // troopHighlight(map.grid[adjacents[i][0]][adjacents[i][1]].centerX,map.grid[adjacents[i][0]][adjacents[i][1]].centerY);
     }
 
 

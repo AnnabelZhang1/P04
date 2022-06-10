@@ -41,11 +41,13 @@ let changeTurnCycle = function(){
 
 // find correct player
 var findCurrentPlayer = function(id){
-  var found = players.find(function(element) {
+  // var found = players.find(function(element) {
+  var found = players.findIndex(function(element) {
     return (element.requestid === id);
   });
 
-  console.log(found);
+  // console.log(found);
+  return found;
 };
 
 
@@ -65,7 +67,8 @@ let nextTurn = function(){
 
 
     eraseNotifs();
-    deleteOptions();
+    // deleteOptions();
+    socket.emit('deny_options_everyone_else')
     turnCounter++;
 
     // to clear the last selected hexagon upon clicking next turn.

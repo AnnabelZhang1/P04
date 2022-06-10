@@ -36,19 +36,34 @@ $(document).ready(function() {
     socket.on('draw_to_all', function(data){
         const event = data
         console.log(data)
-        // referenced in line 186 of canvas.js
-        if (event.action === "makeBorder")
+        // referenced in line 191 of canvas.js
+        if (event.action === "select_hex"){
           ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
           drawHexNoFill(map.grid[event.curHexX][event.curHexY].centerX,map.grid[event.curHexX][event.curHexY].centerY, "black");
-        // else if (event.action === "")
-          // do something
+        }
+        else if (event.action === "move_troops"){
+          console.log("moving troops")
+          troopHighlight(map.grid[event.adjax][event.adjy].centerX,map.grid[event.adjax][event.adjy].centerY);
+        }
     });
 
-    // referenced in line 90
+    // socket.on('draw_to_self', function(data){
+    //     // referenced in line 137 of troop.js
+    //     if (event.action === "move_troops"){
+    //       console.log("moving troops")
+    //       troopHighlight(map.grid[event.adjax][event.adjy].centerX,map.grid[event.adjax][event.adjy].centerY);
+    //     }
+    // });
+
+    // referenced in line 91 of turn.js
     socket.on('update_html', function(data){
       const event = data
       console.log("updating html:" + data)
       turnPlayer.innerHTML = event.playername + "'s Turn";
+    });
+
+    socket.on('deny_options', function(data){
+      deleteOptions();
     });
 
 });
