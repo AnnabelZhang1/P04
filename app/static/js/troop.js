@@ -69,7 +69,8 @@ class Battalion {
     if(map.grid[curHex[0]][curHex[1]].troop != null && !isInit) {
       // troop of one empire tries to move onto a tile with a troop from the same empire
       if (map.grid[curHex[0]][curHex[1]].troop.ownerCol == this.ownerCol) {
-        addNotif("illegal troop movement!");
+        alert("troop already here!");
+        return;
      // combat phase
       } else {
         let atkHex = map.grid[selectedHex[0]][selectedHex[1]];
@@ -83,7 +84,7 @@ class Battalion {
         if (defHex.troop.hp <= 0) {
           defHex.troop = null;
           ctxTC.clearRect(clearX-31,clearY-31,65,60);
-          atkHex.troop.move(clearX,clearY,false);
+          atkHex.troop.currMoves -= 1;
         }
       }
     } else {
