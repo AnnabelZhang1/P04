@@ -9,6 +9,8 @@ const canvasHL = document.getElementById('interactions');
 const ctxHL = canvasHL.getContext('2d');
 const canvasTC = document.getElementById('troopCanv');
 const ctxTC = canvasTC.getContext('2d');
+const canvasB = document.getElementById('buildingCanv');
+const ctxB = canvasB.getContext('2d');
 let curHex = [-1,-1];
 
 // background of canvas behind hexagons
@@ -84,7 +86,6 @@ let capitals = [];
 let colors = ["#E30B5C", "#FDDA0D", "#4169E1", "#00A36C"];
 // topright red
 capitals[0] = new Capital(colors[0], map.grid[Math.round(Math.random()*1)][8+Math.round(Math.random()*2)]);
-//capitals[0] = new Capital(colors[0], map.grid[3][9]);
 // top left yellow
 capitals[1] = new Capital(colors[1], map.grid[Math.round(Math.random()*1)][Math.round(Math.random()*2)]);
 // bottom right blue

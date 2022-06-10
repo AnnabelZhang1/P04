@@ -109,6 +109,7 @@ class Capital {
       // troops are gone
       for (let i = 0; i < players[colors.indexOf(this.color)].troop.length; i++){
         let currTroop = players[colors.indexOf(this.color)].troop[i];
+        console.log(currTroop.ownerCol)
         map.grid[currTroop.x][currTroop.y].troop = null;
 
         // clear troop on map
@@ -118,7 +119,17 @@ class Capital {
       }
 
       // player is eliminated in turn
+      console.log(colors.indexOf(this.color))
       players[colors.indexOf(this.color)] = null;
+
+      // one player remaining
+      if (players.filter(player => player != null).length == 1){
+        alert(players[turnCounter].name + " WON!");
+        hexClick = function(){
+          alert(players[turnCounter].name + " WON! GAME'S OVER");
+        }
+        nextTurnButton.removeEventListener('click', nextTurn);
+      }
 
       return true;
     }

@@ -1,3 +1,5 @@
+// WORK ON SHOWING BUILDINGS AND NOT DISPLAYING TROOPS THAT MOVE ONTO BUILDINGS
+
 
 // each player start off w/ 7 gold, 2 troops
 let red = new Emperor("Red", "#E30B5C", 7, 0 , "");
@@ -54,11 +56,6 @@ var findCurrentPlayer = function(id){
 // handles the switch from player to player
 let turnPlayer = document.getElementById("turnPlayer");
 let nextTurn = function(){
-
-    currentPlayer = players[turnCounter];
-    currentPlayerColor = players[turnCounter].name;
-    currentPlayerID = players[turnCounter].requestid;
-
     // player is in progress of choosing to move troops and has not finished
     if (action){
         alert("you are moving troops");
@@ -89,6 +86,10 @@ let nextTurn = function(){
         nextTurn();
         return;
     }
+
+    currentPlayer = players[turnCounter];
+    currentPlayerColor = players[turnCounter].name;
+    currentPlayerID = players[turnCounter].requestid;
 
     console.log("entering this stage");
     socket.emit('update_turn', {'playername': players[turnCounter].name, 'playerid': players[turnCounter].requestid})
@@ -147,6 +148,9 @@ let buyGoldMine = function(){
         currentPlayer.goldMine++;
         // add to hex tile
         map.grid[curHex[0]][curHex[1]].building = "Gold Mine";
+		let mine = new Image(70,70);
+		mine.src = "./static/assets/gold_mine.png";
+		mine.onload = drawImgOnload;
         // update new vales on screen
         updateValues();
         deleteOptions();
@@ -157,6 +161,9 @@ let buyGoldMine = function(){
 let deleteGoldMine = function(){
     map.grid[curHex[0]][curHex[1]].building = "";
     players[turnCounter].goldMine -= 1;
+	let clearX = map.grid[curHex[0]][curHex[1]].centerX;
+	let clearY = map.grid[curHex[0]][curHex[1]].centerY;
+	ctxB.clearRect(clearX-34,clearY-34,68,65);
     updateValues();
     deleteOptions();
     showOptions();
@@ -354,8 +361,8 @@ let spawnTroops = function(){
 
 let buyTroops = function(){
     let num = 1;
-    // one troop costs 2 gold
-    let cost = 2 * num;
+    // one troop costs 7 gold
+    let cost = 7 * num;
     if(map.grid[curHex[0]][curHex[1]].troop != null) {
         alert("troop already on tile!");
         return;
@@ -429,6 +436,23 @@ let buyFort = function(){
     players[turnCounter].gold -= cost;
     map.grid[curHex[0]][curHex[1]].building = "Fort";
     players[turnCounter].forts.push(map.grid[curHex[0]][curHex[1]]);
+	let castle = new Image(57,57);
+	if (turnCounter == 0) {
+		// red fort
+		castle.src = "./static/assets/castle_red.jpg"
+	} else if (turnCounter == 1) {
+		// yellow fort
+		castle.src = "./static/assets/castle_yellow.png"
+	} else if (turnCounter == 2) {
+		// blue fort
+		castle.src = "./static/assets/castle_blue.png"
+	} else if (turnCounter == 3) {
+		// green fort
+		castle.src = "./static/assets/castle_green.png"
+	}
+	//ctxTC.drawImage(castle,map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY);
+	castle.onload = drawImgOnload;
+	console.log("FORT BUILT");
     // IDK if we really need fort in player but oh well its here
     //console.log(players[turnCounter]);
 
@@ -442,10 +466,17 @@ let buyFort = function(){
     // drawFort(players[turnCounter].name, x, y);
 }
 
+function drawImgOnload() {
+	ctxB.drawImage(this,map.grid[curHex[0]][curHex[1]].centerX-26,map.grid[curHex[0]][curHex[1]].centerY-33,this.width,this.height);
+}
+
 let deleteFort = function(){
     map.grid[curHex[0]][curHex[1]].building = "";
     // rid of fort in player
     players[turnCounter].forts = players[turnCounter].forts.filter(fort => fort != map.grid[curHex[0]][curHex[1]]);
+	let clearX = map.grid[curHex[0]][curHex[1]].centerX;
+	let clearY = map.grid[curHex[0]][curHex[1]].centerY;
+	ctxB.clearRect(clearX-34,clearY-34,68,65);
     //console.log(players[turnCounter]);
 
     updateValues();
