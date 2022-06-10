@@ -202,3 +202,6 @@ sophieL -- 2022-06-09 21:17
 
 alifA -- 2022-06-09 21:40
 - buildings are now drawn and deleted properly
+
+qinaL -- 2022-06-09 21:51
+- end of game implemented
