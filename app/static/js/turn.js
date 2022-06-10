@@ -139,7 +139,7 @@ let buyGoldMine = function(){
     // add to player
     let currentPlayer = players[turnCounter];
     //currentGold = currentPlayer.gold;
-    if (currentPlayer.gold < cost){capital
+    if (currentPlayer.gold < cost){
         alert("Gold Mines cost " + cost + " gold");
         return;
     }

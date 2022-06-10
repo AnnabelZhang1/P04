@@ -133,13 +133,14 @@ map.grid[capitalRows[3]][capitalCols[3]].building = "Capital";
 //players[3].capital = map.grid[capitalRows[3]][capitalCols[3]];
 */
 
+/*
 map.grid[2][2].color = colors[1]; // yellow testing
 map.grid[4][4].color = colors[1]; // yellow testing
 map.grid[3][3].color = colors[2]; // blue testing
 map.grid[3][4].color = colors[3]; // green testing
 map.grid[3][5].color = "#E30B5C"; // for testing buildings
 map.grid[3][6].color = "#E30B5C"; // for testing buildings
-
+*/
 drawGrid(map);
 
 
