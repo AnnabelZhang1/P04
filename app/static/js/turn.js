@@ -54,11 +54,6 @@ var findCurrentPlayer = function(id){
 // handles the switch from player to player
 let turnPlayer = document.getElementById("turnPlayer");
 let nextTurn = function(){
-
-    currentPlayer = players[turnCounter];
-    currentPlayerColor = players[turnCounter].name;
-    currentPlayerID = players[turnCounter].requestid;
-
     // player is in progress of choosing to move troops and has not finished
     if (action){
         alert("you are moving troops");
@@ -89,6 +84,10 @@ let nextTurn = function(){
         nextTurn();
         return;
     }
+
+    currentPlayer = players[turnCounter];
+    currentPlayerColor = players[turnCounter].name;
+    currentPlayerID = players[turnCounter].requestid;
 
     console.log("entering this stage");
     socket.emit('update_turn', {'playername': players[turnCounter].name, 'playerid': players[turnCounter].requestid})
