@@ -361,8 +361,8 @@ let spawnTroops = function(){
 
 let buyTroops = function(){
     let num = 1;
-    // one troop costs 2 gold
-    let cost = 2 * num;
+    // one troop costs 7 gold
+    let cost = 7 * num;
     if(map.grid[curHex[0]][curHex[1]].troop != null) {
         alert("troop already on tile!");
         return;
