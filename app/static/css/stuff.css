@@ -17,8 +17,12 @@ canvas {
     transform:translate(-50%,-50%)
 }
 
+#buildingCanv {
+	z-index: 3;
+}
+
 #troopCanv {
-  z-index: 3;
+  z-index: 4;
 }
 
 #interactions {

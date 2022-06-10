@@ -9,6 +9,8 @@ const canvasHL = document.getElementById('interactions');
 const ctxHL = canvasHL.getContext('2d');
 const canvasTC = document.getElementById('troopCanv');
 const ctxTC = canvasTC.getContext('2d');
+const canvasB = document.getElementById('buildingCanv');
+const ctxB = canvasB.getContext('2d');
 let curHex = [-1,-1];
 
 // background of canvas behind hexagons

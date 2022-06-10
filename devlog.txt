@@ -199,3 +199,6 @@ Different users are now able to see highlighting hexagons and changing player tu
 sophieL -- 2022-06-09 21:17
 - killing a troop now results in an extra movement
 - bugtesting :P
+
+alifA -- 2022-06-09 21:40
+- buildings are now drawn and deleted properly
