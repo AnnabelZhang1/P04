@@ -5,8 +5,6 @@
 
 from flask import *
 from flask_socketio import *
-from database import *
-import sqlite3
 
 # Socket initialization--
 app = Flask(__name__)
@@ -24,23 +22,9 @@ def welcome():
 def home():
 	return render_template("home.html")
 
-# only one lobby at a time
-# useless rn
-@app.route("/lobby", methods=['GET', 'POST'])
-def lobby():
-    return render_template("lobby.html", list=clients)
-
 @app.route("/game", methods=['GET', 'POST'])
 def game():
     return render_template("game.html")
-
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    return render_template("login.html")
-
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    return render_template("register.html")
 
 # Flask-socketio functions--
 @socketio.on('connect')
@@ -62,9 +46,6 @@ def message_recieved_all(data):
 	# prints request id of the user who clicks
 	# print("Request ID is: " + request.sid)
 	emit('draw_to_all', data, broadcast=True)
-
-# @socketio.on('conquer_tile')
-# 	emit('draw_to_all', data, broadcast=True)
 
 # useless rn
 @socketio.on('turn_red')

@@ -85,6 +85,7 @@ class Battalion {
         if (defHex.troop.hp <= 0) {
           defHex.troop = null;
           ctxTC.clearRect(clearX-31,clearY-31,65,60);
+          socket.emit('send_mouse_all', {'action':'clear_hex', 'x':clearX-31, 'y':clearY-31})
           atkHex.troop.currMoves -= 1;
         }
       }
@@ -96,6 +97,7 @@ class Battalion {
       if (!isInit) {
         let clearX = Math.round(map.grid[selectedHex[0]][selectedHex[1]].centerX);
         let clearY = Math.round(map.grid[selectedHex[0]][selectedHex[1]].centerY);
+        socket.emit('send_mouse_all', {'action':'clear_hex', 'x':clearX-31, 'y':clearY-31})
         ctxTC.clearRect(clearX-31,clearY-31,65,60);
         map.grid[selectedHex[0]][selectedHex[1]].troop = null;
         console.log("isnt init");
@@ -106,12 +108,9 @@ class Battalion {
       map.grid[curHex[0]][curHex[1]].troop.currMoves = this.currMoves;
       map.grid[curHex[0]][curHex[1]].troop = this;
 
-      var troopC = this.troopCol;
-      var ownerC = this.ownerCol;
-
       if (!this.inBuild) {
         console.log("got to this stage")
-        socket.emit('send_mouse_all', {'action':'draw_troop','x':xInd,'y':yInd,'tc':troopC,'oc':ownerC, 'hp': this.hp})
+        socket.emit('send_mouse_all', {'action':'draw_troop','x':xInd,'y':yInd,'tc':this.troopCol,'oc':this.ownerCol,'hexx':curHex[0],'hexy':curHex[1],'hp': this.hp})
         this.drawTroop(xInd,yInd,this.troopCol,this.ownerCol);
 
         console.log("moved");

@@ -3,7 +3,7 @@
 // P04: Forged By Land
 // 2022-05-28
 
-function drawTroop(xInd,yInd,tCol,oCol, hp) {
+function drawTroop(xInd,yInd,tCol,oCol,curhexx,curhexy,hp) {
     ctxTC.strokeStyle = "black";
     ctxTC.fillStyle = tCol + "";
     ctxTC.beginPath();
@@ -27,7 +27,8 @@ function drawTroop(xInd,yInd,tCol,oCol, hp) {
     ctxTC.fillStyle = "orange";
     ctxTC.textAlign = "center";
     ctxTC.font="12px Arial";
-    ctxTC.fillText(hp,map.grid[curHex[0]][curHex[1]].centerX,map.grid[curHex[0]][curHex[1]].centerY + 5);
+
+    ctxTC.fillText(hp,map.grid[curhexx][curhexy].centerX,map.grid[curhexx][curhexy].centerY + 5);
     console.log("hp text done: " + hp);
   }
 
@@ -74,7 +75,7 @@ $(document).ready(function() {
           // ctxHL.clearRect(0,0,canvasHL.width,canvasHL.height);
           drawHexNoFill(map.grid[event.curHexX][event.curHexY].centerX,map.grid[event.curHexX][event.curHexY].centerY, "black");
         }
-        // referenced in line 138 of troop.js
+        // referenced in line 145 of troop.js
         else if (event.action === "move_troops"){
           // console.log("moving troops")
           troopHighlight(map.grid[event.adjax][event.adjy].centerX,map.grid[event.adjax][event.adjy].centerY);
@@ -92,7 +93,11 @@ $(document).ready(function() {
         else if (event.action === "draw_troop"){
           console.log("trooppp being drawn")
           // (event.def).troop.drawTroop(def.centerX,def.centerY,def.troop.troopCol,def.troop.ownerCol);
-          drawTroop(event.x,event.y,event.tc,event.oc,event.hp);
+          drawTroop(event.x,event.y,event.tc,event.oc,event.hexx,event.hexy,event.hp);
+        }
+        // referenced in line 88 and 100 of troop.js
+        else if(event.action === "clear_hex"){
+          ctxTC.clearRect(event.x, event.y, 65, 60);
         }
     });
 
